@@ -56,10 +56,10 @@
 
   <div class="page-width" style="width: 100%;">
     <div class="home-hero__content reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-      <div style="max-width: 42rem; width: 100%;">
+      <div style="max-width: 60rem; width: 100%;">
         {%- if section.settings.label != blank -%}
           <div class="home-hero__label">
-            <div class="home-hero__label-line"></div>
+            <div class="home-hero__label-line"> </div>
             <span class="home-hero__label-text">{{ section.settings.label | escape }}</span>
           </div>
         {%- endif -%}
