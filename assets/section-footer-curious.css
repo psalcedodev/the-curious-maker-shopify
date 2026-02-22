@@ -1,0 +1,227 @@
+/* Footer Curious Maker — Augusta Craft Design System */
+
+.footer-curious {
+  background-color: oklch(0.18 0.09 150);
+  color: oklch(0.90 0.01 90);
+}
+
+.footer-curious__rule-top {
+  height: 1px;
+  background-color: oklch(0.72 0.12 80 / 0.5);
+}
+
+.footer-curious__main {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .footer-curious__main {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+.footer-curious__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .footer-curious__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+}
+
+/* Brand column */
+.footer-curious__brand-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.75rem, 2.8vw + 1.4rem, 2.6rem);
+  font-weight: 700;
+  color: oklch(0.97 0.01 90);
+  margin: 0 0 0.25rem 0;
+}
+
+.footer-curious__brand-tagline {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.85rem, 1.2vw + 0.75rem, 1.05rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: oklch(0.72 0.12 80);
+}
+
+.footer-curious__brand-rule {
+  width: 2rem;
+  height: 1px;
+  background-color: oklch(0.72 0.12 80);
+  margin: 1rem 0;
+}
+
+.footer-curious__brand-desc {
+  font-family: 'Lora', serif;
+  font-size: clamp(1.05rem, 1.25vw + 0.95rem, 1.3rem);
+  line-height: 1.7;
+  color: oklch(0.72 0.08 150);
+  max-width: 340px;
+  margin: 0;
+}
+
+/* Column headings (Navigation, Get in Touch) */
+.footer-curious__heading {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.9rem, 1.15vw + 0.8rem, 1.05rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: oklch(0.72 0.12 80);
+  margin: 0 0 1.25rem 0;
+}
+
+.footer-curious__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-curious__link {
+  font-family: 'Lora', serif;
+  font-size: clamp(1.05rem, 1.25vw + 0.95rem, 1.25rem);
+  color: oklch(0.72 0.08 150);
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.footer-curious__link:hover {
+  color: oklch(0.72 0.12 80);
+}
+
+.footer-curious__link--inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Contact column */
+.footer-curious__contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Lora', serif;
+  font-size: clamp(1.05rem, 1.25vw + 0.95rem, 1.25rem);
+  color: oklch(0.72 0.08 150);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-curious__contact-link:hover {
+  color: oklch(0.72 0.12 80);
+}
+
+.footer-curious__contact-text {
+  font-family: 'Lora', serif;
+  font-size: clamp(1rem, 1.15vw + 0.9rem, 1.2rem);
+  color: oklch(0.60 0.06 150);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.footer-curious__newsletter-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.85rem, 1.15vw + 0.75rem, 1rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: oklch(0.72 0.12 80);
+  margin: 0.5rem 0 0.75rem 0;
+}
+
+.footer-curious__newsletter-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.85rem, 1.15vw + 0.75rem, 1rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: oklch(0.22 0.01 0);
+  background-color: oklch(0.72 0.12 80);
+  padding: 0.7rem 1.5rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+}
+
+.footer-curious__newsletter-btn:hover {
+  background-color: oklch(0.82 0.10 80);
+}
+
+/* Bottom bar */
+.footer-curious__bottom {
+  border-top: 1px solid oklch(0.72 0.12 80 / 0.2);
+}
+
+.footer-curious__bottom-inner {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+@media screen and (min-width: 750px) {
+  .footer-curious__bottom-inner {
+    flex-direction: row;
+  }
+}
+
+.footer-curious__copyright {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.85rem, 1.1vw + 0.75rem, 1rem);
+  letter-spacing: 0.1em;
+  color: oklch(0.55 0.05 150);
+  margin: 0;
+}
+
+.footer-curious__bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.footer-curious__bottom-link {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.85rem, 1.1vw + 0.75rem, 1rem);
+  letter-spacing: 0.1em;
+  color: oklch(0.55 0.05 150);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-curious__bottom-link:hover {
+  color: oklch(0.72 0.12 80);
+}
+
+.footer-curious__bottom-links a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.85rem, 1.1vw + 0.75rem, 1rem);
+  letter-spacing: 0.1em;
+  color: oklch(0.55 0.05 150);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-curious__bottom-links a:hover {
+  color: oklch(0.72 0.12 80);
+}
+
+/* Mail icon (inline SVG) */
+.footer-curious__icon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+}
+
+.footer-curious__icon--external {
+  width: 12px;
+  height: 12px;
+}

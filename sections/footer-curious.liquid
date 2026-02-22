@@ -1,0 +1,291 @@
+{{ 'home-fonts.css' | asset_url | stylesheet_tag }}
+{{ 'section-footer-curious.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .footer-curious.section-{{ section.id }}-padding .footer-curious__main {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .footer-curious.section-{{ section.id }}-padding .footer-curious__main {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<footer class="footer-curious section-{{ section.id }}-padding" role="contentinfo">
+  <div class="footer-curious__rule-top"></div>
+
+  <div class="footer-curious__main">
+    <div class="page-width">
+      <div class="footer-curious__grid">
+        {%- comment -%} Brand column {%- endcomment -%}
+        <div>
+          <div style="margin-bottom: 1rem;">
+            {%- if section.settings.brand_headline != blank -%}
+              <h3 class="footer-curious__brand-headline">{{ section.settings.brand_headline | escape }}</h3>
+            {%- endif -%}
+            {%- if section.settings.brand_tagline != blank -%}
+              <span class="footer-curious__brand-tagline">{{ section.settings.brand_tagline | escape }}</span>
+            {%- endif -%}
+          </div>
+          <div class="footer-curious__brand-rule"></div>
+          {%- if section.settings.brand_description != blank -%}
+            <p class="footer-curious__brand-desc">{{ section.settings.brand_description | escape }}</p>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Navigation column {%- endcomment -%}
+        <nav aria-label="{{ section.settings.nav_heading | default: 'Navigation' }}">
+          {%- if section.settings.nav_heading != blank -%}
+            <h4 class="footer-curious__heading">{{ section.settings.nav_heading | escape }}</h4>
+          {%- endif -%}
+          <div class="footer-curious__links">
+            {%- if section.settings.menu != blank -%}
+              {%- for link in section.settings.menu.links -%}
+                <a href="{{ link.url }}" class="footer-curious__link">{{ link.title | escape }}</a>
+              {%- endfor -%}
+            {%- endif -%}
+            {%- if section.settings.shop_link_url != blank -%}
+              <a
+                href="{{ section.settings.shop_link_url }}"
+                class="footer-curious__link footer-curious__link--inline"
+                {% if section.settings.shop_link_url contains 'http' or section.settings.shop_link_url contains '//' %}target="_blank" rel="noopener noreferrer"{% endif %}
+              >
+                {{ section.settings.shop_link_text | default: 'Shop on Shopify' | escape }}
+                <svg class="footer-curious__icon footer-curious__icon--external" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            {%- endif -%}
+          </div>
+        </nav>
+
+        {%- comment -%} Get in Touch column {%- endcomment -%}
+        <div>
+          {%- if section.settings.contact_heading != blank -%}
+            <h4 class="footer-curious__heading">{{ section.settings.contact_heading | escape }}</h4>
+          {%- endif -%}
+          <div class="footer-curious__links">
+            {%- if section.settings.contact_url != blank -%}
+              <a
+                href="{{ section.settings.contact_url }}"
+                class="footer-curious__contact-link"
+                {% if section.settings.contact_url contains 'http' or section.settings.contact_url contains '//' %}target="_blank" rel="noopener noreferrer"{% endif %}
+              >
+                <svg class="footer-curious__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                {{ section.settings.contact_link_text | default: 'Contact Us' | escape }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.contact_support_text != blank -%}
+              <p class="footer-curious__contact-text">{{ section.settings.contact_support_text | escape }}</p>
+            {%- endif -%}
+            {%- if section.settings.newsletter_heading != blank or section.settings.newsletter_button_url != blank -%}
+              <div style="margin-top: 0.5rem;">
+                {%- if section.settings.newsletter_heading != blank -%}
+                  <p class="footer-curious__newsletter-label">{{ section.settings.newsletter_heading | escape }}</p>
+                {%- endif -%}
+                {%- if section.settings.newsletter_button_url != blank -%}
+                  <a
+                    href="{{ section.settings.newsletter_button_url }}"
+                    class="footer-curious__newsletter-btn"
+                    {% if section.settings.newsletter_button_url contains 'http' or section.settings.newsletter_button_url contains '//' %}target="_blank" rel="noopener noreferrer"{% endif %}
+                  >
+                    {{ section.settings.newsletter_button_text | default: 'Subscribe on Shopify' | escape }}
+                  </a>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} Bottom bar {%- endcomment -%}
+  <div class="footer-curious__bottom">
+    <div class="page-width">
+      <div class="footer-curious__bottom-inner">
+        <p class="footer-curious__copyright">
+          {%- if section.settings.copyright_override != blank -%}
+            {%- assign year = 'now' | date: '%Y' -%}
+            {%- assign copyright_text = section.settings.copyright_override | replace: '{year}', year | replace: '{shop}', shop.name -%}
+            {{ copyright_text }}
+          {%- else -%}
+            &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
+          {%- endif -%}
+        </p>
+        <div class="footer-curious__bottom-links">
+          {%- if section.settings.show_policy -%}
+            {%- for policy in shop.policies -%}
+              {%- if policy != blank -%}
+                <a href="{{ policy.url }}" class="footer-curious__bottom-link">{{ policy.title | escape }}</a>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer (Curious Maker)",
+  "tag": "footer",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "text",
+      "id": "brand_headline",
+      "label": "Brand headline",
+      "default": "The Curious Maker"
+    },
+    {
+      "type": "text",
+      "id": "brand_tagline",
+      "label": "Brand tagline",
+      "default": "Premium Golf Training Aids"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_description",
+      "label": "Brand description",
+      "default": "Precision-engineered, 3D-printed golf training aids designed by a passionate golfer, for golfers who take their game seriously."
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "text",
+      "id": "nav_heading",
+      "label": "Navigation heading",
+      "default": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu"
+    },
+    {
+      "type": "url",
+      "id": "shop_link_url",
+      "label": "Shop link URL"
+    },
+    {
+      "type": "text",
+      "id": "shop_link_text",
+      "label": "Shop link text",
+      "default": "Shop on Shopify"
+    },
+    {
+      "type": "header",
+      "content": "Get in Touch"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Contact heading",
+      "default": "Get in Touch"
+    },
+    {
+      "type": "url",
+      "id": "contact_url",
+      "label": "Contact page URL"
+    },
+    {
+      "type": "text",
+      "id": "contact_link_text",
+      "label": "Contact link text",
+      "default": "Contact Us"
+    },
+    {
+      "type": "textarea",
+      "id": "contact_support_text",
+      "label": "Support text",
+      "default": "Questions about your order or a custom color request? We respond within 24 hours."
+    },
+    {
+      "type": "header",
+      "content": "Newsletter CTA"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Stay Updated"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button_text",
+      "label": "Button text",
+      "default": "Subscribe on Shopify"
+    },
+    {
+      "type": "url",
+      "id": "newsletter_button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Bottom bar"
+    },
+    {
+      "type": "textarea",
+      "id": "copyright_override",
+      "label": "Copyright text (optional)",
+      "info": "Use {year} for current year, {shop} for shop name. Leave blank for default."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy",
+      "label": "Show policy links",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_powered_by",
+      "label": "Show Powered by Shopify",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer (Curious Maker)"
+    }
+  ]
+}
+{% endschema %}
