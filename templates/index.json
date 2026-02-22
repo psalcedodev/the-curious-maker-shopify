@@ -94,9 +94,10 @@
     "home-craftsmanship": {
       "type": "home-craftsmanship",
       "settings": {
+        "background_image": "shopify://shop_images/7.jpg",
         "overlay_opacity": 82,
         "label": "Our Craft",
-        "heading": "<p>Every Product is<br><em>Precision-Printed & Inspected</em></p>",
+        "heading": "<p>Every Product is<br/><em>Precision-Printed & Inspected</em></p>",
         "description": "Each training aid is 3D-printed with precision, individually inspected, and carefully packaged before it reaches your hands. We use UV-resistant PETG and flexible TPU — materials chosen for their performance in real practice conditions, not just their appearance.",
         "cta_text": "Our Story",
         "cta_link": "/pages/about",
@@ -150,9 +151,10 @@
     "home-cta": {
       "type": "home-cta",
       "settings": {
+        "background_image": "shopify://shop_images/7.jpg",
         "background_opacity": 20,
         "label": "Ready to Elevate Your Practice?",
-        "heading": "<p>Shop The Curious Maker<br><em>Collection</em></p>",
+        "heading": "<p>Shop The Curious Maker<br/><em>Collection</em></p>",
         "description": "Four precision-crafted training aids. All designed to make your practice more efficient, your mechanics more consistent, and your game more rewarding.",
         "primary_cta_text": "Shop All Products",
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
