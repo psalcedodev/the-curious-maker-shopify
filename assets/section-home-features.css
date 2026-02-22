@@ -87,7 +87,7 @@
 .home-features__content {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .home-features__label {
@@ -109,9 +109,17 @@
   margin-bottom: 0.75rem;
 }
 
+.home-features__heading h2 {
+  margin: 0;
+  padding: 0;
+}
+
 .home-features__heading em {
   color: oklch(0.82 0.1 80);
   font-style: italic;
+}
+.home-features__heading p {
+  margin: 0;
 }
 
 .home-features__rule {
