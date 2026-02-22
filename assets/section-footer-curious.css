@@ -153,6 +153,100 @@
   background-color: oklch(0.82 0.10 80);
 }
 
+/* Newsletter email form (Stay Updated) – same as Get in Touch heading + description */
+.footer-curious__newsletter-block {
+  text-align: left;
+}
+
+.footer-curious__newsletter-form {
+  margin: 1.25rem 0 0 0;
+  width: 100%;
+  max-width: 22rem;
+}
+
+.footer-curious__newsletter-field {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid oklch(0.72 0.12 80 / 0.6);
+  border-radius: 9999px;
+  background: transparent;
+  overflow: hidden;
+}
+
+.footer-curious__newsletter-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.75rem 1rem 0.75rem 1.25rem;
+  font-family: 'Lora', serif;
+  font-size: clamp(0.95rem, 1.1vw + 0.85rem, 1.1rem);
+  color: oklch(0.97 0.01 90);
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.footer-curious__newsletter-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.footer-curious__newsletter-input::placeholder {
+  color: oklch(0.72 0.08 150);
+}
+
+.footer-curious__newsletter-submit {
+  flex-shrink: 0;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-left: none;
+  color: oklch(0.97 0.01 90);
+  cursor: pointer;
+  transition: color 0.2s ease;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Remove focus ring when user is typing in the input (avoids white line next to arrow) */
+.footer-curious__newsletter-field:focus-within .footer-curious__newsletter-submit {
+  outline: none;
+  box-shadow: none;
+  border-left: none;
+}
+
+.footer-curious__newsletter-submit:hover {
+  color: oklch(0.72 0.12 80);
+}
+
+.footer-curious__newsletter-submit:focus-visible {
+  outline: 0.2rem solid oklch(0.72 0.12 80 / 0.6);
+  outline-offset: 0.2rem;
+}
+
+.footer-curious__newsletter-submit svg {
+  width: 20px;
+  height: 20px;
+}
+
+.footer-curious__newsletter-message {
+  margin-top: 0.75rem;
+  font-family: 'Lora', serif;
+  font-size: clamp(0.9rem, 1vw + 0.8rem, 1rem);
+}
+
+.footer-curious__newsletter-message--error {
+  color: oklch(0.75 0.15 25);
+}
+
+.footer-curious__newsletter-message--success {
+  color: oklch(0.72 0.12 80);
+}
+
 /* Bottom bar */
 .footer-curious__bottom {
   border-top: 1px solid oklch(0.72 0.12 80 / 0.2);

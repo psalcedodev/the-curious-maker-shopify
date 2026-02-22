@@ -69,27 +69,63 @@
             <h4 class="footer-curious__heading">{{ section.settings.contact_heading | escape }}</h4>
           {%- endif -%}
           <div class="footer-curious__links">
-            {%- if section.settings.contact_url != blank -%}
-              <a
-                href="{{ section.settings.contact_url }}"
-                class="footer-curious__contact-link"
-                {% if section.settings.contact_url contains 'http' or section.settings.contact_url contains '//' %}target="_blank" rel="noopener noreferrer"{% endif %}
-              >
-                <svg class="footer-curious__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                {{ section.settings.contact_link_text | default: 'Contact Us' | escape }}
-              </a>
-            {%- endif -%}
+            {%- assign contact_page_url = section.settings.contact_url | default: shop.url | append: '/pages/contact' -%}
+            <a
+              href="{{ contact_page_url }}"
+              class="footer-curious__contact-link"
+              {% if section.settings.contact_url != blank and section.settings.contact_url contains 'http' %}target="_blank" rel="noopener noreferrer"{% endif %}
+            >
+              <svg class="footer-curious__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              {{ section.settings.contact_link_text | default: 'Contact Us' | escape }}
+            </a>
             {%- if section.settings.contact_support_text != blank -%}
               <p class="footer-curious__contact-text">{{ section.settings.contact_support_text | escape }}</p>
             {%- endif -%}
-            {%- if section.settings.newsletter_heading != blank or section.settings.newsletter_button_url != blank -%}
-              <div style="margin-top: 0.5rem;">
+            {%- if section.settings.newsletter_heading != blank or section.settings.newsletter_enable or section.settings.newsletter_button_url != blank -%}
+              <div class="footer-curious__newsletter-block" style="margin-top: 0.5rem;">
                 {%- if section.settings.newsletter_heading != blank -%}
-                  <p class="footer-curious__newsletter-label">{{ section.settings.newsletter_heading | escape }}</p>
+                  <h4 class="footer-curious__heading">{{ section.settings.newsletter_heading | escape }}</h4>
                 {%- endif -%}
-                {%- if section.settings.newsletter_button_url != blank -%}
+                {%- if section.settings.newsletter_enable -%}
+                  {%- if section.settings.newsletter_subtext != blank -%}
+                    <p class="footer-curious__contact-text">{{ section.settings.newsletter_subtext | escape }}</p>
+                  {%- endif -%}
+                  {%- form 'customer', id: 'FooterNewsletterForm', class: 'footer-curious__newsletter-form' -%}
+                    <input type="hidden" name="contact[tags]" value="newsletter">
+                    <div class="footer-curious__newsletter-field">
+                      <label for="FooterNewsletterForm-{{ section.id }}" class="visually-hidden">{{ 'newsletter.label' | t }}</label>
+                      <input
+                        id="FooterNewsletterForm-{{ section.id }}"
+                        type="email"
+                        name="contact[email]"
+                        class="footer-curious__newsletter-input"
+                        value="{{ form.email }}"
+                        aria-required="true"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        autocomplete="email"
+                        placeholder="{{ 'newsletter.label' | t }}"
+                        {% if form.errors %}aria-invalid="true" aria-describedby="FooterNewsletterForm-error-{{ section.id }}"{% elsif form.posted_successfully? %}aria-describedby="FooterNewsletterForm-success-{{ section.id }}"{% endif %}
+                        required
+                      >
+                      <button type="submit" class="footer-curious__newsletter-submit" name="commit" aria-label="{{ 'newsletter.button_label' | t }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                      </button>
+                    </div>
+                    {%- if form.errors -%}
+                      <small class="footer-curious__newsletter-message footer-curious__newsletter-message--error" id="FooterNewsletterForm-error-{{ section.id }}">
+                        {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
+                      </small>
+                    {%- endif -%}
+                    {%- if form.posted_successfully? -%}
+                      <p class="footer-curious__newsletter-message footer-curious__newsletter-message--success" id="FooterNewsletterForm-success-{{ section.id }}" tabindex="-1">
+                        {{ 'newsletter.success' | t }}
+                      </p>
+                    {%- endif -%}
+                  {%- endform -%}
+                {%- elsif section.settings.newsletter_button_url != blank -%}
                   <a
                     href="{{ section.settings.newsletter_button_url }}"
                     class="footer-curious__newsletter-btn"
@@ -216,7 +252,13 @@
     },
     {
       "type": "header",
-      "content": "Newsletter CTA"
+      "content": "Newsletter (Stay Updated)"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "label": "Show email signup form",
+      "default": true
     },
     {
       "type": "text",
@@ -225,15 +267,21 @@
       "default": "Stay Updated"
     },
     {
+      "type": "textarea",
+      "id": "newsletter_subtext",
+      "label": "Newsletter subtext",
+      "default": "Be the first to know about new collections and exclusive offers."
+    },
+    {
       "type": "text",
       "id": "newsletter_button_text",
-      "label": "Button text",
+      "label": "Button text (when form is off)",
       "default": "Subscribe on Shopify"
     },
     {
       "type": "url",
       "id": "newsletter_button_url",
-      "label": "Button URL"
+      "label": "Button URL (when form is off)"
     },
     {
       "type": "header",
