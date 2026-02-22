@@ -1,10 +1,20 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "home-hero": {
       "type": "home-hero",
       "settings": {
+        "background_image": "shopify://shop_images/7.jpg",
         "label": "Premium Golf Training Aids",
-        "headline": "<p>Perfect Your Practice.<br><em>Lower Your Score.</em></p>",
+        "headline": "<p>Perfect Your Practice.<br/><em>Lower Your Score.</em></p>",
         "subheadline": "Precision-engineered, 3D-printed golf training aids designed by a passionate golfer. Built to keep you in your stance, sharpen your mechanics, and make every practice session count.",
         "primary_cta_text": "Shop All Products",
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
@@ -24,7 +34,7 @@
         "collection": "all",
         "products_to_show": 4,
         "label": "Our Collection",
-        "heading": "<p>Handcrafted Training Aids<br><em>for Serious Golfers</em></p>",
+        "heading": "<p>Handcrafted Training Aids<br/><em>for Serious Golfers</em></p>",
         "view_all_text": "View All Products",
         "view_all_link": "/collections/all",
         "padding_top": 36,
@@ -74,8 +84,9 @@
         "feature-4"
       ],
       "settings": {
+        "image": "shopify://shop_images/1.jpg",
         "label": "Why The Curious Maker",
-        "heading": "<p>Designed by a Golfer.<br><em>Built for Golfers.</em></p>",
+        "heading": "<p>Designed by a Golfer.<br/><em>Built for Golfers.</em></p>",
         "padding_top": 36,
         "padding_bottom": 36
       }
