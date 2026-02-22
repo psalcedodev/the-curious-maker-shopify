@@ -8,9 +8,15 @@
 .home-craftsmanship__background {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
   z-index: 0;
+}
+
+.home-craftsmanship__bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .home-craftsmanship__overlay {
@@ -39,7 +45,7 @@
 
 .home-craftsmanship__label {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  font-size: clamp(0.85rem, 1.5vw + 0.7rem, 1.05rem);
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: oklch(0.72 0.12 80);
@@ -47,31 +53,13 @@
   margin-bottom: 1rem;
 }
 
-@media screen and (min-width: 990px) {
-  .home-craftsmanship__label {
-    font-size: 0.85rem;
-  }
-}
-
 .home-craftsmanship__heading {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.5rem, 4.5vw, 3.25rem);
+  font-size: clamp(1.75rem, 3.5vw + 1.2rem, 3.75rem);
   font-weight: 700;
   color: oklch(0.97 0.01 90);
   line-height: 1.2;
   margin-bottom: 1.5rem;
-}
-
-@media screen and (min-width: 750px) {
-  .home-craftsmanship__heading {
-    font-size: clamp(2rem, 4vw, 3rem);
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .home-craftsmanship__heading {
-    font-size: 3.25rem;
-  }
 }
 
 .home-craftsmanship__heading em {
@@ -88,23 +76,10 @@
 
 .home-craftsmanship__description {
   font-family: 'Lora', serif;
-  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-size: clamp(1.05rem, 1.2vw + 0.9rem, 1.35rem);
   line-height: 1.75;
   color: oklch(0.85 0.02 90);
-  margin-bottom: 2rem;
-}
-
-@media screen and (min-width: 750px) {
-  .home-craftsmanship__description {
-    font-size: 1.1rem;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .home-craftsmanship__description {
-    font-size: 1.15rem;
-    margin-bottom: 2.5rem;
-  }
+  margin-bottom: clamp(2rem, 2vw, 2.5rem);
 }
 
 /* Scroll reveal animation */

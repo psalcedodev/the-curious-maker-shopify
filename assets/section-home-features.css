@@ -61,7 +61,7 @@
 
 .home-features__label {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  font-size: clamp(0.85rem, 1.5vw + 0.7rem, 1.05rem);
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: oklch(0.72 0.12 80);
@@ -69,31 +69,13 @@
   margin-bottom: 0.75rem;
 }
 
-@media screen and (min-width: 990px) {
-  .home-features__label {
-    font-size: 0.85rem;
-  }
-}
-
 .home-features__heading {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.5rem, 4.5vw, 2.75rem);
+  font-size: clamp(1.75rem, 3.5vw + 1.2rem, 3.25rem);
   font-weight: 700;
   color: oklch(0.97 0.01 90);
   line-height: 1.2;
   margin-bottom: 0.75rem;
-}
-
-@media screen and (min-width: 750px) {
-  .home-features__heading {
-    font-size: clamp(2rem, 3.5vw, 2.5rem);
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .home-features__heading {
-    font-size: 2.75rem;
-  }
 }
 
 .home-features__heading em {
@@ -142,29 +124,17 @@
 
 .home-features__item-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-size: clamp(1rem, 1.4vw + 0.85rem, 1.35rem);
   font-weight: 600;
   color: oklch(0.97 0.01 90);
   margin-bottom: 0.25rem;
 }
 
-@media screen and (min-width: 990px) {
-  .home-features__item-title {
-    font-size: 1.15rem;
-  }
-}
-
 .home-features__item-description {
   font-family: 'Lora', serif;
-  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  font-size: clamp(0.95rem, 1.2vw + 0.8rem, 1.2rem);
   line-height: 1.65;
   color: oklch(0.75 0.05 150);
-}
-
-@media screen and (min-width: 990px) {
-  .home-features__item-description {
-    font-size: 1rem;
-  }
 }
 
 /* Scroll reveal animation */

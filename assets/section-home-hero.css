@@ -4,27 +4,20 @@
   position: relative;
   display: flex;
   align-items: flex-end;
-  padding-top: 80px;
+  /* Clear announcement bar + main header so content is not hidden (--hero-header-offset set by home-hero.liquid script) */
+  padding-top: var(--hero-header-offset, 160px);
   margin-top: 0;
   overflow: hidden;
 }
 
-@media screen and (min-width: 990px) {
-  .home-hero {
-    min-height: 100vh;
-  }
-}
-
-@media screen and (min-width: 750px) and (max-width: 989px) {
-  .home-hero {
-    min-height: 80vh;
-  }
+/* When a background image is set, ensure section has a minimum so the image is visible */
+.home-hero--has-bg {
+  min-height: 320px;
 }
 
 @media screen and (max-width: 749px) {
   .home-hero {
     min-height: auto;
-    padding-top: 60px;
   }
 }
 
@@ -36,22 +29,23 @@
   bottom: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center 30%;
-  background-repeat: no-repeat;
+  min-height: 100%;
   z-index: 0;
+  /* Force own layer so background paints reliably in theme editor */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
-@media screen and (min-width: 990px) {
-  .home-hero__background {
-    min-height: 100vh;
-  }
-}
-
-@media screen and (min-width: 750px) and (max-width: 989px) {
-  .home-hero__background {
-    min-height: 80vh;
-  }
+.home-hero__bg-image {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  /* Soft blur so overlay and text read clearly (matches client Home.tsx aesthetic) */
+  filter: blur(4px);
+  transform: scale(1.05);
 }
 
 .home-hero__overlay {
@@ -108,48 +102,24 @@
 }
 
 .home-hero__label-text {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.8rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(0.85rem, 1.8vw + 0.7rem, 1.15rem);
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: oklch(0.72 0.12 80);
 }
 
-@media screen and (min-width: 750px) {
-  .home-hero__label-text {
-    font-size: 0.9rem;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .home-hero__label-text {
-    font-size: 1rem;
-  }
-}
-
 .home-hero__headline {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.25rem, 8vw, 5.5rem);
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.25rem, 5.5vw + 1.75rem, 6.25rem);
   font-weight: 700;
   color: oklch(0.97 0.01 90);
   line-height: 1.1;
   margin-bottom: 1.5rem;
 }
 
-@media screen and (min-width: 750px) {
-  .home-hero__headline {
-    font-size: clamp(3rem, 6vw, 5rem);
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .home-hero__headline {
-    font-size: 5.5rem;
-  }
-}
-
 .home-hero__headline em {
-  color: oklch(0.82 0.10 80);
+  color: oklch(0.82 0.1 80);
   font-style: italic;
 }
 
@@ -161,24 +131,12 @@
 }
 
 .home-hero__subheadline {
-  font-family: 'Lora', serif;
-  font-size: 1.1rem;
+  font-family: "Lora", serif;
+  font-size: clamp(1.1rem, 1.8vw + 0.9rem, 1.75rem);
   line-height: 1.75;
   color: oklch(0.85 0.02 90);
   margin-bottom: 2.5rem;
   max-width: 520px;
-}
-
-@media screen and (min-width: 750px) {
-  .home-hero__subheadline {
-    font-size: 1.35rem;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .home-hero__subheadline {
-    font-size: 1.5rem;
-  }
 }
 
 .home-hero__ctas {
@@ -203,28 +161,16 @@
 
 .home-hero__trust-icon {
   width: 14px;
-  height: 14px;
+
   color: oklch(0.72 0.12 80);
   flex-shrink: 0;
 }
 
 .home-hero__trust-text {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.8rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(0.85rem, 1.4vw + 0.65rem, 1.1rem);
   letter-spacing: 0.1em;
-  color: oklch(0.80 0.02 90);
-}
-
-@media screen and (min-width: 750px) {
-  .home-hero__trust-text {
-    font-size: 0.9rem;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .home-hero__trust-text {
-    font-size: 1rem;
-  }
+  color: oklch(0.8 0.02 90);
 }
 
 .home-hero__scroll-indicator {
@@ -245,8 +191,8 @@
 }
 
 .home-hero__scroll-text {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: clamp(0.6rem, 1vw, 0.75rem);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(0.7rem, 1.2vw + 0.5rem, 0.9rem);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: oklch(0.97 0.01 90);
@@ -263,7 +209,9 @@
 .home-hero__content.reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
 .home-hero__content.reveal.visible {

@@ -6,9 +6,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.875rem 1.5rem;
+  padding: clamp(0.85rem, 1.3vw, 1.1rem) clamp(1.4rem, 2.2vw, 2.25rem);
   font-family: 'IBM Plex Mono', monospace;
-  font-size: clamp(0.8rem, 2vw, 1rem);
+  font-size: clamp(0.9rem, 1.2vw + 0.75rem, 1.1rem);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
@@ -16,23 +16,13 @@
   cursor: pointer;
   transition: all 0.2s ease;
   line-height: 1;
-  min-height: 2.75rem;
-}
-
-@media screen and (min-width: 750px) {
-  .btn-primary,
-  .btn-outline {
-    font-size: 0.95rem;
-    padding: 0.9rem 1.75rem;
-  }
+  min-height: clamp(2.85rem, 4.5vw, 3.25rem);
 }
 
 @media screen and (min-width: 990px) {
   .btn-primary,
   .btn-outline {
-    font-size: 1rem;
-    padding: 1rem 2rem;
-    min-height: 3rem;
+    min-height: 3.25rem;
   }
 }
 

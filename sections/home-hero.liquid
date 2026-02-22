@@ -19,24 +19,40 @@
 
 {%- liquid
   if section.settings.background_image != blank
-    assign hero_image_url = section.settings.background_image | image_url: width: 3840
+    assign hero_has_image = true
+    assign hero_image = section.settings.background_image
   else
-    assign hero_image_url = 'https://files.manuscdn.com/user_upload_by_module/session_file/117859024/HcwDHIoifWuIvQzi.jpg'
+    assign hero_has_image = false
+    assign hero_image = nil
   endif
 -%}
 
 <section
-  class="home-hero section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  class="home-hero section-{{ section.id }}-padding{% if hero_has_image %} home-hero--has-bg{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
   id="home-hero-{{ section.id }}"
 >
-  <div
-    class="home-hero__background"
-    {% if hero_image_url != blank %}
-      style="background-image: url({{ hero_image_url | escape }});"
-    {% endif %}
-  ></div>
-  
-  <div class="home-hero__overlay"></div>
+  <div class="home-hero__background">
+    {%- if hero_has_image and hero_image != blank -%}
+      {{
+        hero_image
+        | image_url: width: 3840
+        | image_tag: loading: 'eager', fetchpriority: 'high', class: 'home-hero__bg-image', sizes: '100vw', widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+      }}
+    {%- else -%}
+      <img
+        src="https://files.manuscdn.com/user_upload_by_module/session_file/117859024/HcwDHIoifWuIvQzi.jpg"
+        alt=""
+        class="home-hero__bg-image"
+        loading="eager"
+        fetchpriority="high"
+        width="3840"
+        height="2160"
+      >
+    {%- endif -%}
+  </div>
+
+  <div class="home-hero__overlay"> </div>
+
 
   <div class="page-width" style="width: 100%;">
     <div class="home-hero__content reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -86,13 +102,12 @@
 
         {%- if section.settings.trust_indicator_1 != blank
           or section.settings.trust_indicator_2 != blank
-          or section.settings.trust_indicator_3 != blank
         -%}
           <div class="home-hero__trust-indicators">
             {%- if section.settings.trust_indicator_1 != blank -%}
               <div class="home-hero__trust-item">
                 <span class="home-hero__trust-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9" width="14" height="14">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9" width="14" >
                     <path fill="currentColor" fill-rule="evenodd" d="M11.35.643a.5.5 0 0 1 .006.707l-6.77 6.886a.5.5 0 0 1-.719-.006L.638 4.845a.5.5 0 1 1 .724-.69l2.872 3.011 6.41-6.517a.5.5 0 0 1 .707-.006z" clip-rule="evenodd"/>
                   </svg>
                 </span>
@@ -103,7 +118,7 @@
             {%- if section.settings.trust_indicator_2 != blank -%}
               <div class="home-hero__trust-item">
                 <span class="home-hero__trust-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9" width="14" height="14">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9" width="14" >
                     <path fill="currentColor" fill-rule="evenodd" d="M11.35.643a.5.5 0 0 1 .006.707l-6.77 6.886a.5.5 0 0 1-.719-.006L.638 4.845a.5.5 0 1 1 .724-.69l2.872 3.011 6.41-6.517a.5.5 0 0 1 .707-.006z" clip-rule="evenodd"/>
                   </svg>
                 </span>
@@ -111,16 +126,7 @@
               </div>
             {%- endif -%}
 
-            {%- if section.settings.trust_indicator_3 != blank -%}
-              <div class="home-hero__trust-item">
-                <span class="home-hero__trust-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9" width="14" height="14">
-                    <path fill="currentColor" fill-rule="evenodd" d="M11.35.643a.5.5 0 0 1 .006.707l-6.77 6.886a.5.5 0 0 1-.719-.006L.638 4.845a.5.5 0 1 1 .724-.69l2.872 3.011 6.41-6.517a.5.5 0 0 1 .707-.006z" clip-rule="evenodd"/>
-                  </svg>
-                </span>
-                <span class="home-hero__trust-text">{{ section.settings.trust_indicator_3 | escape }}</span>
-              </div>
-            {%- endif -%}
+            
           </div>
         {%- endif -%}
       </div>
@@ -134,6 +140,7 @@
     </div>
   {%- endif -%}
 </section>
+
 
 {% schema %}
 {
