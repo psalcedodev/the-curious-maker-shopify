@@ -29,7 +29,7 @@
 .home-craftsmanship__content {
   position: relative;
   z-index: 10;
-  max-width: 36rem;
+  max-width: 60rem;
   margin: 0 auto;
   text-align: center;
   padding-left: 1rem;
@@ -44,7 +44,7 @@
 }
 
 .home-craftsmanship__label {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   font-size: clamp(0.85rem, 1.5vw + 0.7rem, 1.05rem);
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -54,7 +54,7 @@
 }
 
 .home-craftsmanship__heading {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: clamp(1.75rem, 3.5vw + 1.2rem, 3.75rem);
   font-weight: 700;
   color: oklch(0.97 0.01 90);
@@ -63,7 +63,7 @@
 }
 
 .home-craftsmanship__heading em {
-  color: oklch(0.82 0.10 80);
+  color: oklch(0.82 0.1 80);
   font-style: italic;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .home-craftsmanship__description {
-  font-family: 'Lora', serif;
+  font-family: "Lora", serif;
   font-size: clamp(1.05rem, 1.2vw + 0.9rem, 1.35rem);
   line-height: 1.75;
   color: oklch(0.85 0.02 90);
@@ -86,7 +86,9 @@
 .home-craftsmanship__content.reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
 .home-craftsmanship__content.reveal.visible {
