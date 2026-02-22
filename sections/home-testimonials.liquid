@@ -1,0 +1,224 @@
+{{ 'section-home-testimonials.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'home-scroll-reveal.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  class="home-testimonials section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  id="home-testimonials-{{ section.id }}"
+>
+  <div class="page-width">
+    <div class="home-testimonials__header reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {%- if section.settings.label != blank -%}
+        <span class="home-testimonials__label">{{ section.settings.label | escape }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="home-testimonials__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="home-testimonials__grid">
+        {%- for block in section.blocks -%}
+          <div
+            class="home-testimonial-card reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            style="transition-delay: {{ forloop.index0 | times: 150 }}ms;"
+            {% if settings.animations_reveal_on_scroll %}
+              data-cascade
+              style="--animation-order: {{ forloop.index }}; transition-delay: {{ forloop.index0 | times: 150 }}ms;"
+            {% endif %}
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.rating > 0 -%}
+              <div class="home-testimonial-card__stars">
+                {%- for i in (1..block.settings.rating) -%}
+                  <svg
+                    class="home-testimonial-card__star"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    width="14"
+                    height="14"
+                  >
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.quote != blank -%}
+              <blockquote class="home-testimonial-card__quote">
+                "{{ block.settings.quote | escape }}"
+              </blockquote>
+            {%- endif -%}
+
+            <div>
+              {%- if block.settings.author != blank -%}
+                <p class="home-testimonial-card__author">{{ block.settings.author | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.author_title != blank -%}
+                <p class="home-testimonial-card__title">{{ block.settings.author_title | escape }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="home-testimonials__grid">
+        {%- for i in (1..3) -%}
+          <div class="home-testimonial-card">
+            <div class="home-testimonial-card__stars">
+              {%- for j in (1..5) -%}
+                <svg
+                  class="home-testimonial-card__star"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  width="14"
+                  height="14"
+                >
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              {%- endfor -%}
+            </div>
+            <blockquote class="home-testimonial-card__quote">
+              "Sample testimonial text goes here."
+            </blockquote>
+            <div>
+              <p class="home-testimonial-card__author">Customer Name</p>
+              <p class="home-testimonial-card__title">Customer Title</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home Testimonials",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Golfer Reviews"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What Golfers Are Saying"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Testimonial quote goes here."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Customer Name"
+        },
+        {
+          "type": "text",
+          "id": "author_title",
+          "label": "Author title",
+          "default": "Customer Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "The Golf Ball Dispenser has completely changed how I practice. No more breaking my rhythm to pick up balls — I just tap and swing. My session efficiency has improved dramatically.",
+            "author": "Michael R.",
+            "author_title": "Scratch Golfer, Nevada"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Strike Form helped me understand my wedge contact in a way that years of lessons hadn't. The feedback is immediate and the build quality is exceptional for the price.",
+            "author": "James T.",
+            "author_title": "12-Handicap, Utah"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "I bought the Football-Team Dispenser as a gift for my father. He uses it every single day in his simulator. The quality is outstanding and the team colors are perfect.",
+            "author": "Sarah K.",
+            "author_title": "Gift Buyer, Texas"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

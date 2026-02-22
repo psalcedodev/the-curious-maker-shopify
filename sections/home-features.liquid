@@ -1,0 +1,209 @@
+{{ 'section-home-features.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'home-scroll-reveal.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  class="home-features section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  id="home-features-{{ section.id }}"
+>
+  <div class="page-width">
+    <div class="home-features__grid">
+      {%- if section.settings.image != blank -%}
+        <div class="home-features__image-wrapper reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              alt: section.settings.image.alt,
+              class: 'home-features__image',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              widths: '375, 550, 750, 1100, 1200'
+          }}
+          <div class="home-features__image-frame"></div>
+        </div>
+      {%- endif -%}
+
+      <div class="home-features__content reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" style="transition-delay: 200ms;">
+        {%- if section.settings.label != blank -%}
+          <span class="home-features__label">{{ section.settings.label | escape }}</span>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="home-features__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        <div class="home-features__rule"></div>
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="home-features__list">
+            {%- for block in section.blocks -%}
+              <div class="home-features__item" {{ block.shopify_attributes }}>
+                <div class="home-features__icon-wrapper">
+                  {% render 'icon-feature', icon_type: block.settings.icon_type %}
+                </div>
+                <div class="home-features__item-content">
+                  {%- if block.settings.title != blank -%}
+                    <h4 class="home-features__item-title">{{ block.settings.title | escape }}</h4>
+                  {%- endif -%}
+                  {%- if block.settings.description != blank -%}
+                    <p class="home-features__item-description">{{ block.settings.description | escape }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home Features",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Why The Curious Maker"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Designed by a Golfer.<br><em>Built for Golfers.</em></p>"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "zap",
+              "label": "Zap"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "award",
+              "label": "Award"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            }
+          ],
+          "default": "zap"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Feature description goes here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon_type": "zap",
+            "title": "Engineered for Efficiency",
+            "description": "Every product is designed to remove friction from your practice routine, keeping you in your stance and focused on your swing."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_type": "shield",
+            "title": "Built to Last",
+            "description": "UV-resistant PETG and flexible TPU materials chosen specifically for durability in real practice conditions — indoors and out."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_type": "award",
+            "title": "Validated by PGA Coaches",
+            "description": "Our Strike Form trainer has been tested and endorsed by PGA coaches in Nevada and Utah. Real feedback, real results."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_type": "check",
+            "title": "Precision 3D-Printed",
+            "description": "Each piece is precision 3D-printed and individually inspected before shipping. Craftsmanship you can see and feel."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

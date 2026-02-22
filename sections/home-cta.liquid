@@ -1,0 +1,179 @@
+{{ 'section-home-cta.css' | asset_url | stylesheet_tag }}
+{{ 'component-home-buttons.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'home-scroll-reveal.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #home-cta-{{ section.id }} .home-cta__background {
+    opacity: {{ section.settings.background_opacity | divided_by: 100.0 }};
+  }
+{%- endstyle -%}
+
+<section
+  class="home-cta section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  id="home-cta-{{ section.id }}"
+>
+  {%- if section.settings.background_image != blank -%}
+    <div
+      class="home-cta__background"
+      style="background-image: url('{{ section.settings.background_image | image_url: width: 3840 }}');"
+    ></div>
+  {%- endif -%}
+
+  <div class="page-width">
+    <div class="home-cta__content reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {%- if section.settings.label != blank -%}
+        <span class="home-cta__label">{{ section.settings.label | escape }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="home-cta__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+
+      <div class="home-cta__rule"></div>
+
+      {%- if section.settings.description != blank -%}
+        <p class="home-cta__description">
+          {{ section.settings.description | escape }}
+        </p>
+      {%- endif -%}
+
+      <div class="home-cta__buttons">
+        {%- if section.settings.primary_cta_text != blank and section.settings.primary_cta_link != blank -%}
+          <a
+            href="{{ section.settings.primary_cta_link }}"
+            class="btn-primary"
+            {% if section.settings.primary_cta_link contains 'http' %}target="_blank" rel="noopener noreferrer"{% endif %}
+          >
+            <span>{{ section.settings.primary_cta_text | escape }}</span>
+            <span class="svg-wrapper">{{ 'icon-arrow.svg' | inline_asset_content }}</span>
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.secondary_cta_text != blank and section.settings.secondary_cta_link != blank -%}
+          <a
+            href="{{ section.settings.secondary_cta_link }}"
+            class="btn-outline"
+          >
+            <span>{{ section.settings.secondary_cta_text | escape }}</span>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home Final CTA",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "background_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Background opacity",
+      "default": 20
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Ready to Elevate Your Practice?"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Shop The Curious Maker<br><em>Collection</em></p>"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Four precision-crafted training aids. All designed to make your practice more efficient, your mechanics more consistent, and your game more rewarding."
+    },
+    {
+      "type": "header",
+      "content": "Primary CTA"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_text",
+      "label": "Primary CTA text",
+      "default": "Shop All Products"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_link",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary CTA"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_text",
+      "label": "Secondary CTA text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_link",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Final CTA"
+    }
+  ]
+}
+{% endschema %}

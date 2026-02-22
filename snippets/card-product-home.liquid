@@ -1,0 +1,104 @@
+{% comment %}
+  Renders a product card for the home featured products section
+  Accepts:
+  - product: {Object} Product object
+  - index: {Number} Index for staggered layout
+  - lazy_load: {Boolean} Lazy load image
+
+  Usage:
+  {% render 'card-product-home',
+    product: product,
+    index: forloop.index0,
+    lazy_load: lazy_load
+  %}
+{% endcomment %}
+
+{%- liquid
+  assign transition_delay = index | times: 100
+-%}
+<div
+  class="home-product-card reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  style="transition-delay: {{ transition_delay }}ms;"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+    style="--animation-order: {{ index | plus: 1 }}; transition-delay: {{ transition_delay }}ms;"
+  {% endif %}
+>
+  <div class="home-product-card__image-wrapper">
+    {%- if product.featured_image -%}
+      {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+      <img
+        srcset="
+          {%- if product.featured_image.width >= 200 -%}{{ product.featured_image | image_url: width: 200 }} 200w,{%- endif -%}
+          {%- if product.featured_image.width >= 300 -%}{{ product.featured_image | image_url: width: 300 }} 300w,{%- endif -%}
+          {%- if product.featured_image.width >= 400 -%}{{ product.featured_image | image_url: width: 400 }} 400w,{%- endif -%}
+          {%- if product.featured_image.width >= 500 -%}{{ product.featured_image | image_url: width: 500 }} 500w,{%- endif -%}
+          {%- if product.featured_image.width >= 600 -%}{{ product.featured_image | image_url: width: 600 }} 600w,{%- endif -%}
+          {%- if product.featured_image.width >= 700 -%}{{ product.featured_image | image_url: width: 700 }} 700w,{%- endif -%}
+          {%- if product.featured_image.width >= 800 -%}{{ product.featured_image | image_url: width: 800 }} 800w,{%- endif -%}
+          {%- if product.featured_image.width >= 1000 -%}{{ product.featured_image | image_url: width: 1000 }} 1000w,{%- endif -%}
+          {{ product.featured_image | image_url }} {{ product.featured_image.width }}w
+        "
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        sizes="(min-width: 990px) 25vw, (min-width: 750px) 50vw, 100vw"
+        alt="{{ product.featured_image.alt | escape }}"
+        class="home-product-card__image"
+        {% unless lazy_load == false %}
+          loading="lazy"
+        {% endunless %}
+        width="{{ product.featured_image.width }}"
+        height="{{ product.featured_image.height }}"
+      >
+      {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
+    {%- else -%}
+      {{ 'product-apparel-1' | placeholder_svg_tag: 'home-product-card__image' }}
+    {%- endif -%}
+
+    {%- comment -%} Badge from product metafield or tag {%- endcomment -%}
+    {%- assign badge_tag = product.tags | where: 'badge' | first -%}
+    {%- if product.metafields.custom.badge != blank -%}
+      <div class="home-product-card__badge">
+        {{ product.metafields.custom.badge | escape }}
+      </div>
+    {%- elsif badge_tag != blank -%}
+      <div class="home-product-card__badge">
+        {{ badge_tag | remove: 'badge:' | escape }}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Category from product type or metafield {%- endcomment -%}
+    {%- if product.type != blank -%}
+      <div class="home-product-card__category">
+        {{ product.type | escape }}
+      </div>
+    {%- elsif product.metafields.custom.category != blank -%}
+      <div class="home-product-card__category">
+        {{ product.metafields.custom.category | escape }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="home-product-card__info">
+    <h3 class="home-product-card__title">
+      <a href="{{ product.url }}" class="full-unstyled-link">
+        {{ product.title | escape }}
+      </a>
+    </h3>
+
+    <div class="home-product-card__footer">
+      <span class="home-product-card__price">
+        {%- if product.price_varies -%}
+          From {{ product.price_min | money }}
+        {%- else -%}
+          {{ product.price | money }}
+        {%- endif -%}
+      </span>
+      <a
+        href="{{ product.url }}"
+        class="home-product-card__cta"
+      >
+        Shop Now
+      </a>
+    </div>
+  </div>
+</div>

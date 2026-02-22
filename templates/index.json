@@ -1,1 +1,163 @@
-{"sections":{"slideshow":{"type":"slideshow","blocks":{"slide-0":{"type":"slide","settings":{"image_overlay_opacity":10,"heading":"Perfect Your Practice. Lower Your Score.","heading_size":"h1","subheading":"","button_label":"Shop Now","link":"shopify:\/\/collections\/all","button_style_secondary":false,"show_text_box":true,"box_align":"middle-left","text_alignment":"left","text_alignment_mobile":"left","color_scheme":"scheme-2"}}},"block_order":["slide-0"],"settings":{"layout":"full_bleed","slide_height":"adapt_image","slider_visual":"counter","auto_rotate":false,"change_slides_speed":5,"image_behavior":"ambient","show_text_below":true,"accessibility_info":"Slideshow about our brand"}},"multirow_VnWmmP":{"type":"multirow","blocks":{"row_atDzhz":{"type":"row","settings":{"image":"shopify:\/\/shop_images\/9e166bee-il_fullxfull.7272978424_718c.jpg","caption":"Tap-to-Dispense Auto Feeder for Simulator, Backyard & Range Practice","heading":"Golf Ball Dispenser","text":"<p>A sleek, tap-to-dispense golf ball feeder that drops one ball per tap — no cords, no batteries, just pure efficiency. Keep your rhythm, stay in position, and focus on your swing. Perfect for simulators, backyard nets, and range sessions.<\/p><p>🏌️ Tap-to-dispense — one ball per tap with club or foot<br\/>⚡ No power needed — gravity-fed design<br\/>🎯 25-ball capacity for uninterrupted practice<br\/>☀️ UV-resistant PETG — built for outdoor use<br\/>🔧 Adjustable legs for all terrain types<\/p>","button_label":"Shop Now - From $69.95","button_link":"shopify:\/\/products\/golf-ball-dispenser-golf-training-aid-for-simulator-backyard-range-practice-25-ball-capacity"}},"row_Ed6iyz":{"type":"row","settings":{"image":"shopify:\/\/shop_images\/d7fa8793-il_fullxfull.7382565840_j3ni.jpg","caption":"Wedge Practice Tool to Improve Contact and Swing Path","heading":"Strike Form Golf Swing Trainer","text":"<p>Refine your ball striking, perfect your contact, and bring professional-level consistency to your golf practice. Strike Form is a precision-engineered swing training wedge designed for golfers who care about improving their form.<\/p><p>🎯 Train wedge precision and ball-first contact<br\/>📐 Build consistent swing mechanics<br\/>✈️ Compact and travel-friendly design<br\/>☀️ Durable and weather-resistant PETG<br\/>🏌️ Works on turf, mats, or indoor simulators<\/p>","button_label":"Shop Now - From $24","button_link":"shopify:\/\/products\/strike-form-golf-swing-trainer-wedge-practice-improve-contact-and-swing-path"}}},"block_order":["row_atDzhz","row_Ed6iyz"],"name":"t:sections.multirow.presets.name","settings":{"image_height":"medium","desktop_image_width":"medium","image_layout":"alternate-left","heading_size":"h1","text_style":"body","button_style":"secondary","desktop_content_position":"middle","desktop_content_alignment":"left","mobile_content_alignment":"left","section_color_scheme":"scheme-1","row_color_scheme":"scheme-2","padding_top":36,"padding_bottom":36}},"featured-collection-0":{"type":"featured-collection","settings":{"collection":"all","products_to_show":4,"title":"Featured products","heading_size":"h1","description":"<p>Hand-picked training aids to elevate your practice and accelerate your improvement<\/p>","show_description":false,"description_style":"body","columns_desktop":4,"enable_desktop_slider":true,"full_width":false,"show_view_all":false,"view_all_style":"solid","color_scheme":"scheme-1","image_ratio":"adapt","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"quick_add":"standard","columns_mobile":"2","swipe_on_mobile":false,"padding_top":60,"padding_bottom":60}}},"order":["slideshow","multirow_VnWmmP","featured-collection-0"]}
+{
+  "sections": {
+    "home-hero": {
+      "type": "home-hero",
+      "settings": {
+        "label": "Premium Golf Training Aids",
+        "headline": "<p>Perfect Your Practice.<br><em>Lower Your Score.</em></p>",
+        "subheadline": "Precision-engineered, 3D-printed golf training aids designed by a passionate golfer. Built to keep you in your stance, sharpen your mechanics, and make every practice session count.",
+        "primary_cta_text": "Shop All Products",
+        "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
+        "secondary_cta_text": "View Collection",
+        "secondary_cta_link": "/collections/all",
+        "trust_indicator_1": "PGA Coach Tested",
+        "trust_indicator_2": "Free Shipping Available",
+        "trust_indicator_3": "4 Products In Stock",
+        "show_scroll_indicator": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "home-featured-products": {
+      "type": "home-featured-products",
+      "settings": {
+        "collection": "all",
+        "products_to_show": 4,
+        "label": "Our Collection",
+        "heading": "<p>Handcrafted Training Aids<br><em>for Serious Golfers</em></p>",
+        "view_all_text": "View All Products",
+        "view_all_link": "/collections/all",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "home-features": {
+      "type": "home-features",
+      "blocks": {
+        "feature-1": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "zap",
+            "title": "Engineered for Efficiency",
+            "description": "Every product is designed to remove friction from your practice routine, keeping you in your stance and focused on your swing."
+          }
+        },
+        "feature-2": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "shield",
+            "title": "Built to Last",
+            "description": "UV-resistant PETG and flexible TPU materials chosen specifically for durability in real practice conditions — indoors and out."
+          }
+        },
+        "feature-3": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "award",
+            "title": "Validated by PGA Coaches",
+            "description": "Our Strike Form trainer has been tested and endorsed by PGA coaches in Nevada and Utah. Real feedback, real results."
+          }
+        },
+        "feature-4": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "check",
+            "title": "Precision 3D-Printed",
+            "description": "Each piece is precision 3D-printed and individually inspected before shipping. Craftsmanship you can see and feel."
+          }
+        }
+      },
+      "block_order": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-4"
+      ],
+      "settings": {
+        "label": "Why The Curious Maker",
+        "heading": "<p>Designed by a Golfer.<br><em>Built for Golfers.</em></p>",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "home-craftsmanship": {
+      "type": "home-craftsmanship",
+      "settings": {
+        "overlay_opacity": 82,
+        "label": "Our Craft",
+        "heading": "<p>Every Product is<br><em>Precision-Printed & Inspected</em></p>",
+        "description": "Each training aid is 3D-printed with precision, individually inspected, and carefully packaged before it reaches your hands. We use UV-resistant PETG and flexible TPU — materials chosen for their performance in real practice conditions, not just their appearance.",
+        "cta_text": "Our Story",
+        "cta_link": "/pages/about",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "home-testimonials": {
+      "type": "home-testimonials",
+      "blocks": {
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "The Golf Ball Dispenser has completely changed how I practice. No more breaking my rhythm to pick up balls — I just tap and swing. My session efficiency has improved dramatically.",
+            "author": "Michael R.",
+            "author_title": "Scratch Golfer, Nevada"
+          }
+        },
+        "testimonial-2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Strike Form helped me understand my wedge contact in a way that years of lessons hadn't. The feedback is immediate and the build quality is exceptional for the price.",
+            "author": "James T.",
+            "author_title": "12-Handicap, Utah"
+          }
+        },
+        "testimonial-3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "I bought the Football-Team Dispenser as a gift for my father. He uses it every single day in his simulator. The quality is outstanding and the team colors are perfect.",
+            "author": "Sarah K.",
+            "author_title": "Gift Buyer, Texas"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial-1",
+        "testimonial-2",
+        "testimonial-3"
+      ],
+      "settings": {
+        "label": "Golfer Reviews",
+        "heading": "What Golfers Are Saying",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "home-cta": {
+      "type": "home-cta",
+      "settings": {
+        "background_opacity": 20,
+        "label": "Ready to Elevate Your Practice?",
+        "heading": "<p>Shop The Curious Maker<br><em>Collection</em></p>",
+        "description": "Four precision-crafted training aids. All designed to make your practice more efficient, your mechanics more consistent, and your game more rewarding.",
+        "primary_cta_text": "Shop All Products",
+        "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
+        "secondary_cta_text": "Learn More",
+        "secondary_cta_link": "/collections/all",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "home-hero",
+    "home-featured-products",
+    "home-features",
+    "home-craftsmanship",
+    "home-testimonials",
+    "home-cta"
+  ]
+}

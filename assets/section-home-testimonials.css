@@ -1,0 +1,157 @@
+/* Home Testimonials Section Styles */
+
+.home-testimonials {
+  background-color: oklch(0.97 0.01 90);
+}
+
+.home-testimonials__header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .home-testimonials__header {
+    margin-bottom: 3.5rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .home-testimonials__header {
+    margin-bottom: 4rem;
+  }
+}
+
+.home-testimonials__label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: oklch(0.72 0.12 80);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+@media screen and (min-width: 990px) {
+  .home-testimonials__label {
+    font-size: 0.85rem;
+  }
+}
+
+.home-testimonials__heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 4.5vw, 2.75rem);
+  font-weight: 700;
+  color: oklch(0.22 0.01 0);
+  line-height: 1.2;
+}
+
+@media screen and (min-width: 750px) {
+  .home-testimonials__heading {
+    font-size: clamp(2rem, 3.5vw, 2.5rem);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .home-testimonials__heading {
+    font-size: 2.75rem;
+  }
+}
+
+.home-testimonials__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media screen and (min-width: 750px) {
+  .home-testimonials__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.home-testimonial-card {
+  background-color: transparent;
+  padding: 1rem;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+@media screen and (min-width: 750px) {
+  .home-testimonial-card {
+    padding: 1.25rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .home-testimonial-card {
+    padding: 1.5rem;
+  }
+}
+
+.home-testimonial-card.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.home-testimonial-card.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.home-testimonial-card__stars {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.home-testimonial-card__star {
+  width: 14px;
+  height: 14px;
+  color: oklch(0.72 0.12 80);
+  fill: oklch(0.72 0.12 80);
+  flex-shrink: 0;
+}
+
+.home-testimonial-card__quote {
+  font-family: 'Lora', serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  line-height: 1.75;
+  color: oklch(0.30 0.02 0);
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 990px) {
+  .home-testimonial-card__quote {
+    font-size: 1.05rem;
+    margin-bottom: 1.25rem;
+  }
+}
+
+.home-testimonial-card__author {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  font-weight: 600;
+  color: oklch(0.22 0.01 0);
+  margin-bottom: 0.125rem;
+}
+
+@media screen and (min-width: 990px) {
+  .home-testimonial-card__author {
+    font-size: 1.05rem;
+  }
+}
+
+.home-testimonial-card__title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  letter-spacing: 0.1em;
+  color: oklch(0.72 0.12 80);
+  margin-top: 0.125rem;
+}
+
+@media screen and (min-width: 990px) {
+  .home-testimonial-card__title {
+    font-size: 0.75rem;
+  }
+}

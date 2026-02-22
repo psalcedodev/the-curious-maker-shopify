@@ -1,0 +1,10 @@
+/* Home Page Custom Fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* Font family variables for home sections */
+:root {
+  --font-home-heading: 'Playfair Display', serif;
+  --font-home-body: 'Lora', serif;
+  --font-home-mono: 'IBM Plex Mono', monospace;
+}

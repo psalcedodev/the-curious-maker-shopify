@@ -1,0 +1,17 @@
+{
+  "name": "the-curious-maker-shopify",
+  "version": "1.0.0",
+  "description": "Shopify theme for The Curious Maker",
+  "scripts": {
+    "dev": "shopify theme dev",
+    "push": "shopify theme push",
+    "pull": "shopify theme pull",
+    "check": "shopify theme check"
+  },
+  "keywords": [
+    "shopify",
+    "theme"
+  ],
+  "author": "",
+  "license": "MIT"
+}

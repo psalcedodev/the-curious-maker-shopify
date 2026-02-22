@@ -1,0 +1,120 @@
+/* Home Craftsmanship Banner Section Styles */
+
+.home-craftsmanship {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-craftsmanship__background {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.home-craftsmanship__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: oklch(0.18 0.09 150 / 0.82);
+  z-index: 1;
+}
+
+.home-craftsmanship__content {
+  position: relative;
+  z-index: 10;
+  max-width: 36rem;
+  margin: 0 auto;
+  text-align: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media screen and (min-width: 750px) {
+  .home-craftsmanship__content {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+.home-craftsmanship__label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: oklch(0.72 0.12 80);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 990px) {
+  .home-craftsmanship__label {
+    font-size: 0.85rem;
+  }
+}
+
+.home-craftsmanship__heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 4.5vw, 3.25rem);
+  font-weight: 700;
+  color: oklch(0.97 0.01 90);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .home-craftsmanship__heading {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .home-craftsmanship__heading {
+    font-size: 3.25rem;
+  }
+}
+
+.home-craftsmanship__heading em {
+  color: oklch(0.82 0.10 80);
+  font-style: italic;
+}
+
+.home-craftsmanship__rule {
+  width: 3rem;
+  height: 1px;
+  background-color: oklch(0.72 0.12 80);
+  margin: 0 auto 1.5rem;
+}
+
+.home-craftsmanship__description {
+  font-family: 'Lora', serif;
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  line-height: 1.75;
+  color: oklch(0.85 0.02 90);
+  margin-bottom: 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .home-craftsmanship__description {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .home-craftsmanship__description {
+    font-size: 1.15rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* Scroll reveal animation */
+.home-craftsmanship__content.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.home-craftsmanship__content.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

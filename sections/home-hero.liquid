@@ -1,0 +1,256 @@
+{{ 'home-fonts.css' | asset_url | stylesheet_tag }}
+{{ 'section-home-hero.css' | asset_url | stylesheet_tag }}
+{{ 'component-home-buttons.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'home-scroll-reveal.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  if section.settings.background_image != blank
+    assign hero_image_url = section.settings.background_image | image_url: width: 3840
+  else
+    assign hero_image_url = 'https://files.manuscdn.com/user_upload_by_module/session_file/117859024/HcwDHIoifWuIvQzi.jpg'
+  endif
+-%}
+
+<section
+  class="home-hero section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  id="home-hero-{{ section.id }}"
+>
+  <div
+    class="home-hero__background"
+    {% if hero_image_url != blank %}
+      style="background-image: url({{ hero_image_url | escape }});"
+    {% endif %}
+  ></div>
+  
+  <div class="home-hero__overlay"></div>
+
+  <div class="page-width" style="width: 100%;">
+    <div class="home-hero__content reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <div style="max-width: 42rem; width: 100%;">
+        {%- if section.settings.label != blank -%}
+          <div class="home-hero__label">
+            <div class="home-hero__label-line"></div>
+            <span class="home-hero__label-text">{{ section.settings.label | escape }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.headline != blank -%}
+          <h1 class="home-hero__headline">
+            {{ section.settings.headline }}
+          </h1>
+        {%- endif -%}
+
+        <div class="home-hero__rule"></div>
+
+        {%- if section.settings.subheadline != blank -%}
+          <p class="home-hero__subheadline">
+            {{ section.settings.subheadline | escape }}
+          </p>
+        {%- endif -%}
+
+        <div class="home-hero__ctas">
+          {%- if section.settings.primary_cta_text != blank and section.settings.primary_cta_link != blank -%}
+            <a
+              href="{{ section.settings.primary_cta_link }}"
+              class="btn-primary"
+              {% if section.settings.primary_cta_link contains 'http' %}target="_blank" rel="noopener noreferrer"{% endif %}
+            >
+              <span>{{ section.settings.primary_cta_text | escape }}</span>
+              <span class="svg-wrapper">{{ 'icon-arrow.svg' | inline_asset_content }}</span>
+            </a>
+          {%- endif -%}
+
+          {%- if section.settings.secondary_cta_text != blank and section.settings.secondary_cta_link != blank -%}
+            <a
+              href="{{ section.settings.secondary_cta_link }}"
+              class="btn-outline"
+            >
+              <span>{{ section.settings.secondary_cta_text | escape }}</span>
+            </a>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.trust_indicator_1 != blank
+          or section.settings.trust_indicator_2 != blank
+          or section.settings.trust_indicator_3 != blank
+        -%}
+          <div class="home-hero__trust-indicators">
+            {%- if section.settings.trust_indicator_1 != blank -%}
+              <div class="home-hero__trust-item">
+                <span class="home-hero__trust-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9" width="14" height="14">
+                    <path fill="currentColor" fill-rule="evenodd" d="M11.35.643a.5.5 0 0 1 .006.707l-6.77 6.886a.5.5 0 0 1-.719-.006L.638 4.845a.5.5 0 1 1 .724-.69l2.872 3.011 6.41-6.517a.5.5 0 0 1 .707-.006z" clip-rule="evenodd"/>
+                  </svg>
+                </span>
+                <span class="home-hero__trust-text">{{ section.settings.trust_indicator_1 | escape }}</span>
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.trust_indicator_2 != blank -%}
+              <div class="home-hero__trust-item">
+                <span class="home-hero__trust-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9" width="14" height="14">
+                    <path fill="currentColor" fill-rule="evenodd" d="M11.35.643a.5.5 0 0 1 .006.707l-6.77 6.886a.5.5 0 0 1-.719-.006L.638 4.845a.5.5 0 1 1 .724-.69l2.872 3.011 6.41-6.517a.5.5 0 0 1 .707-.006z" clip-rule="evenodd"/>
+                  </svg>
+                </span>
+                <span class="home-hero__trust-text">{{ section.settings.trust_indicator_2 | escape }}</span>
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.trust_indicator_3 != blank -%}
+              <div class="home-hero__trust-item">
+                <span class="home-hero__trust-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9" width="14" height="14">
+                    <path fill="currentColor" fill-rule="evenodd" d="M11.35.643a.5.5 0 0 1 .006.707l-6.77 6.886a.5.5 0 0 1-.719-.006L.638 4.845a.5.5 0 1 1 .724-.69l2.872 3.011 6.41-6.517a.5.5 0 0 1 .707-.006z" clip-rule="evenodd"/>
+                  </svg>
+                </span>
+                <span class="home-hero__trust-text">{{ section.settings.trust_indicator_3 | escape }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.show_scroll_indicator -%}
+    <div class="home-hero__scroll-indicator">
+      <span class="home-hero__scroll-text">Scroll</span>
+      <div class="home-hero__scroll-line"></div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Home Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Premium Golf Training Aids"
+    },
+    {
+      "type": "richtext",
+      "id": "headline",
+      "label": "Headline",
+      "default": "<p>Perfect Your Practice.<br><em>Lower Your Score.</em></p>"
+    },
+    {
+      "type": "textarea",
+      "id": "subheadline",
+      "label": "Subheadline",
+      "default": "Precision-engineered, 3D-printed golf training aids designed by a passionate golfer. Built to keep you in your stance, sharpen your mechanics, and make every practice session count."
+    },
+    {
+      "type": "header",
+      "content": "Primary CTA"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_text",
+      "label": "Primary CTA text",
+      "default": "Shop All Products"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_link",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary CTA"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_text",
+      "label": "Secondary CTA text",
+      "default": "View Collection"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_link",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Trust Indicators"
+    },
+    {
+      "type": "text",
+      "id": "trust_indicator_1",
+      "label": "Trust indicator 1",
+      "default": "PGA Coach Tested"
+    },
+    {
+      "type": "text",
+      "id": "trust_indicator_2",
+      "label": "Trust indicator 2",
+      "default": "Free Shipping Available"
+    },
+    {
+      "type": "text",
+      "id": "trust_indicator_3",
+      "label": "Trust indicator 3",
+      "default": "4 Products In Stock"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scroll_indicator",
+      "label": "Show scroll indicator",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Hero"
+    }
+  ]
+}
+{% endschema %}

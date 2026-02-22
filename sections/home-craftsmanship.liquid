@@ -1,0 +1,150 @@
+{{ 'section-home-craftsmanship.css' | asset_url | stylesheet_tag }}
+{{ 'component-home-buttons.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'home-scroll-reveal.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #home-craftsmanship-{{ section.id }} .home-craftsmanship__overlay {
+    background-color: oklch(0.18 0.09 150 / {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+  }
+{%- endstyle -%}
+
+<section
+  class="home-craftsmanship section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  id="home-craftsmanship-{{ section.id }}"
+>
+  {%- if section.settings.background_image != blank -%}
+    <div
+      class="home-craftsmanship__background"
+      style="background-image: url('{{ section.settings.background_image | image_url: width: 3840 }}');"
+    ></div>
+  {%- endif -%}
+  
+  <div class="home-craftsmanship__overlay"></div>
+
+  <div class="page-width">
+    <div class="home-craftsmanship__content reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {%- if section.settings.label != blank -%}
+        <span class="home-craftsmanship__label">{{ section.settings.label | escape }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="home-craftsmanship__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+
+      <div class="home-craftsmanship__rule"></div>
+
+      {%- if section.settings.description != blank -%}
+        <p class="home-craftsmanship__description">
+          {{ section.settings.description | escape }}
+        </p>
+      {%- endif -%}
+
+      {%- if section.settings.cta_text != blank and section.settings.cta_link != blank -%}
+        <a
+          href="{{ section.settings.cta_link }}"
+          class="btn-outline"
+        >
+          <span>{{ section.settings.cta_text | escape }}</span>
+          <span class="svg-wrapper">{{ 'icon-arrow.svg' | inline_asset_content }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home Craftsmanship",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 82
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Our Craft"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Every Product is<br><em>Precision-Printed & Inspected</em></p>"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Each training aid is 3D-printed with precision, individually inspected, and carefully packaged before it reaches your hands. We use UV-resistant PETG and flexible TPU — materials chosen for their performance in real practice conditions, not just their appearance."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Our Story"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 152,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 152,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Craftsmanship"
+    }
+  ]
+}
+{% endschema %}
