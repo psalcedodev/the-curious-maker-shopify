@@ -25,7 +25,7 @@
         "trust_indicator_3": "4 Products In Stock",
         "show_scroll_indicator": true,
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_bottom": 100
       }
     },
     "home-featured-products": {
@@ -37,8 +37,8 @@
         "heading": "<p>Handcrafted Training Aids<br/><em>for Serious Golfers</em></p>",
         "view_all_text": "View All Products",
         "view_all_link": "/collections/all",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "home-features": {
@@ -87,8 +87,8 @@
         "image": "shopify://shop_images/1.jpg",
         "label": "Why The Curious Maker",
         "heading": "<p>Designed by a Golfer.<br/><em>Built for Golfers.</em></p>",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 100,
+        "padding_bottom": 100
       }
     },
     "home-craftsmanship": {
@@ -101,8 +101,8 @@
         "description": "Each training aid is 3D-printed with precision, individually inspected, and carefully packaged before it reaches your hands. We use UV-resistant PETG and flexible TPU — materials chosen for their performance in real practice conditions, not just their appearance.",
         "cta_text": "Our Story",
         "cta_link": "/pages/about",
-        "padding_top": 80,
-        "padding_bottom": 80
+        "padding_top": 100,
+        "padding_bottom": 100
       }
     },
     "home-testimonials": {
@@ -144,8 +144,8 @@
       "settings": {
         "label": "Golfer Reviews",
         "heading": "What Golfers Are Saying",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "home-cta": {
@@ -160,8 +160,8 @@
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
         "secondary_cta_text": "Learn More",
         "secondary_cta_link": "/collections/all",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     }
   },
