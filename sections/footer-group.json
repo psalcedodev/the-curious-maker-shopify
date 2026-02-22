@@ -11,32 +11,6 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
-    "newsletter": {
-      "type": "newsletter",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Subscribe to our emails",
-            "heading_size": "h1"
-          }
-        },
-        "paragraph": {
-          "type": "paragraph",
-          "settings": {
-            "text": "<p>Be the first to know about new collections and exclusive offers.<\/p>"
-          }
-        },
-        "email-form": { "type": "email_form", "settings": {} }
-      },
-      "block_order": ["heading", "paragraph", "email-form"],
-      "settings": {
-        "color_scheme": "scheme-3",
-        "full_width": true,
-        "padding_top": 28,
-        "padding_bottom": 0
-      }
-    },
     "footer": {
       "type": "footer-curious",
       "settings": {
@@ -44,14 +18,19 @@
         "brand_tagline": "Premium Golf Training Aids",
         "brand_description": "Precision-engineered, 3D-printed golf training aids designed by a passionate golfer, for golfers who take their game seriously.",
         "nav_heading": "Navigation",
+        "menu": "",
+        "shop_link_url": "",
         "shop_link_text": "Shop on Shopify",
         "contact_heading": "Get in Touch",
+        "contact_url": "",
         "contact_link_text": "Contact Us",
         "contact_support_text": "Questions about your order or a custom color request? We respond within 24 hours.",
         "newsletter_enable": true,
         "newsletter_heading": "Stay Updated",
         "newsletter_subtext": "Be the first to know about new collections and exclusive offers.",
         "newsletter_button_text": "Subscribe on Shopify",
+        "newsletter_button_url": "",
+        "copyright_override": "",
         "show_policy": true,
         "show_powered_by": true,
         "padding_top": 64,
@@ -59,5 +38,7 @@
       }
     }
   },
-  "order": ["newsletter", "footer"]
+  "order": [
+    "footer"
+  ]
 }
