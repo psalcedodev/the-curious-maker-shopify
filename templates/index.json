@@ -94,7 +94,7 @@
     "home-craftsmanship": {
       "type": "home-craftsmanship",
       "settings": {
-        "background_image": "shopify://shop_images/7.jpg",
+        "background_image": "shopify://shop_images/golfer-silhouette.jpg",
         "overlay_opacity": 82,
         "label": "Our Craft",
         "heading": "<p>Every Product is<br/><em>Precision-Printed & Inspected</em></p>",
@@ -151,7 +151,7 @@
     "home-cta": {
       "type": "home-cta",
       "settings": {
-        "background_image": "shopify://shop_images/7.jpg",
+        "background_image": "shopify://shop_images/golf-course-2.jpg",
         "background_opacity": 20,
         "label": "Ready to Elevate Your Practice?",
         "heading": "<p>Shop The Curious Maker<br/><em>Collection</em></p>",
