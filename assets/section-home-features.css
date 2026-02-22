@@ -133,9 +133,9 @@
 }
 
 .home-features__icon-wrapper {
-  width: 2.5rem;
-  height: 2.5rem;
-  min-width: 2.5rem;
+  width: 40px;
+  height: 40px;
+  min-width: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -145,8 +145,8 @@
 }
 
 .home-features__icon-wrapper svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 .home-features__item-content {
