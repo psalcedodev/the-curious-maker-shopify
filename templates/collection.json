@@ -11,6 +11,7 @@
   "sections": {
     "banner": {
       "type": "main-collection-banner",
+      "disabled": true,
       "settings": {
         "show_collection_description": true,
         "show_collection_image": false,
@@ -19,6 +20,7 @@
     },
     "product-grid": {
       "type": "main-collection-product-grid",
+      "disabled": true,
       "settings": {
         "products_per_page": 24,
         "columns_desktop": 4,
@@ -45,8 +47,8 @@
         "products_to_show": 4,
         "label": "Our Collection",
         "heading": "<p>Handcrafted Training Aids<br/><em>for Serious Golfers</em></p>",
-        "view_all_text": "View All Products",
-        "view_all_link": "shopify://collections",
+        "view_all_text": "",
+        "view_all_link": "",
         "padding_top": 36,
         "padding_bottom": 36
       }
