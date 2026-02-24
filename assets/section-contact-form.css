@@ -20,6 +20,114 @@
   }
 }
 
+/* Newsletter-style inputs ( Augusta / Curious Maker ) */
+.contact .field {
+  border: 1px solid oklch(0.72 0.12 80 / 0.6);
+  border-radius: 1rem;
+  background: rgb(var(--color-background));
+  overflow: hidden;
+}
+
+.contact .field.field--with-error {
+  overflow: visible;
+}
+
+.contact .field:before,
+.contact .field:after {
+  display: none;
+}
+
+.contact .field__input,
+.contact .field input {
+  font-family: 'Lora', serif;
+  font-size: clamp(0.95rem, 1.1vw + 0.85rem, 1.1rem);
+  padding: 0.75rem 1.25rem;
+  color: oklch(0.22 0.01 0);
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  margin: 0;
+  min-height: auto;
+}
+
+.contact .field__input::placeholder,
+.contact .field input::placeholder {
+  color: oklch(0.55 0.05 150);
+  opacity: 0;
+}
+
+.contact .field__input:focus,
+.contact .field__input:not(:placeholder-shown),
+.contact .field__input:-webkit-autofill,
+.contact .field input:focus,
+.contact .field input:not(:placeholder-shown),
+.contact .field input:-webkit-autofill {
+  padding: 1.5rem 1.25rem 0.75rem;
+  margin: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+.contact textarea.field__input {
+  border-radius: 1rem;
+  min-height: 10rem;
+  padding: 1.25rem 1.25rem 1rem;
+  resize: vertical;
+}
+
+.contact .field textarea:focus ~ .field__label,
+.contact .field textarea:focus ~ .form__label,
+.contact .field textarea:not(:placeholder-shown) ~ .field__label,
+.contact .field textarea:not(:placeholder-shown) ~ .form__label {
+  top: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.contact .field textarea:focus,
+.contact .field textarea:not(:placeholder-shown) {
+  padding-top: 1.5rem;
+}
+
+.contact .field__label,
+.contact .field label {
+  color: oklch(0.55 0.05 150);
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Lora', serif;
+  font-size: clamp(0.95rem, 1.1vw + 0.85rem, 1.1rem);
+}
+
+.contact .field__input:focus ~ .field__label,
+.contact .field__input:not(:placeholder-shown) ~ .field__label,
+.contact .field__input:-webkit-autofill ~ .field__label,
+.contact .field input:focus ~ label,
+.contact .field input:not(:placeholder-shown) ~ label,
+.contact .field input:-webkit-autofill ~ label {
+  top: calc(0.75rem + 0.5rem);
+  transform: none;
+  font-size: 0.85rem;
+  color: oklch(0.55 0.05 150);
+}
+
+.contact .field textarea ~ .field__label,
+.contact .field textarea ~ .form__label {
+  top: 1rem;
+  transform: none;
+}
+
+.contact .contact__button .button.btn-primary {
+  min-height: clamp(2.85rem, 4.5vw, 3.25rem);
+  border-radius: 0.75rem;
+  border: none;
+}
+
+.contact .contact__button .button.btn-primary:after,
+.contact .contact__button .button.btn-primary:not([disabled]):hover:after {
+  box-shadow: none;
+}
+
 .contact__button {
   margin-top: 3rem;
 }

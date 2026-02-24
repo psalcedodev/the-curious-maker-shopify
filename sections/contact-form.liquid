@@ -1,3 +1,5 @@
+{{ 'home-fonts.css' | asset_url | stylesheet_tag }}
+{{ 'component-home-buttons.css' | asset_url | stylesheet_tag }}
 {{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
@@ -127,7 +129,7 @@
         </label>
       </div>
       <div class="contact__button">
-        <button type="submit" class="button">
+        <button type="submit" class="button btn-primary">
           {{ 'templates.contact.form.send' | t }}
         </button>
       </div>
