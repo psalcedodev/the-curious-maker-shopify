@@ -33,7 +33,7 @@
       "settings": {
         "collection": "all",
         "products_to_show": 4,
-        "label": "Golf",
+        "label": "Our Collection",
         "heading": "<p>Practical Objects,<br/><em>Precisely Made</em></p>",
         "view_all_text": "View All Products",
         "view_all_link": "/collections/all",
