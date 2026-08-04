@@ -12,17 +12,17 @@
     "home-hero": {
       "type": "home-hero",
       "settings": {
-        "background_image": "shopify://shop_images/HcwDHIoifWuIvQzi.jpg",
-        "label": "Premium Golf Training Aids",
-        "headline": "<p>Perfect Your Practice.<br/><em>Lower Your Score.</em></p>",
-        "subheadline": "Precision-engineered, 3D-printed golf training aids designed by a passionate golfer. Built to keep you in your stance, sharpen your mechanics, and make every practice session count.",
+        "background_image": "",
+        "label": "Creative, Functional & Custom 3D Creations",
+        "headline": "<p>Everyday Objects,<br/><em>Made to Order.</em></p>",
+        "subheadline": "Designed and 3D-printed in small batches. Practical things, made properly, in the colours you actually want.",
         "primary_cta_text": "Shop All Products",
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
         "secondary_cta_text": "View Collection",
         "secondary_cta_link": "/collections/all",
-        "trust_indicator_1": "PGA Coach Tested",
+        "trust_indicator_1": "3D Printed In-House",
         "trust_indicator_2": "Free Shipping Available",
-        "trust_indicator_3": "4 Products In Stock",
+        "trust_indicator_3": "",
         "show_scroll_indicator": true,
         "padding_top": 0,
         "padding_bottom": 100
@@ -33,8 +33,8 @@
       "settings": {
         "collection": "all",
         "products_to_show": 4,
-        "label": "Our Collection",
-        "heading": "<p>Handcrafted Training Aids<br/><em>for Serious Golfers</em></p>",
+        "label": "Golf",
+        "heading": "<p>Practical Objects,<br/><em>Precisely Made</em></p>",
         "view_all_text": "View All Products",
         "view_all_link": "/collections/all",
         "padding_top": 52,
@@ -48,8 +48,8 @@
           "type": "feature",
           "settings": {
             "icon_type": "zap",
-            "title": "Engineered for Efficiency",
-            "description": "Every product is designed to remove friction from your practice routine, keeping you in your stance and focused on your swing."
+            "title": "Engineered, Not Improvised",
+            "description": "Every product starts as a real problem worth solving, then gets designed, printed, and revised until the mechanism actually works the way it should."
           }
         },
         "feature-2": {
@@ -57,15 +57,15 @@
           "settings": {
             "icon_type": "shield",
             "title": "Built to Last",
-            "description": "UV-resistant PETG and flexible TPU materials chosen specifically for durability in real practice conditions — indoors and out."
+            "description": "UV-resistant PETG and flexible TPU, chosen for durability in real conditions rather than for how they photograph. Indoors and out."
           }
         },
         "feature-3": {
           "type": "feature",
           "settings": {
             "icon_type": "award",
-            "title": "Validated by PGA Coaches",
-            "description": "Our Strike Form trainer has been tested and endorsed by PGA coaches in Nevada and Utah. Real feedback, real results."
+            "title": "Tested by the People Who Use It",
+            "description": "Nothing goes on sale until it has been in real hands doing the real job, including coaches and specialists in the field a product is built for."
           }
         },
         "feature-4": {
@@ -86,7 +86,7 @@
       "settings": {
         "image": "shopify://shop_images/vpbUPFHaTJbmpBxu.jpg",
         "label": "Why The Curious Maker",
-        "heading": "<p>Designed by a Golfer.<br/><em>Built for Golfers.</em></p>",
+        "heading": "<p>Designed by a Maker.<br/><em>Built for Daily Use.</em></p>",
         "padding_top": 100,
         "padding_bottom": 100
       }
@@ -98,7 +98,7 @@
         "overlay_opacity": 82,
         "label": "Our Craft",
         "heading": "<p>Every Product is<br/><em>Precision-Printed & Inspected</em></p>",
-        "description": "Each training aid is 3D-printed with precision, individually inspected, and carefully packaged before it reaches your hands. We use UV-resistant PETG and flexible TPU — materials chosen for their performance in real practice conditions, not just their appearance.",
+        "description": "Each product is 3D-printed with precision, individually inspected, and carefully packaged before it reaches your hands. We use UV-resistant PETG and flexible TPU, materials chosen for how they perform in real conditions rather than for how they look on a shelf.",
         "cta_text": "Our Story",
         "cta_link": "/pages/about",
         "padding_top": 100,
@@ -142,8 +142,8 @@
         "testimonial-3"
       ],
       "settings": {
-        "label": "Golfer Reviews",
-        "heading": "What Golfers Are Saying",
+        "label": "Customer Reviews",
+        "heading": "What Customers Are Saying",
         "padding_top": 52,
         "padding_bottom": 52
       }
@@ -153,9 +153,9 @@
       "settings": {
         "background_image": "shopify://shop_images/golf-course-2.jpg",
         "background_opacity": 20,
-        "label": "Ready to Elevate Your Practice?",
+        "label": "Ready to Find Yours?",
         "heading": "<p>Shop The Curious Maker<br/><em>Collection</em></p>",
-        "description": "Four precision-crafted training aids. All designed to make your practice more efficient, your mechanics more consistent, and your game more rewarding.",
+        "description": "Precision-printed objects in the colours you choose, made in small batches and shipped from our own workshop. Golf first, with more categories on the way.",
         "primary_cta_text": "Shop All Products",
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
         "secondary_cta_text": "Learn More",

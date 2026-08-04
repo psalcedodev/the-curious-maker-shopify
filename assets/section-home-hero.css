@@ -209,6 +209,108 @@
   background-color: oklch(0.72 0.12 80);
 }
 
+/* ------------------------------------------------------------------
+ * Cream hero (default: no background image) — "E1-grid"
+ * Flat brand cream with a CSS engineering grid drawn in brand gold.
+ * Deliberately not an image: infinite resolution, zero page weight,
+ * exact brand colour, and spacing/opacity are one-line tweaks.
+ * Brand tokens used here: cream #f2efe6, forest #002d12, gold #b68e4c.
+ * ------------------------------------------------------------------ */
+.home-hero--cream {
+  align-items: center;
+  height: auto;
+  min-height: min(72vh, 640px);
+  color: #002d12;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 43px, rgba(182, 142, 76, 0.15) 43px 44px),
+    repeating-linear-gradient(90deg, transparent 0 43px, rgba(182, 142, 76, 0.15) 43px 44px),
+    #f2efe6;
+}
+
+/* The generous top/bottom padding exists to clear a full-bleed photograph.
+   Centred content on cream doesn't need it. */
+.home-hero--cream .home-hero__content {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .home-hero--cream .home-hero__content {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
+.home-hero--cream .home-hero__label-line,
+.home-hero--cream .home-hero__rule,
+.home-hero--cream .home-hero__scroll-line {
+  background-color: #b68e4c;
+}
+
+.home-hero--cream .home-hero__label-text {
+  font-family: var(--font-heading-family, "Montserrat", sans-serif);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #b68e4c;
+}
+
+.home-hero--cream .home-hero__headline {
+  color: #002d12;
+  letter-spacing: -0.01em;
+}
+
+.home-hero--cream .home-hero__headline em {
+  color: #b68e4c;
+}
+
+.home-hero--cream .home-hero__subheadline {
+  font-family: var(--font-body-family, "Montserrat", sans-serif);
+  color: #002d12;
+  opacity: 0.85;
+}
+
+.home-hero--cream .home-hero__trust-icon {
+  color: #b68e4c;
+}
+
+.home-hero--cream .home-hero__trust-text,
+.home-hero--cream .home-hero__scroll-text {
+  font-family: var(--font-body-family, "Montserrat", sans-serif);
+  color: #002d12;
+  opacity: 0.75;
+}
+
+/* Buttons: the shared home-button styles are built for dark sections, where
+   gold-on-transparent reads fine. On cream, gold text fails contrast — so the
+   cream hero uses forest instead. Scoped here so the dark sections keep theirs. */
+.home-hero--cream .btn-primary {
+  font-family: var(--font-body-family, "Montserrat", sans-serif);
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #002d12;
+  background-color: #002d12;
+  color: #f2efe6;
+}
+
+.home-hero--cream .btn-primary:hover {
+  background-color: #013d1a;
+  border-color: #013d1a;
+}
+
+.home-hero--cream .btn-outline {
+  font-family: var(--font-body-family, "Montserrat", sans-serif);
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #002d12;
+  background-color: transparent;
+  color: #002d12;
+}
+
+.home-hero--cream .btn-outline:hover {
+  background-color: #002d12;
+  color: #f2efe6;
+}
+
 /* Scroll reveal animation */
 .home-hero__content.reveal {
   opacity: 0;

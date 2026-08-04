@@ -28,30 +28,25 @@
 -%}
 
 <section
-  class="home-hero section-{{ section.id }}-padding{% if hero_has_image %} home-hero--has-bg{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  class="home-hero section-{{ section.id }}-padding{% if hero_has_image %} home-hero--has-bg{% else %} home-hero--cream{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
   id="home-hero-{{ section.id }}"
 >
-  <div class="home-hero__background">
-    {%- if hero_has_image and hero_image != blank -%}
+  {%- comment -%}
+    No background image is the intended default: the hero is flat brand cream with a CSS
+    engineering grid (see .home-hero--cream). An image is optional and only then gets the
+    darkening overlay, so clearing the picker can never fall back to a stock photograph.
+  {%- endcomment -%}
+  {%- if hero_has_image -%}
+    <div class="home-hero__background">
       {{
         hero_image
         | image_url: width: 3840
         | image_tag: loading: 'eager', fetchpriority: 'high', class: 'home-hero__bg-image', sizes: '100vw', widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
       }}
-    {%- else -%}
-      <img
-        src="https://files.manuscdn.com/user_upload_by_module/session_file/117859024/HcwDHIoifWuIvQzi.jpg"
-        alt=""
-        class="home-hero__bg-image"
-        loading="eager"
-        fetchpriority="high"
-        width="3840"
-        height="2160"
-      >
-    {%- endif -%}
-  </div>
+    </div>
 
-  <div class="home-hero__overlay"> </div>
+    <div class="home-hero__overlay"> </div>
+  {%- endif -%}
 
 
   <div class="page-width" style="width: 100%;">
@@ -151,25 +146,26 @@
     {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Background image"
+      "label": "Background image",
+      "info": "Leave empty for the brand cream hero with the CSS engineering grid (recommended). Setting an image re-enables the darkening overlay behind the text."
     },
     {
       "type": "text",
       "id": "label",
       "label": "Label",
-      "default": "Premium Golf Training Aids"
+      "default": "Creative, Functional & Custom 3D Creations"
     },
     {
       "type": "richtext",
       "id": "headline",
       "label": "Headline",
-      "default": "<p>Perfect Your Practice.<br><em>Lower Your Score.</em></p>"
+      "default": "<p>Everyday Objects,<br><em>Made to Order.</em></p>"
     },
     {
       "type": "textarea",
       "id": "subheadline",
       "label": "Subheadline",
-      "default": "Precision-engineered, 3D-printed golf training aids designed by a passionate golfer. Built to keep you in your stance, sharpen your mechanics, and make every practice session count."
+      "default": "Designed and 3D-printed in small batches. Practical things, made properly, in the colours you actually want."
     },
     {
       "type": "header",
@@ -209,7 +205,7 @@
       "type": "text",
       "id": "trust_indicator_1",
       "label": "Trust indicator 1",
-      "default": "PGA Coach Tested"
+      "default": "3D Printed In-House"
     },
     {
       "type": "text",
@@ -221,7 +217,7 @@
       "type": "text",
       "id": "trust_indicator_3",
       "label": "Trust indicator 3",
-      "default": "4 Products In Stock"
+      "info": "Currently not rendered by the section. Shopify rejects a blank default, so this stays unset rather than empty."
     },
     {
       "type": "checkbox",
