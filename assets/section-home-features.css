@@ -195,3 +195,22 @@
 .home-features__content.reveal {
   transition-delay: 200ms;
 }
+
+/* ------------------------------------------------------------------
+ * No image: the two-column grid would leave half the row empty, so it
+ * collapses to one column and the feature list uses the freed width as
+ * a 2x2 grid instead of a tall single stack.
+ * ------------------------------------------------------------------ */
+@media screen and (min-width: 990px) {
+  .home-features--no-image .home-features__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .home-features--no-image .home-features__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 3rem;
+  }
+}

@@ -84,7 +84,7 @@
         "feature-4"
       ],
       "settings": {
-        "image": "shopify://shop_images/vpbUPFHaTJbmpBxu.jpg",
+        "image": "",
         "label": "Why The Curious Maker",
         "heading": "<p>Designed by a Maker.<br/><em>Built for Daily Use.</em></p>",
         "padding_top": 100,
@@ -94,8 +94,8 @@
     "home-craftsmanship": {
       "type": "home-craftsmanship",
       "settings": {
-        "background_image": "shopify://shop_images/golfer-silhouette.jpg",
-        "overlay_opacity": 82,
+        "background_image": "",
+        "overlay_opacity": 100,
         "label": "Our Craft",
         "heading": "<p>Every Product is<br/><em>Precision-Printed & Inspected</em></p>",
         "description": "Each product is 3D-printed with precision, individually inspected, and carefully packaged before it reaches your hands. We use UV-resistant PETG and flexible TPU, materials chosen for how they perform in real conditions rather than for how they look on a shelf.",
