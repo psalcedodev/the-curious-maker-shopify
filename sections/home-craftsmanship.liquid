@@ -31,6 +31,15 @@
         | image_url: width: 3840
         | image_tag: loading: 'lazy', class: 'home-craftsmanship__bg-image', sizes: '100vw', widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
       }}
+    {%- else -%}
+      <img
+        src="{{ 'craftsmanship-packing.jpg' | asset_url }}"
+        loading="lazy"
+        class="home-craftsmanship__bg-image"
+        alt="Kraft boxes packed with tissue and twine"
+        width="2048"
+        height="1374"
+      >
     {%- endif -%}
   </div>
 
