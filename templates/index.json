@@ -13,15 +13,15 @@
       "type": "home-hero",
       "settings": {
         "background_image": "",
-        "label": "Creative, Functional & Custom 3D Creations",
-        "headline": "<p>Everyday Objects,<br/><em>Made to Order.</em></p>",
-        "subheadline": "Designed and 3D-printed in small batches. Practical things, made properly, in the colours you actually want.",
+        "label": "Creative 3D Printing",
+        "headline": "<p>Made with Care. <em>Ready in 3 Days.</em></p>",
+        "subheadline": "Unique, functional, and customizable pieces for everyday life. Every item is designed, 3D printed, and packed with care just for you.",
         "primary_cta_text": "Shop All Products",
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
         "secondary_cta_text": "View Collection",
         "secondary_cta_link": "/collections/all",
-        "trust_indicator_1": "3D Printed In-House",
-        "trust_indicator_2": "Free Shipping Available",
+        "trust_indicator_1": "Ships within 3 days",
+        "trust_indicator_2": "Packed with care",
         "trust_indicator_3": "",
         "show_scroll_indicator": true,
         "padding_top": 0,
@@ -48,24 +48,24 @@
           "type": "feature",
           "settings": {
             "icon_type": "zap",
-            "title": "Engineered, Not Improvised",
-            "description": "Every product starts as a real problem worth solving, then gets designed, printed, and revised until the mechanism actually works the way it should."
+            "title": "Designed Here",
+            "description": "Every item starts as an idea for making everyday life more fun or practical."
           }
         },
         "feature-2": {
           "type": "feature",
           "settings": {
             "icon_type": "shield",
-            "title": "Built to Last",
-            "description": "UV-resistant PETG and flexible TPU, chosen for durability in real conditions rather than for how they photograph. Indoors and out."
+            "title": "Printed with Care",
+            "description": "UV resistant PETG chosen for real outdoor conditions. Every item is designed, 3D printed, and packed with care just for you."
           }
         },
         "feature-3": {
           "type": "feature",
           "settings": {
             "icon_type": "award",
-            "title": "Tested by the People Who Use It",
-            "description": "Nothing goes on sale until it has been in real hands doing the real job, including coaches and specialists in the field a product is built for."
+            "title": "Made to Be Yours",
+            "description": "Choose the colors and details that feel like you. Questions? We're here to help! Message us anytime."
           }
         },
         "feature-4": {
@@ -86,7 +86,7 @@
       "settings": {
         "image": "",
         "label": "Why The Curious Maker",
-        "heading": "<p>Designed by a Maker.<br/><em>Built for Daily Use.</em></p>",
+        "heading": "<p>Designed Here.<br/><em>Printed with Care.</em></p>",
         "padding_top": 100,
         "padding_bottom": 100
       }
@@ -151,15 +151,15 @@
     "home-cta": {
       "type": "home-cta",
       "settings": {
-        "background_image": "shopify://shop_images/golf-course-2.jpg",
+        "background_image": "",
         "background_opacity": 20,
-        "label": "Ready to Find Yours?",
-        "heading": "<p>Shop The Curious Maker<br/><em>Collection</em></p>",
-        "description": "Precision-printed objects in the colours you choose, made in small batches and shipped from our own workshop. Golf first, with more categories on the way.",
+        "label": "Thanks for Shopping Small",
+        "heading": "<p>A Little More Fun.<br/><em>Made Just for You.</em></p>",
+        "description": "Your support means the world to our small business. Questions? We're here to help! Message us anytime.",
         "primary_cta_text": "Shop All Products",
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
-        "secondary_cta_text": "Learn More",
-        "secondary_cta_link": "/collections/all",
+        "secondary_cta_text": "Contact Us",
+        "secondary_cta_link": "/pages/contact",
         "padding_top": 52,
         "padding_bottom": 52
       }
