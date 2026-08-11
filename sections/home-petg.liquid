@@ -40,6 +40,10 @@
       {%- endif -%}
     </div>
 
+    {%- liquid
+      assign image_1_alt = section.settings.image_1.alt | default: 'Two identical printed cups after time in the sun. The PETG cup on the left holds its straight shape. The PLA cup on the right has warped and creased.'
+      assign image_2_alt = section.settings.image_2.alt | default: 'Comparison table of PETG against PLA for desert sun exposure, rain and sprinklers, summer heat at 114 degrees Fahrenheit, and being left outside for seasons. PETG holds up in every row.'
+    -%}
     <div class="home-petg__gallery reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" style="transition-delay: 150ms;">
       <figure class="home-petg__figure">
         {%- if section.settings.image_1 != blank -%}
@@ -48,7 +52,7 @@
             | image_url: width: 1600
             | image_tag:
               loading: 'lazy',
-              alt: section.settings.image_1.alt | default: 'Two identical printed cups after time in the sun. The PETG cup on the left holds its straight shape. The PLA cup on the right has warped and creased.',
+              alt: image_1_alt,
               sizes: '(min-width: 750px) 45vw, 90vw',
               widths: '375, 550, 750, 1100, 1600'
           }}
@@ -70,7 +74,7 @@
             | image_url: width: 1600
             | image_tag:
               loading: 'lazy',
-              alt: section.settings.image_2.alt | default: 'Comparison table of PETG against PLA for desert sun exposure, rain and sprinklers, summer heat at 114 degrees Fahrenheit, and being left outside for seasons. PETG holds up in every row.',
+              alt: image_2_alt,
               sizes: '(min-width: 750px) 45vw, 90vw',
               widths: '375, 550, 750, 1100, 1600'
           }}

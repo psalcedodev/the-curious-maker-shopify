@@ -23,7 +23,7 @@
 {%- if section.settings.video != blank -%}
   {%- liquid
     assign video_id = section.settings.video.id
-    assign alt = 'sections.video.load_video' | t: description: section.settings.video.alt
+    assign alt = 'sections.video.load_video' | t: description: section.settings.video.alt | escape
   -%}
   <section
     class="home-mechanism-video section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
