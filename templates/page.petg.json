@@ -11,7 +11,7 @@
       "type": "home-petg",
       "settings": {
         "label": "",
-        "heading": "<p>Why we print in <em>PETG</em></p>",
+        "heading": "Why we print in <em>PETG</em>",
         "description": "We left our parts in a hot car at 114F. They kept their shape. PETG is a filament made for sun, heat, and real use, so that is what we print with.",
         "image_1": "",
         "image_2": "",
@@ -86,7 +86,7 @@
       "block_order": ["row-1", "row-2", "row-3", "row-4"],
       "settings": {
         "caption": "",
-        "heading": "<p>Same sun. Different material.</p>",
+        "heading": "Same sun. Different material.",
         "heading_size": "h1",
         "heading_alignment": "left",
         "layout": "none",
@@ -106,7 +106,7 @@
         "background_image": "",
         "background_opacity": 20,
         "label": "",
-        "heading": "<p>See it for yourself</p>",
+        "heading": "See it for yourself",
         "description": "Golf ball dispensers and fidget clickers, printed in our workshop.",
         "primary_cta_text": "Shop",
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",

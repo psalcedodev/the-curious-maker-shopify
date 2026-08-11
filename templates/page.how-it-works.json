@@ -134,7 +134,7 @@
       "block_order": ["included-classic", "included-premium", "faq-power", "faq-handed", "faq-simulator"],
       "settings": {
         "caption": "",
-        "heading": "<p>What's included and common questions</p>",
+        "heading": "What's included and common questions",
         "heading_size": "h1",
         "heading_alignment": "left",
         "layout": "none",
@@ -154,7 +154,7 @@
         "background_image": "",
         "background_opacity": 20,
         "label": "",
-        "heading": "<p>Ready to see one in action?</p>",
+        "heading": "Ready to see one in action?",
         "description": "Golf ball dispensers, printed in our workshop.",
         "primary_cta_text": "Shop",
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
