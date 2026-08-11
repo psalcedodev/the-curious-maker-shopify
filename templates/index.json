@@ -102,7 +102,7 @@
       "type": "home-petg",
       "settings": {
         "label": "",
-        "heading": "<p>Why we print in PETG</p>",
+        "heading": "<p>Why we print in <em>PETG</em></p>",
         "description": "We left our parts in a hot car at 114F. They kept their shape. PETG is a filament made for sun, heat, and real use, so that is what we print with.",
         "image_1": "",
         "image_2": "",
@@ -116,7 +116,7 @@
         "background_image": "",
         "overlay_opacity": 82,
         "label": "Our Craft",
-        "heading": "<p>Inside the workshop</p>",
+        "heading": "<p>Inside the <em>workshop</em></p>",
         "description": "Five Bambu Lab P1S printers and one H2D run in our shop. Every product is modeled in CAD, test printed, and adjusted until it works the way it should.",
         "cta_text": "Our Story",
         "cta_link": "/pages/about",
