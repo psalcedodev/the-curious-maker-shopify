@@ -14,14 +14,14 @@
       "settings": {
         "background_image": "",
         "label": "Creative 3D Printing",
-        "headline": "<p>Designed in CAD. Printed in PETG on our own machines. Tested until the mechanism runs clean.</p>",
-        "subheadline": "Golf ball dispensers and fidget clickers from a small workshop that sweats the details.",
+        "headline": "<p>Designed in CAD. Tested until it runs clean.</p>",
+        "subheadline": "Useful, durable things from a small workshop that sweats the details.",
         "primary_cta_text": "Shop",
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
         "secondary_cta_text": "See how it's built",
         "secondary_cta_link": "#how-its-built",
         "trust_indicator_1": "Designed in CAD",
-        "trust_indicator_2": "Printed in PETG",
+        "trust_indicator_2": "Printed on our own machines",
         "trust_indicator_3": "",
         "show_scroll_indicator": true,
         "padding_top": 0,
@@ -68,13 +68,13 @@
         "proof-2": {
           "type": "proof_item",
           "settings": {
-            "text": "Printed in PETG"
+            "text": "Printed on our own machines"
           }
         },
         "proof-3": {
           "type": "proof_item",
           "settings": {
-            "text": "One maker. Six printers."
+            "text": "Tested before it ships"
           }
         }
       },
@@ -103,7 +103,7 @@
       "settings": {
         "label": "",
         "heading": "<p>Why we print in <em>PETG</em></p>",
-        "description": "We left our parts in a hot car at 114F. They kept their shape. PETG is a filament made for sun, heat, and real use, so that is what we print with.",
+        "description": "Our golf ball dispensers live outside, so we print them in PETG. We left parts in a hot car at 114F and they kept their shape. Indoor pieces like our clickers are printed in PLA, the right material for desks and keychains.",
         "image_1": "",
         "image_2": "",
         "padding_top": 60,
@@ -117,7 +117,7 @@
         "overlay_opacity": 82,
         "label": "Our Craft",
         "heading": "<p>Inside the <em>workshop</em></p>",
-        "description": "Five Bambu Lab P1S printers and one H2D run in our shop. Every product is modeled in CAD, test printed, and adjusted until it works the way it should.",
+        "description": "Every product is modeled in CAD, test printed on our own machines, and adjusted until it works the way it should. Designed, printed, and packed in the same workshop.",
         "cta_text": "Our Story",
         "cta_link": "/pages/about",
         "padding_top": 100,

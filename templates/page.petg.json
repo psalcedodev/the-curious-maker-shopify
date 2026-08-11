@@ -12,7 +12,7 @@
       "settings": {
         "label": "",
         "heading": "<p>Why we print in <em>PETG</em></p>",
-        "description": "We left our parts in a hot car at 114F. They kept their shape. PETG is a filament made for sun, heat, and real use, so that is what we print with.",
+        "description": "Our golf ball dispensers live outside, so we print them in PETG. We left parts in a hot car at 114F and they kept their shape. Indoor pieces like our clickers are printed in PLA, the right material for desks and keychains.",
         "image_1": "",
         "image_2": "",
         "padding_top": 44,
@@ -32,7 +32,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>PLA is the filament most 3D printed products are made from. It is easier to print and it costs less, but it softens in heat and it does not hold up well outdoors over time.</p><p>We print in PETG instead. It takes more tuning to print well, but it is built for where our products actually live: golf simulator bays, backyards, cars, and driveways in the sun.</p><p>Our golf ball dispensers and ball trays are printed in UV resistant PETG. Two full dispenser sets have lived outdoors under Utah desert sun and daily sprinklers since testing began, and they are still dispensing.</p>",
+            "text": "<p>PLA is the filament most 3D printed products are made from. It is easier to print and it costs less, but it softens in heat and it does not hold up well outdoors over time.</p><p>Our golf ball dispensers live outside, so we print them in PETG instead. It takes more tuning to print well, but it is built for where a dispenser actually lives: golf simulator bays, backyards, cars, and driveways in the sun.</p><p>Our golf ball dispensers are printed in UV resistant PETG. Two full dispenser sets have lived outdoors under Utah desert sun and daily sprinklers since testing began, and they are still dispensing. Indoor pieces like our clickers are printed in PLA instead, the right material for desks and keychains.</p>",
             "text_style": "body"
           }
         }
