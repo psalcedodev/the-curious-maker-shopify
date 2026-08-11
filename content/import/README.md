@@ -1,17 +1,48 @@
 # How to use products.csv
 
-Plan 0003, step S5. Read this before importing. Two things in this file are
-not obvious from the CSV alone and will bite you if skipped.
+Plan 0003, step S5. Read this before importing, starting with section 0,
+which is a blocker on the fidget clicker product, not a CSV mechanics note.
 
-## 1. This is an overwrite import, not a new-products import
+## 0. The fidget clicker has no working personalization field on this storefront
+
+This is a pre-existing gap, not something this step introduced, but it means
+the product cannot be ordered correctly as the theme stands today. The live
+description's own "HOW TO ORDER" steps end with "Enter your personalization,"
+but never say where. I checked: this theme has no line item property input
+anywhere on the product form (`snippets/buy-buttons.liquid`,
+`snippets/product-variant-picker.liquid`, `sections/main-product.liquid`),
+and the one text field that exists, the cart note
+(`sections/main-cart-footer.liquid`, `snippets/cart-drawer.liquid`), is
+switched off (`config/settings_data.json:128`, `show_cart_note: false`). It
+is also a single note for the whole cart, not tied to a specific line item,
+which would be confusing on an order with more than one clicker.
+
+I did not invent a mechanism to paper over this. The CSV body copy for this
+product says "message us with your personalization," matching the live
+listing's own real fallback ("...or message us"). Before this product is
+truly ready to sell through this storefront, it needs one of: a line item
+property text input added to the product form, the cart note turned on (with
+a name/word field per clicker in a multi-item order still unresolved), or a
+confirmed message-us-first workflow. Flagging for Paul to decide; not a CSV
+or copy problem to solve from this seat.
+
+## 1. This is an overwrite import, not a new-products import, and I have not verified it is safe for existing photos
 
 All 5 products in `products.csv` already exist on the live store (same
 handles, same variant structure, same prices, byte checked against
-`/products/<handle>.js` at fetch time). Import this file using Shopify
-Admin's Products > Import, and choose the option to overwrite existing
-products that match by handle. If you instead choose "create new products,"
-Shopify will either reject the duplicate handles or create a second, parallel
-set of products. Overwrite by handle is what you want.
+`/products/<handle>.js` at fetch time), and each one currently carries real
+product photography (8, 16, 4, 7, and 5 images respectively). Import this
+file using Shopify Admin's Products > Import, and choose the option to
+overwrite existing products that match by handle. If you instead choose
+"create new products," Shopify will either reject the duplicate handles or
+create a second, parallel set of products.
+
+I could not confirm from here whether Shopify's overwrite import treats a
+blank `Image Src` column as "leave existing media alone" or as "clear
+existing media." Before you run the first overwrite import, export the
+current products from Admin as a backup CSV, or at minimum confirm this
+behavior in a test import on one product. Do not assume the blank image
+columns in this CSV are a safe no-op until you have checked.
 
 Overwriting replaces the live Title, Body (HTML), Tags, and SEO fields with
 the versions in this CSV. I rewrote every product's Body (HTML) in plan
@@ -19,9 +50,9 @@ voice, but kept the details a customer needs to order correctly: the golf
 dispenser FAQ (powered, handed, simulator), and, most importantly, the fidget
 clicker's full 15 color combo list, symbol list, and how to order steps,
 since that product has no color variant option. Its color choice is only
-captured in the body copy and the order notes, not in a Shopify dropdown. If
-you edit that body copy later, keep that list intact or personalization
-orders will come in without enough information to fill correctly.
+captured in the body copy, not in a Shopify dropdown. If you edit that body
+copy later, keep that list intact or personalization orders will come in
+without enough information to fill correctly.
 
 ## 2. The image columns are blank on purpose. Do not leave them blank by accident.
 
