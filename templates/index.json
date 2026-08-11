@@ -14,14 +14,14 @@
       "settings": {
         "background_image": "",
         "label": "Creative 3D Printing",
-        "headline": "<p>Everyday Objects, <em>Made with Care.</em></p>",
-        "subheadline": "Unique, functional, and customizable pieces for everyday life. Every item is designed, 3D printed, and packed with care just for you.",
-        "primary_cta_text": "Shop All Products",
+        "headline": "<p>Designed in CAD. Printed in PETG on our own machines. Tested until the mechanism runs clean.</p>",
+        "subheadline": "Golf ball dispensers and fidget clickers from a small workshop that sweats the details.",
+        "primary_cta_text": "Shop",
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
-        "secondary_cta_text": "View Collection",
-        "secondary_cta_link": "/collections/all",
-        "trust_indicator_1": "3D Printed In House",
-        "trust_indicator_2": "Packed with care",
+        "secondary_cta_text": "See how it's built",
+        "secondary_cta_link": "#how-its-built",
+        "trust_indicator_1": "Designed in CAD",
+        "trust_indicator_2": "Printed in PETG",
         "trust_indicator_3": "",
         "show_scroll_indicator": true,
         "padding_top": 0,
@@ -56,8 +56,8 @@
           "type": "feature",
           "settings": {
             "icon_type": "shield",
-            "title": "Printed with Care",
-            "description": "UV resistant PETG chosen for real outdoor conditions. Every item is designed, 3D printed, and packed with care just for you."
+            "title": "Printed in PETG",
+            "description": "UV resistant PETG chosen for real outdoor conditions. Printed to order in our workshop."
           }
         },
         "feature-3": {
@@ -73,7 +73,7 @@
           "settings": {
             "icon_type": "check",
             "title": "Precision 3D-Printed",
-            "description": "Each piece is precision 3D-printed and individually inspected before shipping. Craftsmanship you can see and feel."
+            "description": "Each piece is precision 3D-printed and individually inspected before shipping."
           }
         }
       },
@@ -86,7 +86,7 @@
       "settings": {
         "image": "",
         "label": "Why The Curious Maker",
-        "heading": "<p>Designed Here.<br/><em>Printed with Care.</em></p>",
+        "heading": "<p>Designed Here.<br/><em>Printed in PETG.</em></p>",
         "padding_top": 100,
         "padding_bottom": 100
       }
@@ -112,7 +112,7 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "quote": "The Golf Ball Dispenser has completely changed how I practice. No more breaking my rhythm to pick up balls — I just tap and swing. My session efficiency has improved dramatically.",
+            "quote": "The Golf Ball Dispenser has completely changed how I practice. No more breaking my rhythm to pick up balls. I just tap and swing. My session efficiency has improved dramatically.",
             "author": "Michael R.",
             "author_title": "Scratch Golfer, Nevada"
           }
@@ -156,7 +156,7 @@
         "label": "Thanks for Shopping Small",
         "heading": "<p>A Little More Fun.<br/><em>Made Just for You.</em></p>",
         "description": "Your support means the world to our small business. Questions? We're here to help! Message us anytime.",
-        "primary_cta_text": "Shop All Products",
+        "primary_cta_text": "Shop",
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
         "secondary_cta_text": "Contact Us",
         "secondary_cta_link": "/pages/contact",
