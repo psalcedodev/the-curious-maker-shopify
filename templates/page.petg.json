@@ -1,0 +1,127 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "petg-story": {
+      "type": "home-petg",
+      "settings": {
+        "label": "",
+        "heading": "<p>Why we print in <em>PETG</em></p>",
+        "description": "We left our parts in a hot car at 114F. They kept their shape. PETG is a filament made for sun, heat, and real use, so that is what we print with.",
+        "image_1": "",
+        "image_2": "",
+        "padding_top": 44,
+        "padding_bottom": 44
+      }
+    },
+    "petg-explainer": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "The short version",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>PLA is the filament most 3D printed products are made from. It is easier to print and it costs less, but it softens in heat and it does not hold up well outdoors over time.</p><p>We print in PETG instead. It takes more tuning to print well, but it is built for where our products actually live: golf simulator bays, backyards, cars, and driveways in the sun.</p><p>Our golf ball dispensers and ball trays are printed in UV resistant PETG. Two full dispenser sets have lived outdoors under Utah desert sun and daily sprinklers since testing began, and they are still dispensing.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 52,
+        "padding_bottom": 28
+      }
+    },
+    "petg-comparison": {
+      "type": "collapsible-content",
+      "blocks": {
+        "row-1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Desert sun and UV exposure",
+            "icon": "check_mark",
+            "row_content": "<p>Our PETG keeps its strength in direct sun. PLA turns brittle over time.</p>"
+          }
+        },
+        "row-2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Rain and sprinklers",
+            "icon": "check_mark",
+            "row_content": "<p>Our PETG resists water. PLA absorbs moisture.</p>"
+          }
+        },
+        "row-3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Summer heat, tested at 114F",
+            "icon": "check_mark",
+            "row_content": "<p>Our PETG holds its shape. PLA can warp and soften.</p>"
+          }
+        },
+        "row-4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Left outside for seasons",
+            "icon": "check_mark",
+            "row_content": "<p>Our PETG is built for it. PLA is an indoor material.</p>"
+          }
+        }
+      },
+      "block_order": ["row-1", "row-2", "row-3", "row-4"],
+      "settings": {
+        "caption": "",
+        "heading": "<p>Same sun. Different material.</p>",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image": "",
+        "image_ratio": "adapt",
+        "desktop_layout": "image_first",
+        "padding_top": 28,
+        "padding_bottom": 60
+      }
+    },
+    "petg-cta": {
+      "type": "home-cta",
+      "settings": {
+        "background_image": "",
+        "background_opacity": 20,
+        "label": "",
+        "heading": "<p>See it for yourself</p>",
+        "description": "Golf ball dispensers and fidget clickers, printed in our workshop.",
+        "primary_cta_text": "Shop",
+        "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
+        "secondary_cta_text": "How it works",
+        "secondary_cta_link": "/pages/how-it-works",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "main",
+    "petg-story",
+    "petg-explainer",
+    "petg-comparison",
+    "petg-cta"
+  ]
+}

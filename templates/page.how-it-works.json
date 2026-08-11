@@ -1,0 +1,175 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "how-it-works-intro": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "How the dispenser works",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our golf ball dispenser is a gravity fed, tap to dispense feeder. There is no motor and no battery. Tap it with a club or your foot, and the next ball drops into place.</p><p>It works the same for left and right handed golfers, and it is designed to keep your hitting area clean and repeatable, whether you are practicing at home or on the range.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 44,
+        "padding_bottom": 28
+      }
+    },
+    "how-it-works-steps": {
+      "type": "multicolumn",
+      "blocks": {
+        "step-1": {
+          "type": "column",
+          "settings": {
+            "image": "",
+            "title": "Tap",
+            "text": "<p>A light tap with a club or your foot triggers the mechanism. No batteries, no motor, no power required.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "step-2": {
+          "type": "column",
+          "settings": {
+            "image": "",
+            "title": "Gravity does the work",
+            "text": "<p>The hopper holds up to 25 balls. Gravity feeds the next one into position the moment you tap.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "step-3": {
+          "type": "column",
+          "settings": {
+            "image": "",
+            "title": "One ball, every time",
+            "text": "<p>A single ball drops into place, ready for your next shot, so your practice rhythm does not break.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["step-1", "step-2", "step-3"],
+      "settings": {
+        "title": "Three steps, no wiring",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 28,
+        "padding_bottom": 44
+      }
+    },
+    "how-it-works-details": {
+      "type": "collapsible-content",
+      "blocks": {
+        "included-classic": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What's included: Classic",
+            "icon": "box",
+            "row_content": "<p>Base, ball guider, pedal, hopper, and adjustable legs.</p>"
+          }
+        },
+        "included-premium": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What's included: Premium",
+            "icon": "box",
+            "row_content": "<p>Everything in Classic, plus a funnel for smoother ball delivery.</p>"
+          }
+        },
+        "faq-power": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Is it powered?",
+            "icon": "lightning_bolt",
+            "row_content": "<p>No. It runs on gravity and a tap, nothing else.</p>"
+          }
+        },
+        "faq-handed": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Does it work for left and right handed golfers?",
+            "icon": "check_mark",
+            "row_content": "<p>Yes, it works the same for both.</p>"
+          }
+        },
+        "faq-simulator": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Will it work with my simulator setup?",
+            "icon": "question_mark",
+            "row_content": "<p>Yes. It is designed to keep your hitting area clean and repeatable for simulator bays, backyard nets, and range sessions.</p>"
+          }
+        }
+      },
+      "block_order": ["included-classic", "included-premium", "faq-power", "faq-handed", "faq-simulator"],
+      "settings": {
+        "caption": "",
+        "heading": "<p>What's included and common questions</p>",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image": "",
+        "image_ratio": "adapt",
+        "desktop_layout": "image_first",
+        "padding_top": 28,
+        "padding_bottom": 60
+      }
+    },
+    "how-it-works-cta": {
+      "type": "home-cta",
+      "settings": {
+        "background_image": "",
+        "background_opacity": 20,
+        "label": "",
+        "heading": "<p>Ready to see one in action?</p>",
+        "description": "Golf ball dispensers, printed in our workshop.",
+        "primary_cta_text": "Shop",
+        "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
+        "secondary_cta_text": "Why we print in PETG",
+        "secondary_cta_link": "/pages/petg",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "main",
+    "how-it-works-intro",
+    "how-it-works-steps",
+    "how-it-works-details",
+    "how-it-works-cta"
+  ]
+}
