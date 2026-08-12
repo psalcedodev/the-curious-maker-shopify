@@ -30,6 +30,24 @@
     },
     "shop-by-family": {
       "type": "collection-list",
+      "blocks": {
+        "family-golf": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "golf"
+          }
+        },
+        "family-clickers": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "clickers"
+          }
+        }
+      },
+      "block_order": [
+        "family-golf",
+        "family-clickers"
+      ],
       "settings": {
         "title": "Shop by family",
         "heading_size": "h1",
@@ -46,7 +64,7 @@
     "home-featured-products": {
       "type": "home-featured-products",
       "settings": {
-        "collection": "all",
+        "collection": "golf",
         "products_to_show": 6,
         "label": "Our Collection",
         "heading": "<p>Practical Objects,<br/><em>Precisely Made</em></p>",
