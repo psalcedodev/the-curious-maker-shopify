@@ -1,0 +1,134 @@
+{{ 'section-home-mechanism-video.css' | asset_url | stylesheet_tag }}
+{{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'home-scroll-reveal.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- comment -%}
+  Blank safe: with no video assigned, this section renders nothing. No stock or
+  placeholder video is ever shown in its place.
+{%- endcomment -%}
+{%- if section.settings.video != blank -%}
+  {%- liquid
+    assign video_id = section.settings.video.id
+    assign alt = 'sections.video.load_video' | t: description: section.settings.video.alt | escape
+  -%}
+  <section
+    class="home-mechanism-video section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+    id="home-mechanism-video-{{ section.id }}"
+  >
+    <div class="page-width">
+      {%- if section.settings.label != blank or section.settings.heading != blank -%}
+        <div class="home-mechanism-video__header reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {%- if section.settings.label != blank -%}
+            <span class="home-mechanism-video__label">{{ section.settings.label | escape }}</span>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="home-mechanism-video__heading">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <deferred-media
+        class="home-mechanism-video__media deferred-media reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        data-media-id="{{ video_id }}"
+        style="--ratio-percent: {{ 1 | divided_by: section.settings.video.aspect_ratio | times: 100 }}%;"
+      >
+        <button
+          id="Deferred-Poster-Modal-{{ video_id }}"
+          class="home-mechanism-video__poster media deferred-media__poster"
+          type="button"
+          aria-label="{{ alt }}"
+        >
+          {{
+            section.settings.video.preview_image
+            | image_url: width: 1600
+            | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 90vw, 100vw', widths: '375, 750, 1100, 1500, 1600'
+          }}
+          <span class="deferred-media__poster-button motion-reduce">
+            <span class="svg-wrapper">{{ 'icon-play.svg' | inline_asset_content }}</span>
+          </span>
+        </button>
+        <template>
+          {{
+            section.settings.video
+            | video_tag:
+              image_size: '1100x',
+              autoplay: true,
+              loop: false,
+              controls: true,
+              muted: false
+          }}
+        </template>
+      </deferred-media>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Home Mechanism Video",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Mechanism video",
+      "info": "Leave empty to hide this section entirely. No stock or placeholder video is shown while empty."
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "info": "Optional eyebrow text above the heading."
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Mechanism Video"
+    }
+  ]
+}
+{% endschema %}

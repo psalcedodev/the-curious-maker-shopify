@@ -23,39 +23,39 @@
   endif
 -%}
 
-<section
-  class="home-featured-products section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
-  id="home-featured-products-{{ section.id }}"
->
-  <div class="page-width">
-    <div class="home-featured-products__header reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-      {%- if section.settings.label != blank -%}
-        <span class="home-featured-products__label">{{ section.settings.label | escape }}</span>
-      {%- endif -%}
-
-      <div class="home-featured-products__header-content">
-        <div>
-          {%- if section.settings.heading != blank -%}
-            <h2 class="home-featured-products__heading">
-              {{ section.settings.heading }}
-            </h2>
-          {%- endif -%}
-          <div class="home-featured-products__rule"> </div>
-        </div>
-
-        {%- if section.settings.view_all_link != blank -%}
-          <a
-            href="{{ section.settings.view_all_link }}"
-            class="btn-outline home-featured-products__view-all"
-          >
-            <span>{{ section.settings.view_all_text | default: 'View All Products' | escape }}</span>
-            <span class="svg-wrapper">{{ 'icon-arrow.svg' | inline_asset_content }}</span>
-          </a>
+{%- if section.settings.collection != blank and section.settings.collection.products.size > 0 -%}
+  <section
+    class="home-featured-products section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+    id="home-featured-products-{{ section.id }}"
+  >
+    <div class="page-width">
+      <div class="home-featured-products__header reveal{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {%- if section.settings.label != blank -%}
+          <span class="home-featured-products__label">{{ section.settings.label | escape }}</span>
         {%- endif -%}
-      </div>
-    </div>
 
-    {%- if section.settings.collection != blank and section.settings.collection.products.size > 0 -%}
+        <div class="home-featured-products__header-content">
+          <div>
+            {%- if section.settings.heading != blank -%}
+              <h2 class="home-featured-products__heading">
+                {{ section.settings.heading }}
+              </h2>
+            {%- endif -%}
+            <div class="home-featured-products__rule"> </div>
+          </div>
+
+          {%- if section.settings.view_all_link != blank -%}
+            <a
+              href="{{ section.settings.view_all_link }}"
+              class="btn-outline home-featured-products__view-all"
+            >
+              <span>{{ section.settings.view_all_text | default: 'View All Products' | escape }}</span>
+              <span class="svg-wrapper">{{ 'icon-arrow.svg' | inline_asset_content }}</span>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
       <div class="home-featured-products__grid">
         {% assign lazy_load = false %}
         {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
@@ -69,26 +69,9 @@
           %}
         {%- endfor -%}
       </div>
-    {%- else -%}
-      <div class="home-featured-products__grid">
-        {%- for i in (1..4) -%}
-          <div class="home-product-card">
-            <div class="home-product-card__image-wrapper">
-              {{ 'product-apparel-' | append: i | placeholder_svg_tag: 'home-product-card__image' }}
-            </div>
-            <div class="home-product-card__info">
-              <h3 class="home-product-card__title">Product {{ i }}</h3>
-              <div class="home-product-card__footer">
-                <span class="home-product-card__price">$99.99</span>
-                <a href="#" class="home-product-card__cta">Shop Now</a>
-              </div>
-            </div>
-          </div>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
-  </div>
-</section>
+    </div>
+  </section>
+{%- endif -%}
 
 {% schema %}
 {

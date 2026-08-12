@@ -1,0 +1,96 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "about-intro": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "About The Curious Maker",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>The Curious Maker is a small workshop. Every product starts as a CAD model, gets test printed, and is adjusted until it works the way it should.</p><p>We choose materials by where a product lives. Golf ball dispensers live outside, so we print them in UV resistant PETG. Indoor pieces like our clickers are printed in PLA, the right material for desks and keychains. Parts that need to flex, like our Strike Form trainer, are printed in TPU.</p><p>Everything is designed, printed, and packed in the same workshop, then shipped to you.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 44,
+        "padding_bottom": 28
+      }
+    },
+    "about-workshop": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Built and tested here",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nothing ships until it has been test printed and checked. If a part does not work the way it should, we adjust the model and print it again.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "image": "",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 28,
+        "padding_bottom": 44
+      }
+    },
+    "about-cta": {
+      "type": "home-cta",
+      "settings": {
+        "background_image": "",
+        "background_opacity": 20,
+        "label": "",
+        "heading": "<p>See what we make</p>",
+        "description": "Golf ball dispensers and fidget clickers, printed in our workshop.",
+        "primary_cta_text": "Shop",
+        "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
+        "secondary_cta_text": "How it works",
+        "secondary_cta_link": "/pages/how-it-works",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "main",
+    "about-intro",
+    "about-workshop",
+    "about-cta"
+  ]
+}

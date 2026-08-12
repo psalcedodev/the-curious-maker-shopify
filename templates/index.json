@@ -14,25 +14,40 @@
       "settings": {
         "background_image": "",
         "label": "Creative 3D Printing",
-        "headline": "<p>Everyday Objects, <em>Made with Care.</em></p>",
-        "subheadline": "Unique, functional, and customizable pieces for everyday life. Every item is designed, 3D printed, and packed with care just for you.",
-        "primary_cta_text": "Shop All Products",
+        "headline": "<p>Designed in CAD. Tested until it runs clean.</p>",
+        "subheadline": "Useful, durable things from a small workshop that sweats the details.",
+        "primary_cta_text": "Shop",
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
-        "secondary_cta_text": "View Collection",
-        "secondary_cta_link": "/collections/all",
-        "trust_indicator_1": "3D Printed In House",
-        "trust_indicator_2": "Packed with care",
+        "secondary_cta_text": "See how it's built",
+        "secondary_cta_link": "#how-its-built",
+        "trust_indicator_1": "Designed in CAD",
+        "trust_indicator_2": "Printed on our own machines",
         "trust_indicator_3": "",
         "show_scroll_indicator": true,
         "padding_top": 0,
         "padding_bottom": 100
       }
     },
+    "shop-by-family": {
+      "type": "collection-list",
+      "settings": {
+        "title": "Shop by family",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "scheme-1",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
     "home-featured-products": {
       "type": "home-featured-products",
       "settings": {
         "collection": "all",
-        "products_to_show": 12,
+        "products_to_show": 6,
         "label": "Our Collection",
         "heading": "<p>Practical Objects,<br/><em>Precisely Made</em></p>",
         "view_all_text": "View All Products",
@@ -41,54 +56,58 @@
         "padding_bottom": 52
       }
     },
-    "home-features": {
-      "type": "home-features",
+    "home-proof": {
+      "type": "home-proof",
       "blocks": {
-        "feature-1": {
-          "type": "feature",
+        "proof-1": {
+          "type": "proof_item",
           "settings": {
-            "icon_type": "zap",
-            "title": "Designed Here",
-            "description": "Every item starts as an idea for making everyday life more fun or practical."
+            "text": "Designed in CAD"
           }
         },
-        "feature-2": {
-          "type": "feature",
+        "proof-2": {
+          "type": "proof_item",
           "settings": {
-            "icon_type": "shield",
-            "title": "Printed with Care",
-            "description": "UV resistant PETG chosen for real outdoor conditions. Every item is designed, 3D printed, and packed with care just for you."
+            "text": "Printed on our own machines"
           }
         },
-        "feature-3": {
-          "type": "feature",
+        "proof-3": {
+          "type": "proof_item",
           "settings": {
-            "icon_type": "award",
-            "title": "Made to Be Yours",
-            "description": "Choose the colors and details that feel like you. Questions? We're here to help! Message us anytime."
-          }
-        },
-        "feature-4": {
-          "type": "feature",
-          "settings": {
-            "icon_type": "check",
-            "title": "Precision 3D-Printed",
-            "description": "Each piece is precision 3D-printed and individually inspected before shipping. Craftsmanship you can see and feel."
+            "text": "Tested before it ships"
           }
         }
       },
       "block_order": [
-        "feature-1",
-        "feature-2",
-        "feature-3",
-        "feature-4"
+        "proof-1",
+        "proof-2",
+        "proof-3"
       ],
       "settings": {
-        "image": "",
-        "label": "Why The Curious Maker",
-        "heading": "<p>Designed Here.<br/><em>Printed with Care.</em></p>",
-        "padding_top": 100,
-        "padding_bottom": 100
+        "padding_top": 44,
+        "padding_bottom": 44
+      }
+    },
+    "home-mechanism-video": {
+      "type": "home-mechanism-video",
+      "settings": {
+        "video": "",
+        "label": "",
+        "heading": "",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "home-petg": {
+      "type": "home-petg",
+      "settings": {
+        "label": "",
+        "heading": "<p>Why we print in <em>PETG</em></p>",
+        "description": "Our golf ball dispensers live outside, so we print them in PETG. We left parts in a hot car at 114F and they kept their shape. Indoor pieces like our clickers are printed in PLA, the right material for desks and keychains.",
+        "image_1": "",
+        "image_2": "",
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     },
     "home-craftsmanship": {
@@ -97,55 +116,12 @@
         "background_image": "",
         "overlay_opacity": 82,
         "label": "Our Craft",
-        "heading": "<p>Every Product is<br/><em>Precision-Printed & Inspected</em></p>",
-        "description": "Each product is 3D-printed with precision, individually inspected, and carefully packaged before it reaches your hands. We use UV-resistant PETG and flexible TPU, materials chosen for how they perform in real conditions rather than for how they look on a shelf.",
+        "heading": "<p>Inside the <em>workshop</em></p>",
+        "description": "Every product is modeled in CAD, test printed on our own machines, and adjusted until it works the way it should. Designed, printed, and packed in the same workshop.",
         "cta_text": "Our Story",
         "cta_link": "/pages/about",
         "padding_top": 100,
         "padding_bottom": 100
-      }
-    },
-    "home-testimonials": {
-      "type": "home-testimonials",
-      "blocks": {
-        "testimonial-1": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "The Golf Ball Dispenser has completely changed how I practice. No more breaking my rhythm to pick up balls — I just tap and swing. My session efficiency has improved dramatically.",
-            "author": "Michael R.",
-            "author_title": "Scratch Golfer, Nevada"
-          }
-        },
-        "testimonial-2": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "Strike Form helped me understand my wedge contact in a way that years of lessons hadn't. The feedback is immediate and the build quality is exceptional for the price.",
-            "author": "James T.",
-            "author_title": "12-Handicap, Utah"
-          }
-        },
-        "testimonial-3": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "I bought the Football-Team Dispenser as a gift for my father. He uses it every single day in his simulator. The quality is outstanding and the team colors are perfect.",
-            "author": "Sarah K.",
-            "author_title": "Gift Buyer, Texas"
-          }
-        }
-      },
-      "block_order": [
-        "testimonial-1",
-        "testimonial-2",
-        "testimonial-3"
-      ],
-      "settings": {
-        "label": "Customer Reviews",
-        "heading": "What Customers Are Saying",
-        "padding_top": 52,
-        "padding_bottom": 52
       }
     },
     "home-cta": {
@@ -156,7 +132,7 @@
         "label": "Thanks for Shopping Small",
         "heading": "<p>A Little More Fun.<br/><em>Made Just for You.</em></p>",
         "description": "Your support means the world to our small business. Questions? We're here to help! Message us anytime.",
-        "primary_cta_text": "Shop All Products",
+        "primary_cta_text": "Shop",
         "primary_cta_link": "https://www.thecuriousmaker.us/collections/all",
         "secondary_cta_text": "Contact Us",
         "secondary_cta_link": "/pages/contact",
@@ -167,10 +143,12 @@
   },
   "order": [
     "home-hero",
+    "shop-by-family",
     "home-featured-products",
-    "home-features",
+    "home-proof",
+    "home-mechanism-video",
+    "home-petg",
     "home-craftsmanship",
-    "home-testimonials",
     "home-cta"
   ]
 }

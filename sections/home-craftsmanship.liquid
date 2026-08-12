@@ -15,14 +15,14 @@
     }
   }
 
-  #home-craftsmanship-{{ section.id }} .home-craftsmanship__overlay {
+  #how-its-built .home-craftsmanship__overlay {
     background-color: oklch(0.18 0.09 150 / {{ section.settings.overlay_opacity | divided_by: 100.0 }});
   }
 {%- endstyle -%}
 
 <section
   class="home-craftsmanship section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
-  id="home-craftsmanship-{{ section.id }}"
+  id="how-its-built"
 >
   <div class="home-craftsmanship__background">
     {%- if section.settings.background_image != blank -%}
@@ -109,13 +109,13 @@
       "type": "richtext",
       "id": "heading",
       "label": "Heading",
-      "default": "<p>Every Product is<br><em>Precision-Printed & Inspected</em></p>"
+      "default": "<p>Inside the <em>workshop</em></p>"
     },
     {
       "type": "textarea",
       "id": "description",
       "label": "Description",
-      "default": "Each training aid is 3D-printed with precision, individually inspected, and carefully packaged before it reaches your hands. We use UV-resistant PETG and flexible TPU — materials chosen for their performance in real practice conditions, not just their appearance."
+      "default": "Every product is modeled in CAD, test printed on our own machines, and adjusted until it works the way it should. Designed, printed, and packed in the same workshop."
     },
     {
       "type": "text",

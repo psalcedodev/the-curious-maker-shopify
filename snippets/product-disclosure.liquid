@@ -1,0 +1,14 @@
+{%- comment -%}
+  Proof/disclosure line rendered directly under the buy buttons.
+  Dispenser predicate: product.tags contains 'golf_ball_dispenser'. Verified
+  against the live catalog (bqtfza-md.myshopify.com/products.json, 2026-08-11):
+  both dispenser SKUs carry this tag; Golf Ball Tray and Strike Form Golf Swing
+  Trainer are golf-adjacent but do not dispense balls and do not carry it.
+{%- endcomment -%}
+<p class="product__text rte quick-add-hidden" {{ block.shopify_attributes }}>
+  Printed to order in our workshop.
+  {%- if product.tags contains 'golf_ball_dispenser' %}
+    <br>
+    Golf balls not included.
+  {%- endif %}
+</p>

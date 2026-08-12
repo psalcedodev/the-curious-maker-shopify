@@ -1,0 +1,93 @@
+/* Home Proof Strip Section Styles */
+
+.home-proof {
+  background-color: oklch(0.28 0.08 150);
+}
+
+.home-proof__list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .home-proof__list {
+    flex-direction: row;
+    justify-content: center;
+    gap: 3rem;
+  }
+}
+
+.home-proof__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.home-proof__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  color: oklch(0.72 0.12 80);
+}
+
+.home-proof__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.home-proof__text {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(0.85rem, 1vw + 0.7rem, 1rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: oklch(0.97 0.01 90);
+}
+
+/* Divider between items on desktop, echoing the gold rule used elsewhere on the home page */
+@media screen and (min-width: 750px) {
+  .home-proof__item:not(:last-child) {
+    position: relative;
+    padding-right: 3rem;
+  }
+
+  .home-proof__item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 1.5rem;
+    background-color: oklch(0.72 0.12 80 / 0.35);
+  }
+}
+
+/* Scroll reveal animation */
+.home-proof__list.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.home-proof__list.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-proof__list.reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
