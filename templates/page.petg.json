@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -32,12 +41,14 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>PLA is the filament most 3D printed products are made from. It is easier to print and it costs less, but it softens in heat and it does not hold up well outdoors over time.</p><p>Our golf ball dispensers live outside, so we print them in PETG instead. It takes more tuning to print well, but it is built for where a dispenser actually lives: golf simulator bays, backyards, cars, and driveways in the sun.</p><p>Our golf ball dispensers are printed in UV resistant PETG. Two full dispenser sets have lived outdoors under Utah desert sun and daily sprinklers since testing began, and they are still dispensing. Indoor pieces like our clickers are printed in PLA instead, the right material for desks and keychains.</p>",
-            "text_style": "body"
+            "text": "<p>PLA is the filament most 3D printed products are made from. It is easier to print and it costs less, but it softens in heat and it does not hold up well outdoors over time.</p><p>Our golf ball dispensers live outside, so we print them in PETG instead. It takes more tuning to print well, but it is built for where a dispenser actually lives: golf simulator bays, backyards, cars, and driveways in the sun.</p><p>Our golf ball dispensers are printed in UV resistant PETG. Two full dispenser sets have lived outdoors under Utah desert sun and daily sprinklers since testing began, and they are still dispensing. Indoor pieces like our clickers are printed in PLA instead, the right material for desks and keychains.</p>"
           }
         }
       },
-      "block_order": ["heading", "text"],
+      "block_order": [
+        "heading",
+        "text"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "left",
@@ -83,7 +94,12 @@
           }
         }
       },
-      "block_order": ["row-1", "row-2", "row-3", "row-4"],
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4"
+      ],
       "settings": {
         "caption": "",
         "heading": "Same sun. Different material.",

@@ -91,7 +91,6 @@
     "home-mechanism-video": {
       "type": "home-mechanism-video",
       "settings": {
-        "video": "",
         "label": "",
         "heading": "",
         "padding_top": 52,

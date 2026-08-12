@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -20,12 +29,14 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>The Curious Maker is a small workshop. Every product starts as a CAD model, gets test printed, and is adjusted until it works the way it should.</p><p>We choose materials by where a product lives. Golf ball dispensers live outside, so we print them in UV resistant PETG. Indoor pieces like our clickers are printed in PLA, the right material for desks and keychains. Parts that need to flex, like our Strike Form trainer, are printed in TPU.</p><p>Everything is designed, printed, and packed in the same workshop, then shipped to you.</p>",
-            "text_style": "body"
+            "text": "<p>The Curious Maker is a small workshop. Every product starts as a CAD model, gets test printed, and is adjusted until it works the way it should.</p><p>We choose materials by where a product lives. Golf ball dispensers live outside, so we print them in UV resistant PETG. Indoor pieces like our clickers are printed in PLA, the right material for desks and keychains. Parts that need to flex, like our Strike Form trainer, are printed in TPU.</p><p>Everything is designed, printed, and packed in the same workshop, then shipped to you.</p>"
           }
         }
       },
-      "block_order": ["heading", "text"],
+      "block_order": [
+        "heading",
+        "text"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "left",
@@ -53,9 +64,12 @@
           }
         }
       },
-      "block_order": ["heading", "text"],
+      "block_order": [
+        "heading",
+        "text"
+      ],
       "settings": {
-        "image": "",
+        "image": "shopify://shop_images/Caddie-Premium.png",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
@@ -73,7 +87,6 @@
     "about-cta": {
       "type": "home-cta",
       "settings": {
-        "background_image": "",
         "background_opacity": 20,
         "label": "",
         "heading": "<p>See what we make</p>",

@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -20,12 +29,14 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Our golf ball dispenser is a gravity fed, tap to dispense feeder. There is no motor and no battery. Tap it with a club or your foot, and the next ball drops into place.</p><p>It works the same for left and right handed golfers, and it is designed to keep your hitting area clean and repeatable, whether you are practicing at home or on the range.</p>",
-            "text_style": "body"
+            "text": "<p>Our golf ball dispenser is a gravity fed, tap to dispense feeder. There is no motor and no battery. Tap it with a club or your foot, and the next ball drops into place.</p><p>It works the same for left and right handed golfers, and it is designed to keep your hitting area clean and repeatable, whether you are practicing at home or on the range.</p>"
           }
         }
       },
-      "block_order": ["heading", "text"],
+      "block_order": [
+        "heading",
+        "text"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "left",
@@ -69,7 +80,11 @@
           }
         }
       },
-      "block_order": ["step-1", "step-2", "step-3"],
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3"
+      ],
       "settings": {
         "title": "Three steps, no wiring",
         "heading_size": "h2",
@@ -131,7 +146,13 @@
           }
         }
       },
-      "block_order": ["included-classic", "included-premium", "faq-power", "faq-handed", "faq-simulator"],
+      "block_order": [
+        "included-classic",
+        "included-premium",
+        "faq-power",
+        "faq-handed",
+        "faq-simulator"
+      ],
       "settings": {
         "caption": "",
         "heading": "What's included and common questions",
