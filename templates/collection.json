@@ -43,10 +43,10 @@
       "type": "home-featured-products",
       "name": "Home Featured Products",
       "settings": {
-        "collection": "golf",
+        "collection": "clickers",
         "products_to_show": 12,
         "label": "Our Collection",
-        "heading": "<p>Handcrafted Training Aids<br/><em>for Serious Golfers</em></p>",
+        "heading": "",
         "view_all_text": "",
         "view_all_link": "",
         "padding_top": 36,
