@@ -434,17 +434,41 @@
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
     {% endif %}
-    "sameAs": [
-      {{ settings.social_twitter_link | json }},
-      {{ settings.social_facebook_link | json }},
-      {{ settings.social_pinterest_link | json }},
-      {{ settings.social_instagram_link | json }},
-      {{ settings.social_tiktok_link | json }},
-      {{ settings.social_tumblr_link | json }},
-      {{ settings.social_snapchat_link | json }},
-      {{ settings.social_youtube_link | json }},
-      {{ settings.social_vimeo_link | json }}
-    ],
+    {%- liquid
+      comment
+        Build sameAs from only the social settings that are filled in. Shopify's
+        default emits one entry per setting, so an unconfigured store ships nine
+        empty strings. The delimiter is multi-character on purpose: it does not
+        collapse runs, so blanks survive the split and are removed explicitly by
+        the loop below rather than by a side effect of the split itself.
+      endcomment
+      assign social_delim = '>>|<<'
+      assign social_raw = ''
+      assign social_raw = social_raw | append: settings.social_twitter_link | append: social_delim
+      assign social_raw = social_raw | append: settings.social_facebook_link | append: social_delim
+      assign social_raw = social_raw | append: settings.social_pinterest_link | append: social_delim
+      assign social_raw = social_raw | append: settings.social_instagram_link | append: social_delim
+      assign social_raw = social_raw | append: settings.social_tiktok_link | append: social_delim
+      assign social_raw = social_raw | append: settings.social_tumblr_link | append: social_delim
+      assign social_raw = social_raw | append: settings.social_snapchat_link | append: social_delim
+      assign social_raw = social_raw | append: settings.social_youtube_link | append: social_delim
+      assign social_raw = social_raw | append: settings.social_vimeo_link | append: social_delim
+
+      assign social_candidates = social_raw | split: social_delim
+      assign social_links = ''
+      for social_candidate in social_candidates
+        unless social_candidate == blank
+          if social_links == blank
+            assign social_links = social_candidate
+          else
+            assign social_links = social_links | append: social_delim | append: social_candidate
+          endif
+        endunless
+      endfor
+    -%}
+    {%- if social_links != blank %}
+    "sameAs": {{ social_links | split: social_delim | json }},
+    {%- endif %}
     "url": {{ request.origin | append: page.url | json }}
   }
 </script>
