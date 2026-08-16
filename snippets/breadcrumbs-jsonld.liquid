@@ -1,0 +1,102 @@
+{%- comment -%}
+  BreadcrumbList JSON-LD.
+
+  Schema only. This snippet renders no visible breadcrumb UI, so it can be
+  included in the head without touching the page layout.
+
+  Shape by page type:
+    product     Home > collection > product
+    collection  Home > collection
+    page        Home > page
+    blog        Home > blog
+    article     Home > blog > article
+  Every other page type (index, search, cart, 404, password, customer
+  pages) emits nothing. A BreadcrumbList whose only entry is Home carries
+  no information, so the index is deliberately excluded rather than
+  emitting a one item trail.
+
+  Names and URLs are carried in two parallel delimited strings because
+  Liquid cannot build an array incrementally. The delimiter is
+  multi-character so it cannot occur in a title or a URL. Every string is
+  passed through the json filter on output, so quotes and non ASCII
+  characters in a product or collection title are escaped correctly.
+{%- endcomment -%}
+
+{%- liquid
+  assign crumb_delim = '>>|<<'
+  assign show_crumbs = false
+  assign crumb_names = 'Home'
+  assign crumb_urls = shop.url | append: routes.root_url
+
+  case request.page_type
+    when 'product'
+      assign crumb_collection = collection
+      if crumb_collection == blank
+        assign crumb_collection = product.collections.first
+      endif
+      if crumb_collection != blank
+        assign crumb_names = crumb_names | append: crumb_delim | append: crumb_collection.title
+        assign crumb_urls = crumb_urls | append: crumb_delim | append: shop.url | append: crumb_collection.url
+      endif
+      if product != blank
+        assign crumb_names = crumb_names | append: crumb_delim | append: product.title
+        assign crumb_urls = crumb_urls | append: crumb_delim | append: shop.url | append: product.url
+        assign show_crumbs = true
+      endif
+
+    when 'collection'
+      if collection != blank
+        assign crumb_names = crumb_names | append: crumb_delim | append: collection.title
+        assign crumb_urls = crumb_urls | append: crumb_delim | append: shop.url | append: collection.url
+        assign show_crumbs = true
+      endif
+
+    when 'page'
+      if page != blank
+        assign crumb_names = crumb_names | append: crumb_delim | append: page.title
+        assign crumb_urls = crumb_urls | append: crumb_delim | append: shop.url | append: page.url
+        assign show_crumbs = true
+      endif
+
+    when 'blog'
+      if blog != blank
+        assign crumb_names = crumb_names | append: crumb_delim | append: blog.title
+        assign crumb_urls = crumb_urls | append: crumb_delim | append: shop.url | append: blog.url
+        assign show_crumbs = true
+      endif
+
+    when 'article'
+      if blog != blank
+        assign crumb_names = crumb_names | append: crumb_delim | append: blog.title
+        assign crumb_urls = crumb_urls | append: crumb_delim | append: shop.url | append: blog.url
+      endif
+      if article != blank
+        assign crumb_names = crumb_names | append: crumb_delim | append: article.title
+        assign crumb_urls = crumb_urls | append: crumb_delim | append: shop.url | append: article.url
+        assign show_crumbs = true
+      endif
+  endcase
+
+  assign crumb_name_list = crumb_names | split: crumb_delim
+  assign crumb_url_list = crumb_urls | split: crumb_delim
+-%}
+
+{%- if show_crumbs -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {%- for crumb_name in crumb_name_list -%}
+          {%- assign crumb_index = forloop.index0 -%}
+          {
+            "@type": "ListItem",
+            "position": {{ forloop.index }},
+            "name": {{ crumb_name | json }},
+            "item": {{ crumb_url_list[crumb_index] | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}

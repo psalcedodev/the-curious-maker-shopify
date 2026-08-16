@@ -1356,6 +1356,12 @@
         "id": "social_vimeo_link",
         "label": "t:settings_schema.social-media.settings.social_vimeo_link.label",
         "placeholder": "t:settings_schema.social-media.settings.social_vimeo_link.info"
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Default share image",
+        "info": "Used for og:image on pages that have no featured image, such as the home page and standard pages. Recommended size 1200 x 630."
       }
     ]
   },

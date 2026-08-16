@@ -17,9 +17,9 @@
 
     <title>
       {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- if current_tags %} &#183; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &#183; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &#183; {{ shop.name }}{% endunless -%}
     </title>
 
     {% if page_description %}
@@ -27,6 +27,7 @@
     {% endif %}
 
     {% render 'meta-tags' %}
+    {% render 'breadcrumbs-jsonld' %}
 
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
