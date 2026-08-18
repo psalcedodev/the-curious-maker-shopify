@@ -114,13 +114,30 @@
     .product-custom-colors .product-form__input {
       max-width: 44rem;
     }
+    /* Overlays the product media gallery while a custom combo is chosen. */
     .product-custom-colors__preview {
-      margin-top: 1rem;
-      max-width: 24rem;
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgb(var(--color-background));
     }
     .product-custom-colors__preview img {
-      width: 100%;
+      max-width: 100%;
+      max-height: 90%;
+      width: auto;
       height: auto;
+      object-fit: contain;
+    }
+    .product-custom-colors__preview-chip {
+      margin: 0.4rem 0 0;
+      padding: 0.2rem 0.9rem;
+      border-radius: 2rem;
+      border: 0.1rem solid rgba(var(--color-foreground), 0.2);
+      color: rgba(var(--color-foreground), 0.75);
     }
     .product-custom-colors__swatch {
       display: inline-block;
@@ -171,6 +188,14 @@
       var previewWrap = root.querySelector('[data-custom-preview]');
       var previewImg = document.getElementById('CustomColorPreview-{{ section.id }}');
       var previewMapEl = root.querySelector('[data-custom-preview-map]');
+
+      // Show the preview on top of the product images, not under the fields:
+      // move the overlay into the media gallery (Paul 2026-08-18).
+      var gallery = document.getElementById('MediaGallery-{{ section.id }}');
+      if (previewWrap && gallery) {
+        if (!gallery.style.position) gallery.style.position = 'relative';
+        gallery.appendChild(previewWrap);
+      }
       var previewMap = null;
       if (previewMapEl) {
         try { previewMap = JSON.parse(previewMapEl.textContent); } catch (e) { previewMap = null; }
