@@ -101,11 +101,21 @@
         {{- 'icon-caret.svg' | inline_asset_content -}}
       </div>
     </div>
+
+    {% render 'product-custom-preview' %}
   </div>
 
   {% style %}
     .product-custom-colors .product-form__input {
       max-width: 44rem;
+    }
+    .product-custom-colors__preview {
+      margin-top: 1rem;
+      max-width: 24rem;
+    }
+    .product-custom-colors__preview img {
+      width: 100%;
+      height: auto;
     }
     .product-custom-colors__swatch {
       display: inline-block;
@@ -150,6 +160,28 @@
           if (swatch) swatch.style.background = hex || 'transparent';
         });
         document.dispatchEvent(new CustomEvent('curiousmaker:customcolors', { detail: detail }));
+        updatePreview(detail);
+      }
+
+      var previewWrap = root.querySelector('[data-custom-preview]');
+      var previewImg = document.getElementById('CustomColorPreview-{{ section.id }}');
+      var previewMapEl = root.querySelector('[data-custom-preview-map]');
+      var previewMap = null;
+      if (previewMapEl) {
+        try { previewMap = JSON.parse(previewMapEl.textContent); } catch (e) { previewMap = null; }
+      }
+
+      function updatePreview(detail) {
+        if (!previewWrap || !previewImg || !previewMap) return;
+        if (detail.primary && detail.secondary) {
+          var url = previewMap[detail.primary + '__' + detail.secondary];
+          if (url) {
+            previewImg.src = url;
+            previewWrap.hidden = false;
+            return;
+          }
+        }
+        previewWrap.hidden = true;
       }
 
       selects.forEach(function (sel) {
