@@ -586,6 +586,8 @@
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
               {%- when 'personalization' -%}
                 {% render 'product-personalization', product: product, product_form_id: product_form_id %}
+              {%- when 'custom_colors' -%}
+                {% render 'product-custom-colors', product: product, product_form_id: product_form_id %}
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
@@ -1021,6 +1023,12 @@
     {
       "type": "personalization",
       "name": "Personalization fields",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "custom_colors",
+      "name": "Custom color fields",
       "limit": 1,
       "settings": []
     },

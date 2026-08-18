@@ -43,6 +43,10 @@
           "type": "personalization",
           "settings": {}
         },
+        "custom_colors": {
+          "type": "custom_colors",
+          "settings": {}
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -98,6 +102,7 @@
         "price",
         "variant_picker",
         "personalization",
+        "custom_colors",
         "quantity_selector",
         "buy_buttons",
         "disclosure",

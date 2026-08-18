@@ -1,0 +1,201 @@
+{% comment %}
+  Renders the Primary/Secondary custom color fields for the golf ball
+  dispenser. Visible and required ONLY while the variant option named
+  "Variation" is set to "Custom"; hidden AND disabled otherwise so nothing
+  submits. Values reach the order as line item properties.
+
+  Color list source of truth: Studio vault, projects/shopify/content/product-colors.md
+  (canonical 14 filament palette, Bambu PETG HF). Keep the two in sync.
+
+  Accepts:
+  - product: {Object} Product Liquid object
+  - product_form_id: {String} id of the product form the fields submit with
+
+  Fires `curiousmaker:customcolors` on document with
+  {primary, secondary, primaryHex, secondaryHex} on every change, as the
+  attach point for a future live preview.
+
+  Usage:
+  {% render 'product-custom-colors', product: product, product_form_id: product_form_id %}
+{% endcomment %}
+
+{%- if product.handle == 'golf-ball-dispenser-golf-training-aid-for-simulator-backyard-range-practice-25-ball-capacity' -%}
+  {%- liquid
+    assign variation_index = -1
+    for option in product.options_with_values
+      if option.name == 'Variation'
+        assign variation_index = forloop.index0
+      endif
+    endfor
+    assign current_variation = ''
+    if variation_index > -1
+      assign current_variation = product.selected_or_first_available_variant.options[variation_index]
+    endif
+  -%}
+
+  <div
+    class="product-custom-colors"
+    id="ProductCustomColors-{{ section.id }}"
+    data-variation-index="{{ variation_index }}"
+    {% unless current_variation == 'Custom' %}
+      hidden
+    {% endunless %}
+  >
+    {%- assign color_names = 'White,Cream,Yellow,Orange,Red,Lime Green,Green,Forest Green,Lake Blue,Blue,Peanut Brown,Gray,Dark Gray,Black' | split: ',' -%}
+    {%- assign color_hexes = '#FFFFFF,#F9DFB9,#FFD00B,#F75403,#EB3A3A,#6EE53C,#00AE42,#39541A,#1F79E5,#002E96,#875718,#ADB1B2,#515151,#000000' | split: ',' -%}
+
+    <div class="product-form__input">
+      <label class="form__label" for="CustomColorPrimary-{{ section.id }}">
+        Primary Color (base and legs)
+        <span
+          class="product-custom-colors__swatch"
+          data-swatch-for="CustomColorPrimary-{{ section.id }}"
+        ></span>
+      </label>
+      <div class="select">
+        <select
+          id="CustomColorPrimary-{{ section.id }}"
+          class="select__select"
+          name="properties[Primary Color]"
+          form="{{ product_form_id }}"
+          data-custom-color="primary"
+          required
+          {% unless current_variation == 'Custom' %}
+            disabled
+          {% endunless %}
+        >
+          <option value="" disabled selected>Select an option</option>
+          {%- for name in color_names -%}
+            <option value="{{ name }}" data-hex="{{ color_hexes[forloop.index0] }}">{{ name }}</option>
+          {%- endfor -%}
+        </select>
+        {{- 'icon-caret.svg' | inline_asset_content -}}
+      </div>
+    </div>
+
+    <div class="product-form__input">
+      <label class="form__label" for="CustomColorSecondary-{{ section.id }}">
+        Secondary Color (hopper, ladder and funnel)
+        <span
+          class="product-custom-colors__swatch"
+          data-swatch-for="CustomColorSecondary-{{ section.id }}"
+        ></span>
+      </label>
+      <div class="select">
+        <select
+          id="CustomColorSecondary-{{ section.id }}"
+          class="select__select"
+          name="properties[Secondary Color]"
+          form="{{ product_form_id }}"
+          data-custom-color="secondary"
+          required
+          {% unless current_variation == 'Custom' %}
+            disabled
+          {% endunless %}
+        >
+          <option value="" disabled selected>Select an option</option>
+          {%- for name in color_names -%}
+            <option value="{{ name }}" data-hex="{{ color_hexes[forloop.index0] }}">{{ name }}</option>
+          {%- endfor -%}
+        </select>
+        {{- 'icon-caret.svg' | inline_asset_content -}}
+      </div>
+    </div>
+  </div>
+
+  {% style %}
+    .product-custom-colors .product-form__input {
+      max-width: 44rem;
+    }
+    .product-custom-colors__swatch {
+      display: inline-block;
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-left: 0.5rem;
+      border-radius: 50%;
+      border: 0.1rem solid rgba(var(--color-foreground), 0.3);
+      vertical-align: text-bottom;
+      background: transparent;
+    }
+  {% endstyle %}
+
+  <script>
+    (function () {
+      // Theme scripts (pubsub.js, constants.js) load deferred, so `subscribe`
+      // and PUB_SUB_EVENTS do not exist while this inline script parses. Wait
+      // for DOMContentLoaded, which fires after deferred scripts execute.
+      function init() {
+      var root = document.getElementById('ProductCustomColors-{{ section.id }}');
+      if (!root || root.dataset.initialized) return;
+      root.dataset.initialized = 'true';
+
+      var variationIndex = parseInt(root.dataset.variationIndex, 10);
+      var selects = root.querySelectorAll('select[data-custom-color]');
+
+      function setVisible(visible) {
+        root.hidden = !visible;
+        selects.forEach(function (sel) {
+          sel.disabled = !visible;
+        });
+      }
+
+      function emit() {
+        var detail = { primary: '', secondary: '', primaryHex: '', secondaryHex: '' };
+        selects.forEach(function (sel) {
+          var opt = sel.options[sel.selectedIndex];
+          var hex = opt ? opt.getAttribute('data-hex') || '' : '';
+          detail[sel.dataset.customColor] = sel.value;
+          detail[sel.dataset.customColor + 'Hex'] = hex;
+          var swatch = root.querySelector('[data-swatch-for="' + sel.id + '"]');
+          if (swatch) swatch.style.background = hex || 'transparent';
+        });
+        document.dispatchEvent(new CustomEvent('curiousmaker:customcolors', { detail: detail }));
+      }
+
+      selects.forEach(function (sel) {
+        sel.addEventListener('change', emit);
+      });
+
+      if (typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined' && PUB_SUB_EVENTS.variantChange) {
+        subscribe(PUB_SUB_EVENTS.variantChange, function (event) {
+          var variant = event && event.data && event.data.variant;
+          if (!variant || variationIndex < 0) {
+            setVisible(false);
+            return;
+          }
+          setVisible(variant.options[variationIndex] === 'Custom');
+        });
+      }
+
+      // The product form carries `novalidate`; enforce required-ness on the
+      // add to cart click, before the AJAX submit handler runs.
+      document.addEventListener(
+        'click',
+        function (evt) {
+          var button = evt.target && evt.target.closest && evt.target.closest('button[type="submit"], button[name="add"]');
+          if (!button) return;
+          var form = button.form || button.closest('form');
+          if (!form || form.getAttribute('id') !== {{ product_form_id | json }}) return;
+          for (var i = 0; i < selects.length; i++) {
+            if (!selects[i].disabled && !selects[i].checkValidity()) {
+              evt.preventDefault();
+              evt.stopImmediatePropagation();
+              selects[i].reportValidity();
+              return;
+            }
+          }
+        },
+        true
+      );
+
+      emit();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+{%- endif -%}
