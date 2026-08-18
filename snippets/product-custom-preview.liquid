@@ -20,17 +20,27 @@
       and must be changed together. Measured on 2026-08-18, full method and
       delta tables in Studio vault: projects/shopify/content/viewer-cal-REPORT.md
 
-      Why cineon and not neutral: the Khronos PBR Neutral curve desaturates
-      bright saturated colors by mixing them toward white, which raises the blue
+      Why not neutral: the Khronos PBR Neutral curve desaturates bright
+      saturated colors by mixing them toward white, which raises the blue
       channel of Yellow and Orange by 43 to 63 points no matter what albedo is
       supplied (with blue albedo at zero, blue still rendered 54). That lift is
-      channel coupled, so no per color albedo can invert it. The cineon curve
-      applies per channel with no coupling, so every color is now solvable.
+      channel coupled, so no per color albedo can invert it.
+
+      Why linear and not cineon (round 2, 2026-08-18): cineon has no coupling
+      and hit the color target, but its shoulder flattened the model. At a
+      matched white brightness the hopper and funnel showed a luminance band
+      spread of 8.5 of 255 under cineon versus 47 under neutral and 87 under
+      linear, which is why the part read as a flat silhouette. Linear has a
+      constant slope, so it preserves the geometry's own shading, and it still
+      has zero channel coupling. Its only cost is highlight clipping, which is
+      held near 10 percent of part pixels by a per channel albedo ceiling baked
+      into the tables. Exposure is low because the specular floor scales with
+      it, and the floor is what sets the error on Black and on zero channels.
       Upgrading assets/model-viewer.min.js requires re-running the calibration.
     {%- endcomment -%}
-    tone-mapping="cineon"
-    exposure="0.425"
-    shadow-intensity="1.2"
+    tone-mapping="linear"
+    exposure="0.17"
+    shadow-intensity="2"
     shadow-softness="0.8"
     camera-orbit="200deg 78deg auto"
     style="width: 100%; height: 100%;"
