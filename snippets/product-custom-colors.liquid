@@ -69,7 +69,9 @@
             <option value="{{ name }}" data-hex="{{ color_hexes[forloop.index0] }}">{{ name }}</option>
           {%- endfor -%}
         </select>
-        {{- 'icon-caret.svg' | inline_asset_content -}}
+        <span class="svg-wrapper">
+          {{- 'icon-caret.svg' | inline_asset_content -}}
+        </span>
       </div>
     </div>
 
@@ -98,7 +100,9 @@
             <option value="{{ name }}" data-hex="{{ color_hexes[forloop.index0] }}">{{ name }}</option>
           {%- endfor -%}
         </select>
-        {{- 'icon-caret.svg' | inline_asset_content -}}
+        <span class="svg-wrapper">
+          {{- 'icon-caret.svg' | inline_asset_content -}}
+        </span>
       </div>
     </div>
 
