@@ -27,6 +27,12 @@
         assign variation_index = forloop.index0
       endif
     endfor
+    assign set_index = -1
+    for option in product.options_with_values
+      if option.name == 'Set'
+        assign set_index = forloop.index0
+      endif
+    endfor
     assign current_variation = ''
     if variation_index > -1
       assign current_variation = product.selected_or_first_available_variant.options[variation_index]
@@ -37,6 +43,11 @@
     class="product-custom-colors"
     id="ProductCustomColors-{{ section.id }}"
     data-variation-index="{{ variation_index }}"
+    data-set-index="{{ set_index }}"
+    data-initial-variation="{{ current_variation | escape }}"
+    {%- if set_index > -1 %}
+    data-initial-set="{{ product.selected_or_first_available_variant.options[set_index] | escape }}"
+    {%- endif %}
     {% unless current_variation == 'Custom' %}
       hidden
     {% endunless %}
@@ -108,6 +119,23 @@
     </div>
 
     {% render 'product-custom-preview' %}
+
+    <script type="application/json" data-variant-render-map>
+      {
+        "Patriot's Drive|Classic": {{ 'cw2-PatriotsDrive-Classic.webp' | asset_url | json }},
+        "Patriot's Drive|Premium": {{ 'cw2-PatriotsDrive-Premium.webp' | asset_url | json }},
+        "Augusta Aura|Classic": {{ 'cw2-AugustaAura-Classic.webp' | asset_url | json }},
+        "Augusta Aura|Premium": {{ 'cw2-AugustaAura-Premium.webp' | asset_url | json }},
+        "Caddie|Classic": {{ 'cw2-Caddie-Classic.webp' | asset_url | json }},
+        "Caddie|Premium": {{ 'cw2-Caddie-Premium.webp' | asset_url | json }},
+        "Golden Tee|Classic": {{ 'cw2-GoldenTee-Classic.webp' | asset_url | json }},
+        "Golden Tee|Premium": {{ 'cw2-GoldenTee-Premium.webp' | asset_url | json }},
+        "Ocean Drive|Classic": {{ 'cw2-OceanDrive-Classic.webp' | asset_url | json }},
+        "Ocean Drive|Premium": {{ 'cw2-OceanDrive-Premium.webp' | asset_url | json }},
+        "Tiger's Roar|Classic": {{ 'cw2-TigersRoar-Classic.webp' | asset_url | json }},
+        "Tiger's Roar|Premium": {{ 'cw2-TigersRoar-Premium.webp' | asset_url | json }}
+      }
+    </script>
   </div>
 
   {% style %}
@@ -300,14 +328,56 @@
         sel.addEventListener('change', emit);
       });
 
+      // Per variant lifestyle render as the SECOND gallery slide (named
+      // variations only; Custom uses the interactive overlay instead).
+      var setIndex = parseInt(root.dataset.setIndex, 10);
+      var renderMapEl = root.querySelector('[data-variant-render-map]');
+      var renderMap = null;
+      if (renderMapEl) {
+        try { renderMap = JSON.parse(renderMapEl.textContent); } catch (e) { renderMap = null; }
+      }
+
+      function updateVariantSlide(variation, set) {
+        if (!renderMap) return;
+        var list = document.getElementById('Slider-Gallery-{{ section.id }}');
+        if (!list) return;
+        var slide = list.querySelector('[data-cm-variant-render]');
+        var url = variation && set ? renderMap[variation + '|' + set] : null;
+        if (!url) {
+          if (slide) slide.hidden = true;
+          return;
+        }
+        if (!slide) {
+          var first = list.querySelector('li');
+          if (!first) return;
+          slide = document.createElement('li');
+          slide.className = 'product__media-item grid__item slider__slide';
+          slide.setAttribute('data-cm-variant-render', '');
+          slide.innerHTML = '<div class="product__media media media--transparent" style="padding-top: 148.6%; position: relative;">' +
+            '<img alt="Rendered view of this color set" loading="lazy" ' +
+            'style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;"></div>';
+          first.insertAdjacentElement('afterend', slide);
+        }
+        slide.hidden = false;
+        var img = slide.querySelector('img');
+        if (img.getAttribute('src') !== url) img.setAttribute('src', url);
+      }
+
+      var initialVariation = root.dataset.initialVariation || '';
+      var initialSet = root.dataset.initialSet || '';
+      if (initialVariation && initialVariation !== 'Custom') updateVariantSlide(initialVariation, initialSet);
+
       if (typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined' && PUB_SUB_EVENTS.variantChange) {
         subscribe(PUB_SUB_EVENTS.variantChange, function (event) {
           var variant = event && event.data && event.data.variant;
           if (!variant || variationIndex < 0) {
             setVisible(false);
+            updateVariantSlide(null, null);
             return;
           }
-          setVisible(variant.options[variationIndex] === 'Custom');
+          var v = variant.options[variationIndex];
+          setVisible(v === 'Custom');
+          updateVariantSlide(v === 'Custom' ? null : v, setIndex > -1 ? variant.options[setIndex] : '');
         });
       }
 
