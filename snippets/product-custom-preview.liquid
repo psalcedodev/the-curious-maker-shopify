@@ -9,7 +9,15 @@
 <div class="product-custom-colors__preview" data-custom-preview hidden>
   <model-viewer
     id="CustomColorModel-{{ section.id }}"
-    data-glb-src="{{ 'dispenser-custom.glb' | asset_url }}"
+    {%- comment -%}
+      dispenser-custom-ao.glb carries a baked ambient occlusion map on the
+      Primary and Secondary materials. The previous dispenser-custom.glb is kept
+      in assets as an instant revert; swapping this one line back also requires
+      reverting the albedo tables, since AO darkens the sampled band and the
+      tables were re-solved against it. Built by
+      pipeline/colourway/glb_export_ao.py in the Studio vault.
+    {%- endcomment -%}
+    data-glb-src="{{ 'dispenser-custom-ao.glb' | asset_url }}"
     alt="Interactive preview of the dispenser in the selected custom colors"
     camera-controls
     touch-action="pan-y"
@@ -36,11 +44,16 @@
       held near 10 percent of part pixels by a per channel albedo ceiling baked
       into the tables. Exposure is low because the specular floor scales with
       it, and the floor is what sets the error on Black and on zero channels.
+      Round 3 (2026-08-18) added baked ambient occlusion to the GLB and raised
+      shadow-intensity from 2 to 2.5 (mean ground shadow alpha 119.3 to 143.3 of
+      255; 3.0 was rejected at 157.2). The AO map is now part of the matched set:
+      it darkens the sampled band, so the albedo tables were re-solved against it
+      and are not interchangeable with the pre AO ones.
       Upgrading assets/model-viewer.min.js requires re-running the calibration.
     {%- endcomment -%}
     tone-mapping="linear"
     exposure="0.17"
-    shadow-intensity="2"
+    shadow-intensity="2.5"
     shadow-softness="0.8"
     camera-orbit="200deg 78deg auto"
     style="width: 100%; height: 100%;"
