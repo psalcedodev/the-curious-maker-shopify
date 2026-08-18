@@ -106,11 +106,46 @@
         </span>
       </div>
     </div>
+
+    {% render 'product-custom-preview' %}
   </div>
 
   {% style %}
     .product-custom-colors .product-form__input {
       max-width: 44rem;
+    }
+    /* Overlays the product media gallery while a custom combo is chosen. */
+    .product-custom-colors__preview[hidden] {
+      display: none;
+    }
+    .product-custom-colors__preview {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgb(var(--color-background)) url('{{ 'sim-room-plate.webp' | asset_url }}') center / cover no-repeat;
+    }
+    .product-custom-colors__preview model-viewer {
+      flex: 1 1 auto;
+      width: 100%;
+      min-height: 0;
+    }
+    .product-custom-colors__preview img {
+      max-width: 100%;
+      max-height: 90%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+    .product-custom-colors__preview-chip {
+      margin: 0.4rem 0 0;
+      padding: 0.2rem 0.9rem;
+      border-radius: 2rem;
+      border: 0.1rem solid rgba(var(--color-foreground), 0.2);
+      color: rgba(var(--color-foreground), 0.75);
     }
     .product-custom-colors__swatch {
       display: inline-block;
@@ -137,11 +172,15 @@
       var variationIndex = parseInt(root.dataset.variationIndex, 10);
       var selects = root.querySelectorAll('select[data-custom-color]');
 
+      var fieldsActive = !root.hidden;
+
       function setVisible(visible) {
+        fieldsActive = visible;
         root.hidden = !visible;
         selects.forEach(function (sel) {
           sel.disabled = !visible;
         });
+        refreshPreview();
       }
 
       function emit() {
@@ -155,6 +194,106 @@
           if (swatch) swatch.style.background = hex || 'transparent';
         });
         document.dispatchEvent(new CustomEvent('curiousmaker:customcolors', { detail: detail }));
+        updatePreview(detail);
+      }
+
+      var previewWrap = root.querySelector('[data-custom-preview]');
+      var previewImg = document.getElementById('CustomColorPreview-{{ section.id }}');
+      var previewMapEl = root.querySelector('[data-custom-preview-map]');
+
+      // Show the preview on top of the product images, not under the fields:
+      // move the overlay into the media gallery (Paul 2026-08-18).
+      var gallery = document.getElementById('MediaGallery-{{ section.id }}');
+      if (previewWrap && gallery) {
+        if (!gallery.style.position) gallery.style.position = 'relative';
+        gallery.appendChild(previewWrap);
+      }
+      var previewMap = null;
+      if (previewMapEl) {
+        try { previewMap = JSON.parse(previewMapEl.textContent); } catch (e) { previewMap = null; }
+      }
+
+      var modelViewer = document.getElementById('CustomColorModel-{{ section.id }}');
+      var modelFailed = false;
+      var currentHexes = { primaryHex: '', secondaryHex: '' };
+
+      if (modelViewer) {
+        modelViewer.addEventListener('error', function () {
+          modelFailed = true;
+          modelViewer.hidden = true;
+          if (previewImg) previewImg.hidden = false;
+        });
+        modelViewer.addEventListener('load', function () {
+          recolorModel();
+        });
+        if (typeof customElements !== 'undefined' && customElements.whenDefined) {
+          var defined = false;
+          customElements.whenDefined('model-viewer').then(function () { defined = true; });
+          setTimeout(function () {
+            if (!defined) {
+              modelFailed = true;
+              modelViewer.hidden = true;
+              if (previewImg) previewImg.hidden = false;
+            }
+          }, 6000);
+        }
+      } else {
+        modelFailed = true;
+        if (previewImg) previewImg.hidden = false;
+      }
+
+      function srgbToLinear(c) {
+        c = c / 255;
+        return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      }
+
+      function hexToLinearRgba(hex) {
+        hex = hex.replace('#', '');
+        return [
+          srgbToLinear(parseInt(hex.slice(0, 2), 16)),
+          srgbToLinear(parseInt(hex.slice(2, 4), 16)),
+          srgbToLinear(parseInt(hex.slice(4, 6), 16)),
+          1,
+        ];
+      }
+
+      function recolorModel() {
+        if (modelFailed || !modelViewer || !modelViewer.model) return;
+        var byName = {};
+        modelViewer.model.materials.forEach(function (m) { byName[m.name] = m; });
+        if (currentHexes.primaryHex && byName.Primary) {
+          byName.Primary.pbrMetallicRoughness.setBaseColorFactor(hexToLinearRgba(currentHexes.primaryHex));
+        }
+        if (currentHexes.secondaryHex && byName.Secondary) {
+          byName.Secondary.pbrMetallicRoughness.setBaseColorFactor(hexToLinearRgba(currentHexes.secondaryHex));
+        }
+      }
+
+      function updatePreview(detail) {
+        if (!previewWrap || !previewMap) return;
+        if (detail.primaryHex) currentHexes.primaryHex = detail.primaryHex;
+        if (detail.secondaryHex) currentHexes.secondaryHex = detail.secondaryHex;
+        if (fieldsActive && detail.primary && detail.secondary) {
+          var url = previewMap[detail.primary + '__' + detail.secondary];
+          if (url && previewImg) previewImg.src = url;
+          if (modelViewer && !modelFailed && !modelViewer.getAttribute('src')) {
+            modelViewer.setAttribute('src', modelViewer.dataset.glbSrc);
+          }
+          recolorModel();
+          previewWrap.hidden = false;
+          return;
+        }
+        previewWrap.hidden = true;
+      }
+
+      function refreshPreview() {
+        var detail = { primary: '', secondary: '', primaryHex: '', secondaryHex: '' };
+        selects.forEach(function (sel) {
+          var opt = sel.options[sel.selectedIndex];
+          detail[sel.dataset.customColor] = sel.value;
+          detail[sel.dataset.customColor + 'Hex'] = opt ? opt.getAttribute('data-hex') || '' : '';
+        });
+        updatePreview(detail);
       }
 
       selects.forEach(function (sel) {
