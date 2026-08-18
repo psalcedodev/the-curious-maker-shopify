@@ -30,25 +30,20 @@
           form="{{ product_form_id }}"
           required
         >
+          {%- comment -%}
+            Canonical filament palette, source: Studio vault
+            projects/shopify/content/product-colors.md. Keep in sync.
+          {%- endcomment -%}
           <option value="" disabled selected>Select an option</option>
-          <option value="1. Snowberry">1. Snowberry</option>
-          <option value="2. Blush">2. Blush</option>
-          <option value="3. Sky">3. Sky</option>
-          <option value="4. Cloud">4. Cloud</option>
-          <option value="5. Lavender">5. Lavender</option>
-          <option value="6. Wisteria">6. Wisteria</option>
-          <option value="7. Matcha">7. Matcha</option>
-          <option value="8. Vanilla Latte">8. Vanilla Latte</option>
-          <option value="9. Cafe Au Lait">9. Cafe Au Lait</option>
-          <option value="10. Espresso">10. Espresso</option>
-          <option value="11. Cotton Candy">11. Cotton Candy</option>
-          <option value="12. Lemon Drop">12. Lemon Drop</option>
-          <option value="13. Peach Sorbet">13. Peach Sorbet</option>
-          <option value="14. Taffy">14. Taffy</option>
-          <option value="15. Cookies &amp; Cream">15. Cookies &amp; Cream</option>
+          {%- assign clicker_colors = 'White,Cream,Yellow,Orange,Red,Lime Green,Green,Forest Green,Lake Blue,Blue,Peanut Brown,Gray,Dark Gray,Black' | split: ',' -%}
+          {%- for name in clicker_colors -%}
+            <option value="{{ name }}">{{ name }}</option>
+          {%- endfor -%}
           <option value="Custom (Enter Below)">Custom (Enter Below)</option>
         </select>
-        {{- 'icon-caret.svg' | inline_asset_content -}}
+        <span class="svg-wrapper">
+          {{- 'icon-caret.svg' | inline_asset_content -}}
+        </span>
       </div>
     </div>
 
@@ -72,11 +67,7 @@
           rows="4"
           maxlength="500"
           required
-          placeholder="Personalization Details"
         ></textarea>
-        <label class="field__label" for="PersonalizationDetails-{{ section.id }}">
-          Personalization Details
-        </label>
       </div>
       <p class="caption product-personalization__counter">
         <span id="PersonalizationCounter-{{ section.id }}">0</span>/500
