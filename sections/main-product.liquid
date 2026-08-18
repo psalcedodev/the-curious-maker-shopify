@@ -584,10 +584,16 @@
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+                {%- comment -%}
+                  Rendered here instead of via a 'custom_colors' block: Shopify's
+                  JSON template normalizer kept stripping that block type against
+                  a stale compiled schema and reverse-committing the removal
+                  (shopify[bot] fda6258, 2026-08-18). The snippet is handle
+                  guarded, so it renders nothing on other products.
+                {%- endcomment -%}
+                {% render 'product-custom-colors', product: product, product_form_id: product_form_id %}
               {%- when 'personalization' -%}
                 {% render 'product-personalization', product: product, product_form_id: product_form_id %}
-              {%- when 'custom_colors' -%}
-                {% render 'product-custom-colors', product: product, product_form_id: product_form_id %}
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
@@ -1023,12 +1029,6 @@
     {
       "type": "personalization",
       "name": "Personalization fields",
-      "limit": 1,
-      "settings": []
-    },
-    {
-      "type": "custom_colors",
-      "name": "Custom color fields",
       "limit": 1,
       "settings": []
     },
