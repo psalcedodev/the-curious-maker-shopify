@@ -115,6 +115,9 @@
       max-width: 44rem;
     }
     /* Overlays the product media gallery while a custom combo is chosen. */
+    .product-custom-colors__preview[hidden] {
+      display: none;
+    }
     .product-custom-colors__preview {
       position: absolute;
       inset: 0;
@@ -164,11 +167,15 @@
       var variationIndex = parseInt(root.dataset.variationIndex, 10);
       var selects = root.querySelectorAll('select[data-custom-color]');
 
+      var fieldsActive = !root.hidden;
+
       function setVisible(visible) {
+        fieldsActive = visible;
         root.hidden = !visible;
         selects.forEach(function (sel) {
           sel.disabled = !visible;
         });
+        refreshPreview();
       }
 
       function emit() {
@@ -203,7 +210,7 @@
 
       function updatePreview(detail) {
         if (!previewWrap || !previewImg || !previewMap) return;
-        if (detail.primary && detail.secondary) {
+        if (fieldsActive && detail.primary && detail.secondary) {
           var url = previewMap[detail.primary + '__' + detail.secondary];
           if (url) {
             previewImg.src = url;
@@ -212,6 +219,14 @@
           }
         }
         previewWrap.hidden = true;
+      }
+
+      function refreshPreview() {
+        var detail = { primary: '', secondary: '' };
+        selects.forEach(function (sel) {
+          detail[sel.dataset.customColor] = sel.value;
+        });
+        updatePreview(detail);
       }
 
       selects.forEach(function (sel) {
