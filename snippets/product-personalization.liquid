@@ -1,0 +1,142 @@
+{% comment %}
+  Renders the personalization fields for the fidget clicker product.
+  Both fields submit as line item properties on the product form, matching
+  the Etsy listing (Color Options + Personalization Details).
+
+  Accepts:
+  - product: {Object} Product Liquid object
+  - product_form_id: {String} id of the product form the fields submit with
+
+  The product form is rendered with `novalidate`, so required-ness is
+  enforced by the click interceptor at the bottom of this snippet, which
+  runs before the AJAX add-to-cart handler and shows the native message
+  via reportValidity().
+
+  Usage:
+  {% render 'product-personalization', product: product, product_form_id: product_form_id %}
+{% endcomment %}
+
+{%- if product.handle == 'personalized-keycap-fidget-clicker-keychain-custom-name-or-word-sensory-toy-3d-printed-gift' -%}
+  <div class="product-personalization" id="ProductPersonalization-{{ section.id }}">
+    <div class="product-form__input">
+      <label class="form__label" for="PersonalizationColor-{{ section.id }}">
+        Color Options (See Listing Photos)
+      </label>
+      <div class="select">
+        <select
+          id="PersonalizationColor-{{ section.id }}"
+          class="select__select"
+          name="properties[Color Options]"
+          form="{{ product_form_id }}"
+          required
+        >
+          <option value="" disabled selected>Select an option</option>
+          <option value="1. Snowberry">1. Snowberry</option>
+          <option value="2. Blush">2. Blush</option>
+          <option value="3. Sky">3. Sky</option>
+          <option value="4. Cloud">4. Cloud</option>
+          <option value="5. Lavender">5. Lavender</option>
+          <option value="6. Wisteria">6. Wisteria</option>
+          <option value="7. Matcha">7. Matcha</option>
+          <option value="8. Vanilla Latte">8. Vanilla Latte</option>
+          <option value="9. Cafe Au Lait">9. Cafe Au Lait</option>
+          <option value="10. Espresso">10. Espresso</option>
+          <option value="11. Cotton Candy">11. Cotton Candy</option>
+          <option value="12. Lemon Drop">12. Lemon Drop</option>
+          <option value="13. Peach Sorbet">13. Peach Sorbet</option>
+          <option value="14. Taffy">14. Taffy</option>
+          <option value="15. Cookies &amp; Cream">15. Cookies &amp; Cream</option>
+          <option value="Custom (Enter Below)">Custom (Enter Below)</option>
+        </select>
+        {{- 'icon-caret.svg' | inline_asset_content -}}
+      </div>
+    </div>
+
+    <div class="product-form__input">
+      <label class="form__label" for="PersonalizationDetails-{{ section.id }}">
+        Personalization Details
+      </label>
+      <p class="caption product-personalization__help">
+        1. Enter text, number, &amp; or symbol<br>
+        2. IF Custom Color: Case/Keycap/Letter<br>
+        Ex:<br>
+        1. Lia, 18, cat symbol<br>
+        2. Blue/Blue/Yellow
+      </p>
+      <div class="field">
+        <textarea
+          id="PersonalizationDetails-{{ section.id }}"
+          class="text-area text-area--resize-vertical field__input"
+          name="properties[Personalization Details]"
+          form="{{ product_form_id }}"
+          rows="4"
+          maxlength="500"
+          required
+          placeholder="Personalization Details"
+        ></textarea>
+        <label class="field__label" for="PersonalizationDetails-{{ section.id }}">
+          Personalization Details
+        </label>
+      </div>
+      <p class="caption product-personalization__counter">
+        <span id="PersonalizationCounter-{{ section.id }}">0</span>/500
+      </p>
+    </div>
+  </div>
+
+  {% style %}
+    .product-personalization .product-form__input {
+      max-width: 44rem;
+    }
+    .product-personalization__help {
+      margin: 0.4rem 0 0.8rem;
+      color: rgba(var(--color-foreground), 0.75);
+    }
+    .product-personalization__counter {
+      margin: 0.4rem 0 0;
+      text-align: right;
+      color: rgba(var(--color-foreground), 0.75);
+    }
+  {% endstyle %}
+
+  <script>
+    (function () {
+      var root = document.getElementById('ProductPersonalization-{{ section.id }}');
+      if (!root || root.dataset.initialized) return;
+      root.dataset.initialized = 'true';
+
+      var textarea = document.getElementById('PersonalizationDetails-{{ section.id }}');
+      var counter = document.getElementById('PersonalizationCounter-{{ section.id }}');
+      if (textarea && counter) {
+        var updateCounter = function () {
+          counter.textContent = String(textarea.value.length);
+        };
+        textarea.addEventListener('input', updateCounter);
+        updateCounter();
+      }
+
+      // The product form carries `novalidate`, so intercept the add-to-cart
+      // click in the capture phase (runs before the AJAX submit handler) and
+      // surface the native validation message for our fields.
+      document.addEventListener(
+        'click',
+        function (evt) {
+          var button = evt.target && evt.target.closest && evt.target.closest('button[type="submit"], button[name="add"]');
+          if (!button) return;
+          var form = button.form || button.closest('form');
+          if (!form || form.getAttribute('id') !== {{ product_form_id | json }}) return;
+          var fields = root.querySelectorAll('select[required], textarea[required]');
+          for (var i = 0; i < fields.length; i++) {
+            if (!fields[i].disabled && !fields[i].checkValidity()) {
+              evt.preventDefault();
+              evt.stopImmediatePropagation();
+              fields[i].reportValidity();
+              return;
+            }
+          }
+        },
+        true
+      );
+    })();
+  </script>
+{%- endif -%}

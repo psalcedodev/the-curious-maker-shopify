@@ -39,6 +39,10 @@
             "swatch_shape": "circle"
           }
         },
+        "personalization": {
+          "type": "personalization",
+          "settings": {}
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -93,6 +97,7 @@
         "rating",
         "price",
         "variant_picker",
+        "personalization",
         "quantity_selector",
         "buy_buttons",
         "disclosure",
