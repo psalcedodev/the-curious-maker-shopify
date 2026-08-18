@@ -77,11 +77,18 @@
       per channel rather than scaling all three uniformly is what keeps Yellow's
       green accurate while only its red is held back.
 
-      These tables are only valid together with tone-mapping="linear" and
-      exposure="0.17" in product-custom-preview.liquid. Change them together.
+      Round 3 re-solved these against dispenser-custom-ao.glb, which carries a
+      baked AO map. AO multiplies indirect diffuse light, and this scene is lit
+      entirely by IBL, so it darkened the sampled band too: the hopper and funnel
+      lost about 8 of 255 before the re-solve. The pre AO tables are therefore
+      NOT interchangeable with these.
+
+      These tables are only valid together with tone-mapping="linear",
+      exposure="0.17" and the dispenser-custom-ao.glb asset in
+      product-custom-preview.liquid. Change them together.
     {%- endcomment -%}
-    {%- assign color_albedos_primary = '5.55109,5.55109,5.55109|5.55109,3.44102,0.00977|5.18480,0.47522,0.00007|4.54660,0.21952,0.21952|0.84683,4.29788,0.23575|0.00000,2.31195,0.28857|0.21238,0.47521,0.04701|0.06567,1.03512,4.29788|0.00000,0.13660,1.52494|1.31919,0.50979,0.04087|2.28365,2.39808,2.42720|0.44203,0.44203,0.44203|0.00000,0.00000,0.00000' | split: '|' -%}
-    {%- assign color_albedos_secondary = '4.48438,4.48438,4.48438|4.48438,2.89984,0.00204|4.37437,0.39339,0.00002|3.85749,0.18178,0.18178|0.70645,3.61432,0.19490|0.00000,2.11634,0.27240|0.17307,0.39339,0.03347|0.04857,0.86711,3.61075|0.00000,0.13660,1.52494|1.10178,0.42337,0.02831|1.91780,2.01883,2.04518|0.36552,0.36552,0.36552|0.00000,0.00000,0.00000' | split: '|' -%}
+    {%- assign color_albedos_primary = '5.55747,5.55747,5.55747|5.55747,3.52738,0.01055|5.21747,0.48861,0.00006|4.65298,0.22558,0.22558|0.86930,4.40106,0.24290|0.00000,2.36801,0.29671|0.21833,0.48740,0.04868|0.06815,1.06027,4.40106|0.00000,0.14222,1.71146|1.35281,0.52247,0.04265|2.33933,2.45850,2.48801|0.45375,0.45375,0.45375|0.00000,0.00000,0.00000' | split: '|' -%}
+    {%- assign color_albedos_secondary = '4.85588,4.85588,4.85588|4.85588,3.20554,0.00328|4.83447,0.43683,0.00009|4.23091,0.20135,0.20135|0.77963,3.99219,0.21600|0.00000,2.11634,0.27240|0.19457,0.43683,0.04043|0.05696,0.96113,3.99219|0.00000,0.13660,1.52494|1.22319,0.47093,0.03203|2.11922,2.23179,2.26259|0.41141,0.41141,0.41141|0.00000,0.00000,0.00000' | split: '|' -%}
 
     <div class="product-form__input">
       <label class="form__label" for="CustomColorPrimary-{{ section.id }}">
