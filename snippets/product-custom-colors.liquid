@@ -128,6 +128,11 @@
       justify-content: center;
       background: rgb(var(--color-background));
     }
+    .product-custom-colors__preview model-viewer {
+      flex: 1 1 auto;
+      width: 100%;
+      min-height: 0;
+    }
     .product-custom-colors__preview img {
       max-width: 100%;
       max-height: 90%;
@@ -208,23 +213,85 @@
         try { previewMap = JSON.parse(previewMapEl.textContent); } catch (e) { previewMap = null; }
       }
 
+      var modelViewer = document.getElementById('CustomColorModel-{{ section.id }}');
+      var modelFailed = false;
+      var currentHexes = { primaryHex: '', secondaryHex: '' };
+
+      if (modelViewer) {
+        modelViewer.addEventListener('error', function () {
+          modelFailed = true;
+          modelViewer.hidden = true;
+          if (previewImg) previewImg.hidden = false;
+        });
+        modelViewer.addEventListener('load', function () {
+          recolorModel();
+        });
+        if (typeof customElements !== 'undefined' && customElements.whenDefined) {
+          var defined = false;
+          customElements.whenDefined('model-viewer').then(function () { defined = true; });
+          setTimeout(function () {
+            if (!defined) {
+              modelFailed = true;
+              modelViewer.hidden = true;
+              if (previewImg) previewImg.hidden = false;
+            }
+          }, 6000);
+        }
+      } else {
+        modelFailed = true;
+        if (previewImg) previewImg.hidden = false;
+      }
+
+      function srgbToLinear(c) {
+        c = c / 255;
+        return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      }
+
+      function hexToLinearRgba(hex) {
+        hex = hex.replace('#', '');
+        return [
+          srgbToLinear(parseInt(hex.slice(0, 2), 16)),
+          srgbToLinear(parseInt(hex.slice(2, 4), 16)),
+          srgbToLinear(parseInt(hex.slice(4, 6), 16)),
+          1,
+        ];
+      }
+
+      function recolorModel() {
+        if (modelFailed || !modelViewer || !modelViewer.model) return;
+        var byName = {};
+        modelViewer.model.materials.forEach(function (m) { byName[m.name] = m; });
+        if (currentHexes.primaryHex && byName.Primary) {
+          byName.Primary.pbrMetallicRoughness.setBaseColorFactor(hexToLinearRgba(currentHexes.primaryHex));
+        }
+        if (currentHexes.secondaryHex && byName.Secondary) {
+          byName.Secondary.pbrMetallicRoughness.setBaseColorFactor(hexToLinearRgba(currentHexes.secondaryHex));
+        }
+      }
+
       function updatePreview(detail) {
-        if (!previewWrap || !previewImg || !previewMap) return;
+        if (!previewWrap || !previewMap) return;
+        if (detail.primaryHex) currentHexes.primaryHex = detail.primaryHex;
+        if (detail.secondaryHex) currentHexes.secondaryHex = detail.secondaryHex;
         if (fieldsActive && detail.primary && detail.secondary) {
           var url = previewMap[detail.primary + '__' + detail.secondary];
-          if (url) {
-            previewImg.src = url;
-            previewWrap.hidden = false;
-            return;
+          if (url && previewImg) previewImg.src = url;
+          if (modelViewer && !modelFailed && !modelViewer.getAttribute('src')) {
+            modelViewer.setAttribute('src', modelViewer.dataset.glbSrc);
           }
+          recolorModel();
+          previewWrap.hidden = false;
+          return;
         }
         previewWrap.hidden = true;
       }
 
       function refreshPreview() {
-        var detail = { primary: '', secondary: '' };
+        var detail = { primary: '', secondary: '', primaryHex: '', secondaryHex: '' };
         selects.forEach(function (sel) {
+          var opt = sel.options[sel.selectedIndex];
           detail[sel.dataset.customColor] = sel.value;
+          detail[sel.dataset.customColor + 'Hex'] = opt ? opt.getAttribute('data-hex') || '' : '';
         });
         updatePreview(detail);
       }
