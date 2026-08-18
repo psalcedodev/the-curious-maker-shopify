@@ -361,10 +361,18 @@
 
       function updatePreview(detail) {
         if (!previewWrap || !previewMap) return;
-        if (detail.primaryHex) currentHexes.primaryHex = detail.primaryHex;
-        if (detail.secondaryHex) currentHexes.secondaryHex = detail.secondaryHex;
-        if (detail.primaryAlbedo) currentHexes.primaryAlbedo = detail.primaryAlbedo;
-        if (detail.secondaryAlbedo) currentHexes.secondaryAlbedo = detail.secondaryAlbedo;
+        // Albedo is stored with the hex it belongs to, never independently.
+        // Storing it behind its own truthiness test would let a color that has
+        // no data-albedo silently inherit the previously selected color's
+        // albedo instead of falling back to its own hex.
+        if (detail.primaryHex) {
+          currentHexes.primaryHex = detail.primaryHex;
+          currentHexes.primaryAlbedo = detail.primaryAlbedo || '';
+        }
+        if (detail.secondaryHex) {
+          currentHexes.secondaryHex = detail.secondaryHex;
+          currentHexes.secondaryAlbedo = detail.secondaryAlbedo || '';
+        }
         if (fieldsActive && detail.primary && detail.secondary) {
           var url = previewMap[detail.primary + '__' + detail.secondary];
           if (url && previewImg) previewImg.src = url;
