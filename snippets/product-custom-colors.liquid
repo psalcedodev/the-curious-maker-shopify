@@ -41,8 +41,9 @@
       hidden
     {% endunless %}
   >
-    {%- assign color_names = 'White,Cream,Yellow,Orange,Red,Lime Green,Green,Forest Green,Lake Blue,Blue,Peanut Brown,Gray,Dark Gray,Black' | split: ',' -%}
-    {%- assign color_hexes = '#FFFFFF,#F9DFB9,#FFD00B,#F75403,#EB3A3A,#6EE53C,#00AE42,#39541A,#1F79E5,#002E96,#875718,#ADB1B2,#515151,#000000' | split: ',' -%}
+    {%- comment -%} Cream removed per Paul 2026-08-18; palette source product-colors.md {%- endcomment -%}
+    {%- assign color_names = 'White,Yellow,Orange,Red,Lime Green,Green,Forest Green,Lake Blue,Blue,Peanut Brown,Gray,Dark Gray,Black' | split: ',' -%}
+    {%- assign color_hexes = '#FFFFFF,#FFD00B,#F75403,#EB3A3A,#6EE53C,#00AE42,#39541A,#1F79E5,#002E96,#875718,#ADB1B2,#515151,#000000' | split: ',' -%}
 
     <div class="product-form__input">
       <label class="form__label" for="CustomColorPrimary-{{ section.id }}">
