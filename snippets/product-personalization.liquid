@@ -31,11 +31,11 @@
           required
         >
           {%- comment -%}
-            Canonical filament palette, source: Studio vault
-            projects/shopify/content/product-colors.md. Keep in sync.
+            Clicker color collections, matching the Etsy listing photos
+            (Paul 2026-08-18: the clicker does NOT use the PETG palette).
           {%- endcomment -%}
           <option value="" disabled selected>Select an option</option>
-          {%- assign clicker_colors = 'White,Cream,Yellow,Orange,Red,Lime Green,Green,Forest Green,Lake Blue,Blue,Peanut Brown,Gray,Dark Gray,Black' | split: ',' -%}
+          {%- assign clicker_colors = '1. Snowberry|2. Blush|3. Sky|4. Cloud|5. Lavender|6. Wisteria|7. Matcha|8. Vanilla Latte|9. Cafe Au Lait|10. Espresso|11. Cotton Candy|12. Lemon Drop|13. Peach Sorbet|14. Taffy|15. Cookies & Cream' | split: '|' -%}
           {%- for name in clicker_colors -%}
             <option value="{{ name }}">{{ name }}</option>
           {%- endfor -%}
