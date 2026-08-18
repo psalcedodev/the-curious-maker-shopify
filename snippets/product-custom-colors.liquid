@@ -56,6 +56,24 @@
     {%- assign color_names = 'White,Yellow,Orange,Red,Lime Green,Green,Forest Green,Lake Blue,Blue,Peanut Brown,Gray,Dark Gray,Black' | split: ',' -%}
     {%- assign color_hexes = '#FFFFFF,#FFD00B,#F75403,#EB3A3A,#6EE53C,#00AE42,#39541A,#1F79E5,#002E96,#875718,#ADB1B2,#515151,#000000' | split: ',' -%}
 
+    {%- comment -%}
+      MEASURED linear albedo per color, parallel to color_names above, entries
+      separated by "|" and channels by ",". These are NOT the filament hexes:
+      they are the base color factors that make the 3D viewer RENDER the filament
+      hex. Swatch dots keep using color_hexes, which stay the true filament hex.
+
+      Derived by measured fixed point iteration against rendered pixels on
+      2026-08-18. Worst residual 6.4 of 255 per channel across all 13 colors on
+      both material roles, versus up to 63 before. Values exceed 1.0 on purpose;
+      three.js accepts base color factors above 1 and they are required because
+      the cineon curve is applied at a low exposure to suppress the specular
+      floor. Single source: Studio vault projects/shopify/content/viewer-cal-REPORT.md
+
+      This table is only valid together with tone-mapping="cineon" and
+      exposure="0.425" in product-custom-preview.liquid. Change them together.
+    {%- endcomment -%}
+    {%- assign color_albedos = '19.83250,19.83250,19.83250|19.83250,1.68600,0.01500|11.20450,0.15100,0.00400|5.39150,0.08700,0.08700|0.24450,3.90550,0.09100|0.00000,0.78150,0.10450|0.08450,0.15100,0.03300|0.04000,0.29650,3.90550|0.00000,0.06300,0.49750|0.37850,0.16000,0.03050|0.75000,0.81350,0.83100|0.14150,0.14150,0.14150|0.00000,0.00000,0.00000' | split: '|' -%}
+
     <div class="product-form__input">
       <label class="form__label" for="CustomColorPrimary-{{ section.id }}">
         Primary Color (base and legs)
@@ -78,7 +96,11 @@
         >
           <option value="" disabled selected>Select an option</option>
           {%- for name in color_names -%}
-            <option value="{{ name }}" data-hex="{{ color_hexes[forloop.index0] }}">{{ name }}</option>
+            <option
+              value="{{ name }}"
+              data-hex="{{ color_hexes[forloop.index0] }}"
+              data-albedo="{{ color_albedos[forloop.index0] }}"
+            >{{ name }}</option>
           {%- endfor -%}
         </select>
         <span class="svg-wrapper">
@@ -109,7 +131,11 @@
         >
           <option value="" disabled selected>Select an option</option>
           {%- for name in color_names -%}
-            <option value="{{ name }}" data-hex="{{ color_hexes[forloop.index0] }}">{{ name }}</option>
+            <option
+              value="{{ name }}"
+              data-hex="{{ color_hexes[forloop.index0] }}"
+              data-albedo="{{ color_albedos[forloop.index0] }}"
+            >{{ name }}</option>
           {%- endfor -%}
         </select>
         <span class="svg-wrapper">
@@ -218,6 +244,7 @@
           var hex = opt ? opt.getAttribute('data-hex') || '' : '';
           detail[sel.dataset.customColor] = sel.value;
           detail[sel.dataset.customColor + 'Hex'] = hex;
+          detail[sel.dataset.customColor + 'Albedo'] = opt ? opt.getAttribute('data-albedo') || '' : '';
           var swatch = root.querySelector('[data-swatch-for="' + sel.id + '"]');
           if (swatch) swatch.style.background = hex || 'transparent';
         });
@@ -243,7 +270,14 @@
 
       var modelViewer = document.getElementById('CustomColorModel-{{ section.id }}');
       var modelFailed = false;
-      var currentHexes = { primaryHex: '', secondaryHex: '' };
+      var currentHexes = { primaryHex: '', secondaryHex: '', primaryAlbedo: '', secondaryAlbedo: '' };
+
+      // Golf balls are not user selectable, so they never pass through a select.
+      // They still need a calibrated factor: the GLB ships them at 0.9, which
+      // renders near black under the calibrated exposure. Measured value below
+      // reproduces their previous on screen appearance (approximate, sampled
+      // from only 54 lit pixels since the balls are mostly occluded).
+      var BALL_ALBEDO = [10.438, 10.438, 10.438, 1];
 
       if (modelViewer) {
         modelViewer.addEventListener('error', function () {
@@ -285,22 +319,60 @@
         ];
       }
 
+      // Measured base color factor, "r,g,b" linear floats from data-albedo.
+      // Returns null when the attribute is missing or malformed so the caller
+      // can fall back to the raw hex.
+      function parseAlbedo(str) {
+        if (!str) return null;
+        var parts = String(str).split(',');
+        if (parts.length !== 3) return null;
+        var out = [];
+        for (var i = 0; i < 3; i++) {
+          var v = parseFloat(parts[i]);
+          if (!isFinite(v) || v < 0) return null;
+          out.push(v);
+        }
+        out.push(1);
+        return out;
+      }
+
+      function factorFor(albedoStr, hex) {
+        return parseAlbedo(albedoStr) || (hex ? hexToLinearRgba(hex) : null);
+      }
+
       function recolorModel() {
         if (modelFailed || !modelViewer || !modelViewer.model) return;
         var byName = {};
         modelViewer.model.materials.forEach(function (m) { byName[m.name] = m; });
+        // Unconditional: Ball has no hex and no select, so it must not sit
+        // behind either selection guard below.
+        if (byName.Ball) {
+          byName.Ball.pbrMetallicRoughness.setBaseColorFactor(BALL_ALBEDO);
+        }
         if (currentHexes.primaryHex && byName.Primary) {
-          byName.Primary.pbrMetallicRoughness.setBaseColorFactor(hexToLinearRgba(currentHexes.primaryHex));
+          var pf = factorFor(currentHexes.primaryAlbedo, currentHexes.primaryHex);
+          if (pf) byName.Primary.pbrMetallicRoughness.setBaseColorFactor(pf);
         }
         if (currentHexes.secondaryHex && byName.Secondary) {
-          byName.Secondary.pbrMetallicRoughness.setBaseColorFactor(hexToLinearRgba(currentHexes.secondaryHex));
+          var sf = factorFor(currentHexes.secondaryAlbedo, currentHexes.secondaryHex);
+          if (sf) byName.Secondary.pbrMetallicRoughness.setBaseColorFactor(sf);
         }
       }
 
       function updatePreview(detail) {
         if (!previewWrap || !previewMap) return;
-        if (detail.primaryHex) currentHexes.primaryHex = detail.primaryHex;
-        if (detail.secondaryHex) currentHexes.secondaryHex = detail.secondaryHex;
+        // Albedo is stored with the hex it belongs to, never independently.
+        // Storing it behind its own truthiness test would let a color that has
+        // no data-albedo silently inherit the previously selected color's
+        // albedo instead of falling back to its own hex.
+        if (detail.primaryHex) {
+          currentHexes.primaryHex = detail.primaryHex;
+          currentHexes.primaryAlbedo = detail.primaryAlbedo || '';
+        }
+        if (detail.secondaryHex) {
+          currentHexes.secondaryHex = detail.secondaryHex;
+          currentHexes.secondaryAlbedo = detail.secondaryAlbedo || '';
+        }
         if (fieldsActive && detail.primary && detail.secondary) {
           var url = previewMap[detail.primary + '__' + detail.secondary];
           if (url && previewImg) previewImg.src = url;
@@ -320,6 +392,7 @@
           var opt = sel.options[sel.selectedIndex];
           detail[sel.dataset.customColor] = sel.value;
           detail[sel.dataset.customColor + 'Hex'] = opt ? opt.getAttribute('data-hex') || '' : '';
+          detail[sel.dataset.customColor + 'Albedo'] = opt ? opt.getAttribute('data-albedo') || '' : '';
         });
         updatePreview(detail);
       }

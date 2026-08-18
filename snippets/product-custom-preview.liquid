@@ -14,8 +14,22 @@
     camera-controls
     touch-action="pan-y"
     interaction-prompt="auto"
-    tone-mapping="neutral"
-    exposure="0.85"
+    {%- comment -%}
+      Rendering config is CALIBRATED, not decorative. tone-mapping, exposure and
+      the data-albedo table in product-custom-colors.liquid are ONE MATCHED SET
+      and must be changed together. Measured on 2026-08-18, full method and
+      delta tables in Studio vault: projects/shopify/content/viewer-cal-REPORT.md
+
+      Why cineon and not neutral: the Khronos PBR Neutral curve desaturates
+      bright saturated colors by mixing them toward white, which raises the blue
+      channel of Yellow and Orange by 43 to 63 points no matter what albedo is
+      supplied (with blue albedo at zero, blue still rendered 54). That lift is
+      channel coupled, so no per color albedo can invert it. The cineon curve
+      applies per channel with no coupling, so every color is now solvable.
+      Upgrading assets/model-viewer.min.js requires re-running the calibration.
+    {%- endcomment -%}
+    tone-mapping="cineon"
+    exposure="0.425"
     shadow-intensity="1.2"
     shadow-softness="0.8"
     camera-orbit="200deg 78deg auto"
