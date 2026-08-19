@@ -298,6 +298,13 @@
       var gallery = document.getElementById('MediaGallery-{{ section.id }}');
       if (previewWrap && gallery) {
         if (!gallery.style.position) gallery.style.position = 'relative';
+        // <media-gallery> is a custom element with no display of its own, so
+        // below Dawn's desktop breakpoint it computes to display:inline. An
+        // inline containing block resolves inset:0 to ZERO WIDTH, which
+        // collapsed this whole overlay and made the 3D preview invisible on
+        // narrow viewports. Verified pre-existing on unmodified code, found
+        // round 4. Only touched when it is actually inline.
+        if (getComputedStyle(gallery).display === 'inline') gallery.style.display = 'block';
         gallery.appendChild(previewWrap);
       }
       var previewMap = null;
