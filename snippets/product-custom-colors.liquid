@@ -239,51 +239,73 @@
       color: rgb(var(--color-foreground));
       text-align: center;
     }
-    /* Round 6: true filament colours, top left, where the model never reaches. */
+    /* Round 6: true filament colours, top left, where the model never reaches.
+       The SWATCHES are the point of this card, so they are sized as real colour
+       samples rather than dots (Paul, round 6 amendment). */
     .product-custom-colors__legend {
       position: absolute;
       top: 0.8rem;
       left: 0.8rem;
       z-index: 1;
-      padding: 0.45rem 0.7rem;
-      border-radius: 0.8rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 1rem;
       background: rgb(var(--color-background));
       border: 0.1rem solid rgba(var(--color-foreground), 0.12);
-      /* Kept deliberately small: at a 375 px viewport the overlay is about
-         328 px and a larger card overlapped the hopper. */
-      font-size: 0.72em;
-      line-height: 1.45;
+      font-size: 0.78em;
+      line-height: 1.25;
       text-align: left;
       pointer-events: none;
-      /* 72 percent, and the rows wrap rather than clip. At a 375 px viewport the
-         overlay is about 328 px, and "Yellow, hopper ladder funnel" clipped at
-         60 percent with nowrap (caught in round 6 testing). */
-      max-width: 72%;
     }
     .product-custom-colors__legend[hidden] {
       display: none;
     }
     .product-custom-colors__legend-title {
-      margin: 0 0 0.2rem;
+      margin: 0 0 0.5rem;
       font-weight: 600;
       color: rgb(var(--color-foreground));
     }
     .product-custom-colors__legend-row {
-      margin: 0;
-      color: rgb(var(--color-foreground));
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .product-custom-colors__legend-row + .product-custom-colors__legend-row {
+      margin-top: 0.7rem;
     }
     .product-custom-colors__legend-dot {
-      display: inline-block;
-      width: 0.9rem;
-      height: 0.9rem;
-      margin-right: 0.4rem;
+      flex: 0 0 auto;
+      width: 2.8rem;
+      height: 2.8rem;
       border-radius: 50%;
-      border: 0.1rem solid rgba(var(--color-foreground), 0.3);
-      vertical-align: -0.15rem;
+      /* Two rings: a hairline so pure White still reads as a disc against the
+         pill, and an inset highlight so dark colours keep an edge too. */
+      border: 0.1rem solid rgba(var(--color-foreground), 0.35);
+      box-shadow: inset 0 0 0 0.1rem rgba(255, 255, 255, 0.25);
       background: transparent;
+    }
+    .product-custom-colors__legend-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .product-custom-colors__legend-name {
+      color: rgb(var(--color-foreground));
+      font-weight: 600;
     }
     .product-custom-colors__legend-role {
       color: rgba(var(--color-foreground), 0.6);
+    }
+    @media screen and (max-width: 749px) {
+      .product-custom-colors__legend {
+        padding: 0.6rem 0.7rem;
+        font-size: 0.72em;
+      }
+      .product-custom-colors__legend-dot {
+        /* Still a colour sample, not a dot: 2.4rem is the bottom of the range
+           Paul asked for, so the swatch stays readable at every width. */
+        width: 2.4rem;
+        height: 2.4rem;
+      }
     }
 
     /* Round 5: shown only while the preview is on the sample combo. */

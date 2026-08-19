@@ -98,14 +98,20 @@
   {%- endcomment -%}
   <div class="product-custom-colors__legend" data-preview-legend hidden>
     <p class="product-custom-colors__legend-title">True colors</p>
-    <p class="product-custom-colors__legend-row">
+    <div class="product-custom-colors__legend-row">
       <span class="product-custom-colors__legend-dot" data-legend-dot="primary"></span>
-      <span data-legend-name="primary"></span><span class="product-custom-colors__legend-role">, base and legs</span>
-    </p>
-    <p class="product-custom-colors__legend-row">
+      <span class="product-custom-colors__legend-text">
+        <span class="product-custom-colors__legend-name" data-legend-name="primary"></span>
+        <span class="product-custom-colors__legend-role">base and legs</span>
+      </span>
+    </div>
+    <div class="product-custom-colors__legend-row">
       <span class="product-custom-colors__legend-dot" data-legend-dot="secondary"></span>
-      <span data-legend-name="secondary"></span><span class="product-custom-colors__legend-role">, hopper ladder funnel</span>
-    </p>
+      <span class="product-custom-colors__legend-text">
+        <span class="product-custom-colors__legend-name" data-legend-name="secondary"></span>
+        <span class="product-custom-colors__legend-role">hopper ladder funnel</span>
+      </span>
+    </div>
   </div>
   <img
     id="CustomColorPreview-{{ section.id }}"
