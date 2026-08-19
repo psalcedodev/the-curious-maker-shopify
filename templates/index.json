@@ -28,6 +28,11 @@
         "padding_bottom": 100
       }
     },
+    "custom-colors-promo": {
+      "type": "custom-colors-promo",
+      "settings": {
+      }
+    },
     "shop-by-family": {
       "type": "collection-list",
       "blocks": {
@@ -160,6 +165,7 @@
   },
   "order": [
     "home-hero",
+    "custom-colors-promo",
     "shop-by-family",
     "home-featured-products",
     "home-proof",
