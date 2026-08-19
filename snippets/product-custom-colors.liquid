@@ -240,13 +240,15 @@
       text-align: center;
     }
     .product-custom-colors__preview-note {
-      margin: 0.4rem 1.2rem 1rem;
-      padding: 0.4rem 1rem;
+      /* Narrow side margins on purpose: at a 375px viewport the 1.2rem margins
+         cost enough width to push this to five lines. Round 4.3. */
+      margin: 0.4rem 0.4rem 1rem;
+      padding: 0.4rem 0.8rem;
       max-width: 34rem;
       border-radius: 1.2rem;
       background: rgb(var(--color-background));
       color: rgba(var(--color-foreground), 0.72);
-      font-size: 0.9em;
+      font-size: 0.85em;
       text-align: center;
     }
     .product-custom-colors__swatch {
