@@ -49,10 +49,14 @@
       255; 3.0 was rejected at 157.2). The AO map is now part of the matched set:
       it darkens the sampled band, so the albedo tables were re-solved against it
       and are not interchangeable with the pre AO ones.
+      Round 4 (2026-08-18) rebuilt the mesh: smooth normals by angle plus per
+      object decimate ratios, so exposure moved 0.17 to 0.15 and both albedo
+      tables were re-solved. Geometry, AO map, tone mapping, exposure and the
+      tables are all one matched set.
       Upgrading assets/model-viewer.min.js requires re-running the calibration.
     {%- endcomment -%}
     tone-mapping="linear"
-    exposure="0.17"
+    exposure="0.15"
     shadow-intensity="2.5"
     shadow-softness="0.8"
     camera-orbit="200deg 78deg auto"
@@ -67,6 +71,7 @@
     hidden
   >
   <p class="caption product-custom-colors__preview-chip">Custom color preview, drag to rotate</p>
+  <p class="caption product-custom-colors__preview-note">3D preview is simplified for fast loading. The product you receive is printed smooth and precise.</p>
 </div>
 
 <script type="module" src="{{ 'model-viewer.min.js' | asset_url }}"></script>
