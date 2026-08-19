@@ -61,6 +61,15 @@
       curved role. occlusionTexture.strength is 0.7 (set by
       pipeline/colourway/glb_set_occlusion_strength.py, since Blender always
       writes 1.0) and shadow-intensity dropped 2.5 to 1.5.
+      Round 4.2 (2026-08-18): Paul reported the Secondary parts still looked
+      dirty. Attribution on his crops showed AO was again NOT the cause
+      (removing the AO texture entirely left the numbers unchanged), and that
+      the remaining smudge was smooth shading on the drum wall, hub, fins and
+      rungs. The asset is now FLAT SHADED throughout: on the drum outer wall the
+      p5 to p95 luminance range is 8.2 of 255 flat against 18.3 smooth, and the
+      wall does not re-facet because round 4 already raised the drum to about
+      36k triangles. More triangles plus flat shading beats fewer triangles plus
+      smooth shading for this CAD style asset.
       Upgrading assets/model-viewer.min.js requires re-running the calibration.
     {%- endcomment -%}
     tone-mapping="linear"

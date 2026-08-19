@@ -90,6 +90,9 @@
       denser Secondary catches more specular, which had pushed its floor, and so
       the error on Black and on zero channels, to 12.1.
 
+      Round 4.2 re-solved these again: the mesh is now flat shaded throughout
+      (see product-custom-preview.liquid for why), which moves the sampled band.
+
       Round 4.1 re-solved these once more: shading is now per role (flat on the
       panels, smooth on the curves), the flat parts take planar dissolve only,
       and occlusionTexture.strength is 0.7, all of which move the sampled band.
@@ -99,8 +102,8 @@
       asset (at occlusion strength 0.7) in
       product-custom-preview.liquid. Change them together.
     {%- endcomment -%}
-    {%- assign color_albedos_primary = '6.29038,6.29038,6.29038|6.29038,4.01302,0.01254|5.90898,0.55551,0.00011|5.27682,0.25595,0.25595|0.97987,4.97418,0.27354|0.00000,2.67584,0.33675|0.24784,0.55005,0.05647|0.07741,1.21075,4.97418|0.00000,0.16232,1.93868|1.53950,0.58915,0.04899|2.64384,2.77320,2.80611|0.51250,0.51250,0.51250|0.00000,0.00000,0.00000' | split: '|' -%}
-    {%- assign color_albedos_secondary = '5.32762,5.32762,5.32762|5.32762,3.52607,0.00358|5.31800,0.47934,0.00001|4.65400,0.22076,0.22076|0.85760,4.38704,0.23684|0.00000,2.32797,0.29964|0.21190,0.47934,0.04145|0.06235,1.05536,4.38704|0.00000,0.15026,1.67743|1.34334,0.51679,0.03504|2.33114,2.45186,2.48572|0.45255,0.45255,0.45255|0.00000,0.00000,0.00000' | split: '|' -%}
+    {%- assign color_albedos_primary = '6.29038,6.29038,6.29038|6.29038,4.01302,0.01254|5.89813,0.55280,0.00006|5.27682,0.25595,0.25595|0.97987,4.97418,0.27354|0.00000,2.67584,0.33675|0.24784,0.55005,0.05614|0.07741,1.21075,4.97418|0.00000,0.16232,1.93868|1.53950,0.58915,0.04899|2.64384,2.77320,2.80611|0.51250,0.51250,0.51250|0.00000,0.00000,0.00000' | split: '|' -%}
+    {%- assign color_albedos_secondary = '5.31833,5.31833,5.31833|5.31833,3.54533,0.00473|5.29844,0.48404,0.00012|4.67668,0.22366,0.22366|0.86427,4.40894,0.23912|0.00000,2.32797,0.29964|0.21545,0.48404,0.04520|0.06328,1.06291,4.40894|0.00000,0.15026,1.67743|1.35423,0.52171,0.03628|2.34625,2.46742,2.49827|0.45255,0.45255,0.45255|0.00000,0.00000,0.00000' | split: '|' -%}
 
     <div class="product-form__input">
       <label class="form__label" for="CustomColorPrimary-{{ section.id }}">
@@ -326,7 +329,7 @@
       // renders near black under the calibrated exposure. Measured value below
       // reproduces their previous on screen appearance (approximate, sampled
       // from only 54 lit pixels since the balls are mostly occluded).
-      var BALL_ALBEDO = [4.84849, 4.84849, 4.84849, 1];
+      var BALL_ALBEDO = [4.85817, 4.85817, 4.85817, 1];
 
       if (modelViewer) {
         modelViewer.addEventListener('error', function () {
