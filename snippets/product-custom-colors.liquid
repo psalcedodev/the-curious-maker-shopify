@@ -239,6 +239,18 @@
       color: rgb(var(--color-foreground));
       text-align: center;
     }
+    /* Round 5: shown only while the preview is on the sample combo. */
+    .product-custom-colors__preview-hint {
+      margin: 0.4rem 0.4rem 0;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+      background: rgb(var(--color-background));
+      color: rgba(var(--color-foreground), 0.85);
+      text-align: center;
+    }
+    .product-custom-colors__preview-hint[hidden] {
+      display: none;
+    }
     .product-custom-colors__preview-note {
       /* Narrow side margins on purpose: at a 375px viewport the 1.2rem margins
          cost enough width to push this to five lines. Round 4.3. */
@@ -416,31 +428,80 @@
         }
       }
 
+      // Round 5: the preview shows as soon as Custom is chosen, using a sample
+      // combo, so customers can see that a live preview exists without having to
+      // guess that picking two dropdowns will reveal one. The SELECTS are
+      // deliberately NOT preselected: they stay empty and required, so the
+      // default can never be mistaken for a choice and cannot reach an order.
+      var DEFAULT_COMBO = { primary: 'Green', secondary: 'Yellow' };
+      // Query from previewWrap, not root: the wrapper is moved into the media
+      // gallery above, so by this point the hint is no longer a descendant of
+      // root and root.querySelector returns null (caught in round 5 testing,
+      // the hint silently never showed).
+      var previewHint = previewWrap ? previewWrap.querySelector('[data-preview-hint]') : null;
+
+      function optionData(role, value) {
+        var out = { hex: '', albedo: '' };
+        if (!value) return out;
+        for (var i = 0; i < selects.length; i++) {
+          if (selects[i].dataset.customColor !== role) continue;
+          var opts = selects[i].options;
+          for (var j = 0; j < opts.length; j++) {
+            if (opts[j].value === value) {
+              out.hex = opts[j].getAttribute('data-hex') || '';
+              out.albedo = opts[j].getAttribute('data-albedo') || '';
+              return out;
+            }
+          }
+        }
+        return out;
+      }
+
+      // What the PREVIEW should render: the user's pick per role where there is
+      // one, the sample combo for the role that is still empty. Reads the
+      // default's calibrated data-albedo out of the option list rather than
+      // hard coding a hex, so it stays inside the matched set automatically.
+      function effectiveFor(detail) {
+        var eff = { usingDefault: false };
+        ['primary', 'secondary'].forEach(function (role) {
+          var chosen = detail[role];
+          var name = chosen || DEFAULT_COMBO[role];
+          if (!chosen) eff.usingDefault = true;
+          var d = chosen
+            ? { hex: detail[role + 'Hex'] || '', albedo: detail[role + 'Albedo'] || '' }
+            : optionData(role, name);
+          if (!d.hex && !d.albedo) d = optionData(role, name);
+          eff[role] = name;
+          eff[role + 'Hex'] = d.hex;
+          eff[role + 'Albedo'] = d.albedo;
+        });
+        return eff;
+      }
+
       function updatePreview(detail) {
         if (!previewWrap || !previewMap) return;
+        if (!fieldsActive) {
+          previewWrap.hidden = true;
+          return;
+        }
+        var eff = effectiveFor(detail);
         // Albedo is stored with the hex it belongs to, never independently.
         // Storing it behind its own truthiness test would let a color that has
         // no data-albedo silently inherit the previously selected color's
         // albedo instead of falling back to its own hex.
-        if (detail.primaryHex) {
-          currentHexes.primaryHex = detail.primaryHex;
-          currentHexes.primaryAlbedo = detail.primaryAlbedo || '';
+        currentHexes.primaryHex = eff.primaryHex;
+        currentHexes.primaryAlbedo = eff.primaryAlbedo;
+        currentHexes.secondaryHex = eff.secondaryHex;
+        currentHexes.secondaryAlbedo = eff.secondaryAlbedo;
+
+        var url = previewMap[eff.primary + '__' + eff.secondary];
+        if (url && previewImg) previewImg.src = url;
+        if (modelViewer && !modelFailed && !modelViewer.getAttribute('src')) {
+          modelViewer.setAttribute('src', modelViewer.dataset.glbSrc);
         }
-        if (detail.secondaryHex) {
-          currentHexes.secondaryHex = detail.secondaryHex;
-          currentHexes.secondaryAlbedo = detail.secondaryAlbedo || '';
-        }
-        if (fieldsActive && detail.primary && detail.secondary) {
-          var url = previewMap[detail.primary + '__' + detail.secondary];
-          if (url && previewImg) previewImg.src = url;
-          if (modelViewer && !modelFailed && !modelViewer.getAttribute('src')) {
-            modelViewer.setAttribute('src', modelViewer.dataset.glbSrc);
-          }
-          recolorModel();
-          previewWrap.hidden = false;
-          return;
-        }
-        previewWrap.hidden = true;
+        recolorModel();
+        if (previewHint) previewHint.hidden = !eff.usingDefault;
+        previewWrap.hidden = false;
       }
 
       function refreshPreview() {
