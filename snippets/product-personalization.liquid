@@ -39,7 +39,6 @@
           {%- for name in clicker_colors -%}
             <option value="{{ name }}">{{ name }}</option>
           {%- endfor -%}
-          <option value="Custom (Enter Below)">Custom (Enter Below)</option>
         </select>
         <span class="svg-wrapper">
           {{- 'icon-caret.svg' | inline_asset_content -}}
@@ -52,11 +51,8 @@
         Personalization Details
       </label>
       <p class="caption product-personalization__help">
-        1. Enter text, number, &amp; or symbol<br>
-        2. IF Custom Color: Case/Keycap/Letter<br>
-        Ex:<br>
-        1. Lia, 18, cat symbol<br>
-        2. Blue/Blue/Yellow
+        Enter text, number, &amp; or symbol<br>
+        Ex: Lia, 18, cat symbol
       </p>
       <div class="field">
         <textarea
