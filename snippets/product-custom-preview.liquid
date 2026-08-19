@@ -70,6 +70,16 @@
       wall does not re-facet because round 4 already raised the drum to about
       36k triangles. More triangles plus flat shading beats fewer triangles plus
       smooth shading for this CAD style asset.
+      Round 4.3 (2026-08-19): Paul reported White/White cavities reading gray.
+      Attribution on his crops, mid frequency mottle of 255 on the spiral
+      underside against 1.1 on the clean outer wall: current 9.9, AO removed
+      7.5, smooth shaded Secondary 11.3, environment swapped 9.9. So AO is a
+      real but MINORITY contributor in cavities (about 25 percent, unlike the
+      planar exteriors where it measured zero), smooth shading and the
+      environment are ruled out, and most of the rest is the spiral's own form.
+      Shipped: spiral density 0.08 to 0.15 and occlusion strength 0.7 to 0.35
+      (effective AO floor 0.51 to 0.755). Cavity brightness relative to the
+      outer wall went 0.83 to 0.865.
       Upgrading assets/model-viewer.min.js requires re-running the calibration.
     {%- endcomment -%}
     tone-mapping="linear"
@@ -88,7 +98,7 @@
     hidden
   >
   <p class="caption product-custom-colors__preview-chip">Custom color preview, drag to rotate</p>
-  <p class="caption product-custom-colors__preview-note">3D preview is simplified for fast loading. The product you receive is printed smooth and precise.</p>
+  <p class="caption product-custom-colors__preview-note">Lighting and shadows in the preview can make one color look like different tones. Your product is printed smooth and precise in the exact colors you choose.</p>
 </div>
 
 <script type="module" src="{{ 'model-viewer.min.js' | asset_url }}"></script>

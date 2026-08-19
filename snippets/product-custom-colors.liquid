@@ -90,6 +90,9 @@
       denser Secondary catches more specular, which had pushed its floor, and so
       the error on Black and on zero channels, to 12.1.
 
+      Round 4.3 re-solved these again: the spiral is denser and the occlusion
+      strength dropped 0.7 to 0.35, both of which move the sampled band.
+
       Round 4.2 re-solved these again: the mesh is now flat shaded throughout
       (see product-custom-preview.liquid for why), which moves the sampled band.
 
@@ -102,8 +105,8 @@
       asset (at occlusion strength 0.7) in
       product-custom-preview.liquid. Change them together.
     {%- endcomment -%}
-    {%- assign color_albedos_primary = '6.29038,6.29038,6.29038|6.29038,4.01302,0.01254|5.89813,0.55280,0.00006|5.27682,0.25595,0.25595|0.97987,4.97418,0.27354|0.00000,2.67584,0.33675|0.24784,0.55005,0.05614|0.07741,1.21075,4.97418|0.00000,0.16232,1.93868|1.53950,0.58915,0.04899|2.64384,2.77320,2.80611|0.51250,0.51250,0.51250|0.00000,0.00000,0.00000' | split: '|' -%}
-    {%- assign color_albedos_secondary = '5.31833,5.31833,5.31833|5.31833,3.54533,0.00473|5.29844,0.48404,0.00012|4.67668,0.22366,0.22366|0.86427,4.40894,0.23912|0.00000,2.32797,0.29964|0.21545,0.48404,0.04520|0.06328,1.06291,4.40894|0.00000,0.15026,1.67743|1.35423,0.52171,0.03628|2.34625,2.46742,2.49827|0.45255,0.45255,0.45255|0.00000,0.00000,0.00000' | split: '|' -%}
+    {%- assign color_albedos_primary = '6.28790,6.28790,6.28790|6.28790,3.99517,0.01222|5.89174,0.55005,0.00005|5.26604,0.25506,0.25506|0.97787,4.95857,0.27262|0.00000,2.66861,0.33569|0.24697,0.54863,0.05580|0.07699,1.20620,4.95857|0.00000,0.16099,1.93267|1.53425,0.58769,0.04838|2.63666,2.76951,2.80240|0.51114,0.51114,0.51114|0.00000,0.00000,0.00000' | split: '|' -%}
+    {%- assign color_albedos_secondary = '5.13357,5.13357,5.13357|5.13357,3.42457,0.00421|5.11091,0.46563,0.00003|4.51682,0.21511,0.21511|0.83321,4.25881,0.23020|0.00000,2.32797,0.29964|0.20569,0.46563,0.04078|0.06114,1.02590,4.25881|0.00000,0.15026,1.67743|1.30508,0.50242,0.03445|2.26625,2.38502,2.41227|0.43156,0.43156,0.43156|0.00000,0.00000,0.00000' | split: '|' -%}
 
     <div class="product-form__input">
       <label class="form__label" for="CustomColorPrimary-{{ section.id }}">
@@ -237,13 +240,15 @@
       text-align: center;
     }
     .product-custom-colors__preview-note {
-      margin: 0.4rem 1.2rem 1rem;
-      padding: 0.4rem 1rem;
+      /* Narrow side margins on purpose: at a 375px viewport the 1.2rem margins
+         cost enough width to push this to five lines. Round 4.3. */
+      margin: 0.4rem 0.4rem 1rem;
+      padding: 0.4rem 0.8rem;
       max-width: 34rem;
       border-radius: 1.2rem;
       background: rgb(var(--color-background));
       color: rgba(var(--color-foreground), 0.72);
-      font-size: 0.9em;
+      font-size: 0.85em;
       text-align: center;
     }
     .product-custom-colors__swatch {
