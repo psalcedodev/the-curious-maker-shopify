@@ -89,6 +89,24 @@
     camera-orbit="200deg 78deg auto"
     style="width: 100%; height: 100%;"
   ></model-viewer>
+  {%- comment -%}
+    Round 6: true filament colours, so a customer can compare the render against
+    what they will actually receive. Pinned top left, which measured 0 percent
+    model occupancy at the default 200deg/78deg framing (top right 3.4, bottom
+    right 12.3, bottom left 22.7). The dots are filled from data-hex, the TRUE
+    filament hex, never from the calibrated data-albedo.
+  {%- endcomment -%}
+  <div class="product-custom-colors__legend" data-preview-legend hidden>
+    <p class="product-custom-colors__legend-title">True colors</p>
+    <p class="product-custom-colors__legend-row">
+      <span class="product-custom-colors__legend-dot" data-legend-dot="primary"></span>
+      <span data-legend-name="primary"></span><span class="product-custom-colors__legend-role">, base and legs</span>
+    </p>
+    <p class="product-custom-colors__legend-row">
+      <span class="product-custom-colors__legend-dot" data-legend-dot="secondary"></span>
+      <span data-legend-name="secondary"></span><span class="product-custom-colors__legend-role">, hopper ladder funnel</span>
+    </p>
+  </div>
   <img
     id="CustomColorPreview-{{ section.id }}"
     alt="Preview of the dispenser in the selected custom colors"

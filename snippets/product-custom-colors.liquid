@@ -239,6 +239,53 @@
       color: rgb(var(--color-foreground));
       text-align: center;
     }
+    /* Round 6: true filament colours, top left, where the model never reaches. */
+    .product-custom-colors__legend {
+      position: absolute;
+      top: 0.8rem;
+      left: 0.8rem;
+      z-index: 1;
+      padding: 0.45rem 0.7rem;
+      border-radius: 0.8rem;
+      background: rgb(var(--color-background));
+      border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+      /* Kept deliberately small: at a 375 px viewport the overlay is about
+         328 px and a larger card overlapped the hopper. */
+      font-size: 0.72em;
+      line-height: 1.45;
+      text-align: left;
+      pointer-events: none;
+      /* 72 percent, and the rows wrap rather than clip. At a 375 px viewport the
+         overlay is about 328 px, and "Yellow, hopper ladder funnel" clipped at
+         60 percent with nowrap (caught in round 6 testing). */
+      max-width: 72%;
+    }
+    .product-custom-colors__legend[hidden] {
+      display: none;
+    }
+    .product-custom-colors__legend-title {
+      margin: 0 0 0.2rem;
+      font-weight: 600;
+      color: rgb(var(--color-foreground));
+    }
+    .product-custom-colors__legend-row {
+      margin: 0;
+      color: rgb(var(--color-foreground));
+    }
+    .product-custom-colors__legend-dot {
+      display: inline-block;
+      width: 0.9rem;
+      height: 0.9rem;
+      margin-right: 0.4rem;
+      border-radius: 50%;
+      border: 0.1rem solid rgba(var(--color-foreground), 0.3);
+      vertical-align: -0.15rem;
+      background: transparent;
+    }
+    .product-custom-colors__legend-role {
+      color: rgba(var(--color-foreground), 0.6);
+    }
+
     /* Round 5: shown only while the preview is on the sample combo. */
     .product-custom-colors__preview-hint {
       margin: 0.4rem 0.4rem 0;
@@ -439,6 +486,8 @@
       // root and root.querySelector returns null (caught in round 5 testing,
       // the hint silently never showed).
       var previewHint = previewWrap ? previewWrap.querySelector('[data-preview-hint]') : null;
+      // Same reason as the hint: query from previewWrap, not root.
+      var previewLegend = previewWrap ? previewWrap.querySelector('[data-preview-legend]') : null;
 
       function optionData(role, value) {
         var out = { hex: '', albedo: '' };
@@ -501,6 +550,17 @@
         }
         recolorModel();
         if (previewHint) previewHint.hidden = !eff.usingDefault;
+        // Legend follows whatever the preview currently shows, sample combo
+        // included. Dots take the TRUE filament hex, not the calibrated albedo.
+        if (previewLegend) {
+          ['primary', 'secondary'].forEach(function (role) {
+            var dot = previewLegend.querySelector('[data-legend-dot="' + role + '"]');
+            var nm = previewLegend.querySelector('[data-legend-name="' + role + '"]');
+            if (dot) dot.style.background = eff[role + 'Hex'] || 'transparent';
+            if (nm) nm.textContent = eff[role] || '';
+          });
+          previewLegend.hidden = false;
+        }
         previewWrap.hidden = false;
       }
 
