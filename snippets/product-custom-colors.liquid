@@ -128,12 +128,12 @@
             disabled
           {% endunless %}
         >
-          <option value="" disabled selected>Select an option</option>
           {%- for name in color_names -%}
             <option
               value="{{ name }}"
               data-hex="{{ color_hexes[forloop.index0] }}"
               data-albedo="{{ color_albedos_primary[forloop.index0] }}"
+              {% if name == 'White' %}selected{% endif %}
             >{{ name }}</option>
           {%- endfor -%}
         </select>
@@ -163,12 +163,12 @@
             disabled
           {% endunless %}
         >
-          <option value="" disabled selected>Select an option</option>
           {%- for name in color_names -%}
             <option
               value="{{ name }}"
               data-hex="{{ color_hexes[forloop.index0] }}"
               data-albedo="{{ color_albedos_secondary[forloop.index0] }}"
+              {% if name == 'White' %}selected{% endif %}
             >{{ name }}</option>
           {%- endfor -%}
         </select>
@@ -497,57 +497,22 @@
         }
       }
 
-      // Round 5: the preview shows as soon as Custom is chosen, using a sample
-      // combo, so customers can see that a live preview exists without having to
-      // guess that picking two dropdowns will reveal one. The SELECTS are
-      // deliberately NOT preselected: they stay empty and required, so the
-      // default can never be mistaken for a choice and cannot reach an order.
-      var DEFAULT_COMBO = { primary: 'Green', secondary: 'Yellow' };
+      // Round 6.1: BOTH selects ship defaulted to White and the placeholder row
+      // is gone, so they always hold a valid value. Paul reversed round 5's no
+      // preselect rule after watching users hunt for "how to change the yellow
+      // and green and where or how that's the default". Consequences, all
+      // intended: validation always passes, and an order always carries Primary
+      // and Secondary properties. The Green over Yellow sample combo machinery
+      // is therefore gone; the preview simply renders the CURRENT select values,
+      // and the event payload always carries the real ones.
+      var HINT_DEFAULT = 'White';
+      var hintDismissed = false;
       // Query from previewWrap, not root: the wrapper is moved into the media
-      // gallery above, so by this point the hint is no longer a descendant of
-      // root and root.querySelector returns null (caught in round 5 testing,
-      // the hint silently never showed).
+      // gallery above, so by this point these are no longer descendants of root
+      // and root.querySelector returns null (caught in round 5 testing, the hint
+      // silently never showed).
       var previewHint = previewWrap ? previewWrap.querySelector('[data-preview-hint]') : null;
-      // Same reason as the hint: query from previewWrap, not root.
       var previewLegend = previewWrap ? previewWrap.querySelector('[data-preview-legend]') : null;
-
-      function optionData(role, value) {
-        var out = { hex: '', albedo: '' };
-        if (!value) return out;
-        for (var i = 0; i < selects.length; i++) {
-          if (selects[i].dataset.customColor !== role) continue;
-          var opts = selects[i].options;
-          for (var j = 0; j < opts.length; j++) {
-            if (opts[j].value === value) {
-              out.hex = opts[j].getAttribute('data-hex') || '';
-              out.albedo = opts[j].getAttribute('data-albedo') || '';
-              return out;
-            }
-          }
-        }
-        return out;
-      }
-
-      // What the PREVIEW should render: the user's pick per role where there is
-      // one, the sample combo for the role that is still empty. Reads the
-      // default's calibrated data-albedo out of the option list rather than
-      // hard coding a hex, so it stays inside the matched set automatically.
-      function effectiveFor(detail) {
-        var eff = { usingDefault: false };
-        ['primary', 'secondary'].forEach(function (role) {
-          var chosen = detail[role];
-          var name = chosen || DEFAULT_COMBO[role];
-          if (!chosen) eff.usingDefault = true;
-          var d = chosen
-            ? { hex: detail[role + 'Hex'] || '', albedo: detail[role + 'Albedo'] || '' }
-            : optionData(role, name);
-          if (!d.hex && !d.albedo) d = optionData(role, name);
-          eff[role] = name;
-          eff[role + 'Hex'] = d.hex;
-          eff[role + 'Albedo'] = d.albedo;
-        });
-        return eff;
-      }
 
       function updatePreview(detail) {
         if (!previewWrap || !previewMap) return;
@@ -555,31 +520,38 @@
           previewWrap.hidden = true;
           return;
         }
-        var eff = effectiveFor(detail);
         // Albedo is stored with the hex it belongs to, never independently.
         // Storing it behind its own truthiness test would let a color that has
         // no data-albedo silently inherit the previously selected color's
         // albedo instead of falling back to its own hex.
-        currentHexes.primaryHex = eff.primaryHex;
-        currentHexes.primaryAlbedo = eff.primaryAlbedo;
-        currentHexes.secondaryHex = eff.secondaryHex;
-        currentHexes.secondaryAlbedo = eff.secondaryAlbedo;
+        currentHexes.primaryHex = detail.primaryHex || '';
+        currentHexes.primaryAlbedo = detail.primaryAlbedo || '';
+        currentHexes.secondaryHex = detail.secondaryHex || '';
+        currentHexes.secondaryAlbedo = detail.secondaryAlbedo || '';
 
-        var url = previewMap[eff.primary + '__' + eff.secondary];
+        var url = previewMap[detail.primary + '__' + detail.secondary];
         if (url && previewImg) previewImg.src = url;
         if (modelViewer && !modelFailed && !modelViewer.getAttribute('src')) {
           modelViewer.setAttribute('src', modelViewer.dataset.glbSrc);
         }
         recolorModel();
-        if (previewHint) previewHint.hidden = !eff.usingDefault;
-        // Legend follows whatever the preview currently shows, sample combo
-        // included. Dots take the TRUE filament hex, not the calibrated albedo.
+
+        // The hint explains the White default. Once the shopper moves EITHER
+        // select off it, they have understood, so it is retired for the session
+        // and does not come back even if they set White again.
+        if (detail.primary !== HINT_DEFAULT || detail.secondary !== HINT_DEFAULT) {
+          hintDismissed = true;
+        }
+        if (previewHint) previewHint.hidden = hintDismissed;
+
+        // Legend follows whatever the preview shows. Dots take the TRUE
+        // filament hex, not the calibrated albedo.
         if (previewLegend) {
           ['primary', 'secondary'].forEach(function (role) {
             var dot = previewLegend.querySelector('[data-legend-dot="' + role + '"]');
             var nm = previewLegend.querySelector('[data-legend-name="' + role + '"]');
-            if (dot) dot.style.background = eff[role + 'Hex'] || 'transparent';
-            if (nm) nm.textContent = eff[role] || '';
+            if (dot) dot.style.background = detail[role + 'Hex'] || 'transparent';
+            if (nm) nm.textContent = detail[role] || '';
           });
           previewLegend.hidden = false;
         }
