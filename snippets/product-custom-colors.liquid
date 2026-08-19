@@ -239,6 +239,75 @@
       color: rgb(var(--color-foreground));
       text-align: center;
     }
+    /* Round 6: true filament colours, top left, where the model never reaches.
+       The SWATCHES are the point of this card, so they are sized as real colour
+       samples rather than dots (Paul, round 6 amendment). */
+    .product-custom-colors__legend {
+      position: absolute;
+      top: 0.8rem;
+      left: 0.8rem;
+      z-index: 1;
+      padding: 0.7rem 0.9rem;
+      border-radius: 1rem;
+      background: rgb(var(--color-background));
+      border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+      font-size: 0.78em;
+      line-height: 1.25;
+      text-align: left;
+      pointer-events: none;
+    }
+    .product-custom-colors__legend[hidden] {
+      display: none;
+    }
+    .product-custom-colors__legend-title {
+      margin: 0 0 0.5rem;
+      font-weight: 600;
+      color: rgb(var(--color-foreground));
+    }
+    .product-custom-colors__legend-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .product-custom-colors__legend-row + .product-custom-colors__legend-row {
+      margin-top: 0.7rem;
+    }
+    .product-custom-colors__legend-dot {
+      flex: 0 0 auto;
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 50%;
+      /* Two rings: a hairline so pure White still reads as a disc against the
+         pill, and an inset highlight so dark colours keep an edge too. */
+      border: 0.1rem solid rgba(var(--color-foreground), 0.35);
+      box-shadow: inset 0 0 0 0.1rem rgba(255, 255, 255, 0.25);
+      background: transparent;
+    }
+    .product-custom-colors__legend-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .product-custom-colors__legend-name {
+      color: rgb(var(--color-foreground));
+      font-weight: 600;
+    }
+    .product-custom-colors__legend-role {
+      color: rgba(var(--color-foreground), 0.6);
+    }
+    @media screen and (max-width: 749px) {
+      .product-custom-colors__legend {
+        padding: 0.6rem 0.7rem;
+        font-size: 0.72em;
+      }
+      .product-custom-colors__legend-dot {
+        /* Still a colour sample, not a dot: 2.4rem is the bottom of the range
+           Paul asked for, so the swatch stays readable at every width. */
+        width: 2.4rem;
+        height: 2.4rem;
+      }
+    }
+
     /* Round 5: shown only while the preview is on the sample combo. */
     .product-custom-colors__preview-hint {
       margin: 0.4rem 0.4rem 0;
@@ -439,6 +508,8 @@
       // root and root.querySelector returns null (caught in round 5 testing,
       // the hint silently never showed).
       var previewHint = previewWrap ? previewWrap.querySelector('[data-preview-hint]') : null;
+      // Same reason as the hint: query from previewWrap, not root.
+      var previewLegend = previewWrap ? previewWrap.querySelector('[data-preview-legend]') : null;
 
       function optionData(role, value) {
         var out = { hex: '', albedo: '' };
@@ -501,6 +572,17 @@
         }
         recolorModel();
         if (previewHint) previewHint.hidden = !eff.usingDefault;
+        // Legend follows whatever the preview currently shows, sample combo
+        // included. Dots take the TRUE filament hex, not the calibrated albedo.
+        if (previewLegend) {
+          ['primary', 'secondary'].forEach(function (role) {
+            var dot = previewLegend.querySelector('[data-legend-dot="' + role + '"]');
+            var nm = previewLegend.querySelector('[data-legend-name="' + role + '"]');
+            if (dot) dot.style.background = eff[role + 'Hex'] || 'transparent';
+            if (nm) nm.textContent = eff[role] || '';
+          });
+          previewLegend.hidden = false;
+        }
         previewWrap.hidden = false;
       }
 
