@@ -1,0 +1,435 @@
+{%- comment -%}
+  Custom colors promo (Option C, configurator teaser).
+
+  Advertises the product page colour configurator from the homepage. The left
+  card is a still teaser that mirrors the live configurator on the product page
+  (snippets/product-custom-preview.liquid): the composited render, the "True
+  colors" legend pinned top left, and the rotate pill beneath it.
+
+  ACCURACY: the legend rows are plain settings, not derived from the image. If
+  the merchant swaps the image they MUST update the two legend rows to match.
+  Filament hexes are the true values from snippets/product-custom-colors.liquid
+  (Blue is #002E96; Lake Blue, a different colour, is #1F79E5).
+{%- endcomment -%}
+
+{%- liquid
+  assign default_link = '/products/golf-ball-dispenser-golf-training-aid-for-simulator-backyard-range-practice-25-ball-capacity?variant=46655346147477'
+  assign promo_link = section.settings.button_link | default: default_link
+  assign fallback_alt = 'The golf ball dispenser previewed in Blue and Yellow custom colors'
+  assign image_alt = section.settings.image.alt | default: fallback_alt
+-%}
+
+{%- style -%}
+  .custom-colors-promo-{{ section.id }} {
+    --ccp-gold: #c9a15a;
+    --ccp-card: #ffffff;
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .custom-colors-promo-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .custom-colors-promo__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.2rem;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .custom-colors-promo__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 6rem;
+    }
+
+    /* The preview render is portrait, so an uncapped card grows as tall as the
+       column is wide and leaves the copy stranded in dead space. Capping the
+       width keeps the two columns in proportion. */
+    .custom-colors-promo__card {
+      max-width: 52rem;
+      margin-inline: auto;
+    }
+  }
+
+  /* The card is white on purpose: the band behind it is the cream scheme
+     background, so the card has to be lighter than its surroundings to read as
+     the configurator surface it is imitating. */
+  .custom-colors-promo__card {
+    position: relative;
+    background-color: var(--ccp-card);
+    border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+    border-radius: 1.2rem;
+    overflow: hidden;
+    box-shadow: 0 1.2rem 3.2rem rgba(var(--color-shadow), 0.08);
+  }
+
+  .custom-colors-promo__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 5;
+    padding: 1.6rem;
+  }
+
+  .custom-colors-promo__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .custom-colors-promo__overlay {
+    position: absolute;
+    top: 1.2rem;
+    left: 1.2rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    pointer-events: none;
+  }
+
+  /* Cream fill plus a firmer hairline than the product page uses, because the
+     product page pill sits on a cream stage while this one sits on white. */
+  .custom-colors-promo__legend {
+    padding: 0.7rem 0.9rem;
+    border-radius: 1rem;
+    background: rgb(var(--color-background));
+    border: 0.1rem solid rgba(var(--color-foreground), 0.2);
+    font-size: 1.1rem;
+    line-height: 1.25;
+    text-align: left;
+  }
+
+  .custom-colors-promo__legend-title {
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+    color: rgb(var(--color-foreground));
+  }
+
+  .custom-colors-promo__legend-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .custom-colors-promo__legend-row + .custom-colors-promo__legend-row {
+    margin-top: 0.7rem;
+  }
+
+  .custom-colors-promo__legend-dot {
+    flex: 0 0 auto;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    border: 0.1rem solid rgba(var(--color-foreground), 0.35);
+    box-shadow: inset 0 0 0 0.1rem rgba(255, 255, 255, 0.25);
+  }
+
+  .custom-colors-promo__legend-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .custom-colors-promo__legend-name {
+    color: rgb(var(--color-foreground));
+    font-weight: 600;
+  }
+
+  .custom-colors-promo__legend-role {
+    color: rgba(var(--color-foreground), 0.6);
+  }
+
+  .custom-colors-promo__pill {
+    margin: 0;
+    padding: 0.5rem 1.2rem;
+    border-radius: 2rem;
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Mirrors the product page: the legend shrinks on narrow screens so it does
+     not cover the render it is describing. */
+  @media screen and (max-width: 749px) {
+    .custom-colors-promo__legend {
+      padding: 0.6rem 0.7rem;
+      font-size: 1rem;
+    }
+
+    .custom-colors-promo__legend-dot {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .custom-colors-promo__pill {
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  .custom-colors-promo__eyebrow {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(0.85rem, 1.5vw + 0.7rem, 1.05rem);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ccp-gold);
+  }
+
+  .custom-colors-promo__heading {
+    margin: 0 0 1.6rem;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.85rem, 4vw + 1.2rem, 3.75rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: rgb(var(--color-foreground));
+  }
+
+  .custom-colors-promo__body {
+    margin: 0 0 2.4rem;
+    font-family: 'Lora', serif;
+    font-size: clamp(1.05rem, 1.2vw + 0.9rem, 1.35rem);
+    line-height: 1.7;
+    color: rgba(var(--color-foreground), 0.85);
+  }
+
+  .custom-colors-promo__body > p {
+    margin: 0 0 1.2rem;
+  }
+
+  .custom-colors-promo__body > p:last-child {
+    margin-bottom: 0;
+  }
+
+  .custom-colors-promo__button {
+    border-radius: 6px;
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="custom-colors-promo custom-colors-promo-{{ section.id }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    <div class="custom-colors-promo__grid">
+      <div class="custom-colors-promo__card">
+        <div class="custom-colors-promo__overlay">
+          <div class="custom-colors-promo__legend">
+            <p class="custom-colors-promo__legend-title">True colors</p>
+            <div class="custom-colors-promo__legend-row">
+              <span
+                class="custom-colors-promo__legend-dot"
+                style="background-color: {{ section.settings.legend_1_color | escape }};"
+              ></span>
+              <span class="custom-colors-promo__legend-text">
+                <span class="custom-colors-promo__legend-name">{{ section.settings.legend_1_name | escape }}</span>
+                <span class="custom-colors-promo__legend-role">{{ section.settings.legend_1_role | escape }}</span>
+              </span>
+            </div>
+            <div class="custom-colors-promo__legend-row">
+              <span
+                class="custom-colors-promo__legend-dot"
+                style="background-color: {{ section.settings.legend_2_color | escape }};"
+              ></span>
+              <span class="custom-colors-promo__legend-text">
+                <span class="custom-colors-promo__legend-name">{{ section.settings.legend_2_name | escape }}</span>
+                <span class="custom-colors-promo__legend-role">{{ section.settings.legend_2_role | escape }}</span>
+              </span>
+            </div>
+          </div>
+          <p class="custom-colors-promo__pill">{{ section.settings.pill_label | escape }}</p>
+        </div>
+
+        <div class="custom-colors-promo__media">
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1240
+              | image_tag:
+                loading: 'lazy',
+                widths: '300, 400, 500, 620, 800, 1100, 1240',
+                sizes: '(min-width: 990px) 44vw, 92vw',
+                alt: image_alt
+            }}
+          {%- else -%}
+            <img
+              src="{{ 'cc-Blue__Yellow.webp' | asset_url }}"
+              alt="{{ fallback_alt }}"
+              width="620"
+              height="1119"
+              loading="lazy"
+            >
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="custom-colors-promo__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="custom-colors-promo__eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="custom-colors-promo__heading">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.body != blank -%}
+          <div class="custom-colors-promo__body rte">{{ section.settings.body }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <a
+            href="{{ promo_link }}"
+            class="button custom-colors-promo__button"
+          >
+            {{- section.settings.button_label | escape -}}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Colors Promo",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "LIVE 3D PREVIEW"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Spin it before we print it."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Choose your primary and secondary colors and a live 3D model recolors on the spot, true to the exact filaments we load. What you spin is what ships.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Try the color studio"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Leave blank to send visitors to the dispenser product page with the custom color option already selected."
+    },
+    {
+      "type": "header",
+      "content": "Preview card"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Preview image",
+      "info": "Leave blank to use the Blue and Yellow preview render. If you choose a different render, update the two legend rows below so the swatches match what the image shows."
+    },
+    {
+      "type": "text",
+      "id": "pill_label",
+      "label": "Rotate pill label",
+      "default": "Drag to rotate"
+    },
+    {
+      "type": "header",
+      "content": "Legend row 1 (primary)"
+    },
+    {
+      "type": "text",
+      "id": "legend_1_color",
+      "label": "Swatch color",
+      "default": "#002E96",
+      "info": "The true filament hex. Blue is #002E96. Lake Blue, a different color, is #1F79E5."
+    },
+    {
+      "type": "text",
+      "id": "legend_1_name",
+      "label": "Color name",
+      "default": "Blue"
+    },
+    {
+      "type": "text",
+      "id": "legend_1_role",
+      "label": "Parts",
+      "default": "base and legs"
+    },
+    {
+      "type": "header",
+      "content": "Legend row 2 (secondary)"
+    },
+    {
+      "type": "text",
+      "id": "legend_2_color",
+      "label": "Swatch color",
+      "default": "#FFD00B",
+      "info": "The true filament hex. Yellow is #FFD00B."
+    },
+    {
+      "type": "text",
+      "id": "legend_2_name",
+      "label": "Color name",
+      "default": "Yellow"
+    },
+    {
+      "type": "text",
+      "id": "legend_2_role",
+      "label": "Parts",
+      "default": "hopper ladder funnel"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Colors Promo"
+    }
+  ]
+}
+{% endschema %}
