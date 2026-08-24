@@ -321,9 +321,16 @@
       line-height: 1;
       color: #3a3a3a;
       transition: transform 0.08s ease;
+      padding: 0;
+      /* the render pass overwrites this so the badge tracks the cap size */
+      --pp-badge: 16px;
     }
     .product-personalization__cap:hover {
       transform: translateY(1px);
+    }
+    .product-personalization__cap:focus-visible {
+      outline: 2px solid #3a3a3a;
+      outline-offset: 2px;
     }
     /* Always on show, not hover only, so the remove affordance is discoverable
        on touch. --pp-badge is set per cap in JS because the cap width is
@@ -334,17 +341,17 @@
     .product-personalization__cap::after {
       content: '\00d7';
       position: absolute;
-      top: calc(var(--pp-badge, 16px) * -0.5);
-      right: calc(var(--pp-badge, 16px) * -0.5);
-      width: var(--pp-badge, 16px);
-      height: var(--pp-badge, 16px);
-      background: #2f2f2f;
+      top: calc(var(--pp-badge) * -0.5);
+      right: calc(var(--pp-badge) * -0.5);
+      width: var(--pp-badge);
+      height: var(--pp-badge);
+      background: #3a3a3a;
       color: #fff;
       border-radius: 50%;
       font-family: sans-serif;
       font-weight: 700;
-      font-size: calc(var(--pp-badge, 16px) * 0.62);
-      line-height: var(--pp-badge, 16px);
+      font-size: calc(var(--pp-badge) * 0.62);
+      line-height: var(--pp-badge);
       text-align: center;
       opacity: 0.38;
       z-index: 3;
@@ -352,6 +359,7 @@
       transition: opacity 0.12s ease;
     }
     .product-personalization__cap:hover::after,
+    .product-personalization__cap:focus::after,
     .product-personalization__cap:focus-visible::after {
       opacity: 1;
     }
@@ -656,7 +664,8 @@
         var h = Math.round((w * 56) / 52),
           rad = Math.max(4, Math.round((w * 11) / 52)),
           fs = Math.round(w * 0.5),
-          ic = Math.round(w * 0.54);
+          ic = Math.round(w * 0.54),
+          badge = Math.max(12, Math.round(w * 0.3));
 
         function sizeTile(el) {
           el.style.width = w + 'px';
@@ -681,8 +690,11 @@
           var d = document.createElement('div');
           d.className = 'product-personalization__cap';
           d.title = 'Remove';
+          d.setAttribute('role', 'button');
+          d.setAttribute('tabindex', '0');
+          d.setAttribute('aria-label', 'Remove ' + (t.t === 'ch' ? t.v : t.name));
           sizeTile(d);
-          d.style.setProperty('--pp-badge', Math.max(12, Math.round(w * 0.3)) + 'px');
+          d.style.setProperty('--pp-badge', badge + 'px');
           if (tint) {
             d.style.background =
               'linear-gradient(180deg,' + lighten(tint.cap, 0.07) + ' 0%,' + tint.cap + ' 45%,' + shade(tint.cap, 0.95) + ' 100%)';
@@ -704,6 +716,12 @@
           }
           d.addEventListener('click', function () {
             removeAt(i);
+          });
+          d.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {
+              event.preventDefault();
+              removeAt(i);
+            }
           });
           strip.appendChild(d);
         });
