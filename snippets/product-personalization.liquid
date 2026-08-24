@@ -325,18 +325,35 @@
     .product-personalization__cap:hover {
       transform: translateY(1px);
     }
-    .product-personalization__cap:hover::after {
+    /* Always on show, not hover only, so the remove affordance is discoverable
+       on touch. --pp-badge is set per cap in JS because the cap width is
+       computed, not fixed. z-index lifts it over the next cap: the caps are
+       positioned siblings with auto z-index, so in DOM order the neighbour
+       would otherwise paint over the half that hangs outside. Ghosts have
+       their own class and never get one. */
+    .product-personalization__cap::after {
       content: '\00d7';
       position: absolute;
-      top: -7px;
-      right: -7px;
-      width: 16px;
-      height: 16px;
-      background: #3a3a3a;
+      top: calc(var(--pp-badge, 16px) * -0.5);
+      right: calc(var(--pp-badge, 16px) * -0.5);
+      width: var(--pp-badge, 16px);
+      height: var(--pp-badge, 16px);
+      background: #2f2f2f;
       color: #fff;
       border-radius: 50%;
-      font: 700 11px/16px sans-serif;
+      font-family: sans-serif;
+      font-weight: 700;
+      font-size: calc(var(--pp-badge, 16px) * 0.62);
+      line-height: var(--pp-badge, 16px);
       text-align: center;
+      opacity: 0.38;
+      z-index: 3;
+      pointer-events: none;
+      transition: opacity 0.12s ease;
+    }
+    .product-personalization__cap:hover::after,
+    .product-personalization__cap:focus-visible::after {
+      opacity: 1;
     }
     div.product-personalization__ghost {
       width: 52px;
@@ -665,6 +682,7 @@
           d.className = 'product-personalization__cap';
           d.title = 'Remove';
           sizeTile(d);
+          d.style.setProperty('--pp-badge', Math.max(12, Math.round(w * 0.3)) + 'px');
           if (tint) {
             d.style.background =
               'linear-gradient(180deg,' + lighten(tint.cap, 0.07) + ' 0%,' + tint.cap + ' 45%,' + shade(tint.cap, 0.95) + ' 100%)';
