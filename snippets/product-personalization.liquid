@@ -721,6 +721,11 @@
             if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {
               event.preventDefault();
               removeAt(i);
+              // Activation destroys this cap, so a held key cannot repeat into
+              // the next one, but focus would land on the body. Send it back to
+              // the typebox. Pointer removal deliberately does not move focus,
+              // so a tap to delete never summons the on screen keyboard.
+              typebox.focus({ preventScroll: true });
             }
           });
           strip.appendChild(d);
@@ -760,11 +765,15 @@
           // A held Space or Enter auto-repeats; one press should mean one cap.
           if (e.repeat && (e.key === ' ' || e.key === 'Enter' || e.key === 'Spacebar')) e.preventDefault();
         });
-        b.addEventListener('click', function () {
+        b.addEventListener('click', function (event) {
           addToken({ t: 'sym', name: s[0], b64: s[1] });
           // Put the caret back where the composing happens, so the next
           // keystroke goes to the typebox instead of re-firing this chip.
-          typebox.focus({ preventScroll: true });
+          // Not on touch though: a tap has no follow-on keystroke to catch, and
+          // focusing the input would raise the on screen keyboard over the
+          // palette on every symbol. Keyboard clicks report an empty
+          // pointerType, mouse reports 'mouse'.
+          if (event.pointerType !== 'touch') typebox.focus({ preventScroll: true });
         });
         palette.appendChild(b);
       });
