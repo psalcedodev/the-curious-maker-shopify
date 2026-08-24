@@ -53,7 +53,7 @@
     data-initial-characters="{{ initial_characters | escape }}"
   >
     <div class="product-form__input">
-      <label class="form__label" for="PersonalizationColor-{{ section.id }}">
+      <label class="form__label product-personalization__label" for="PersonalizationColor-{{ section.id }}">
         Color Options (See Listing Photos)
       </label>
       <div class="select">
@@ -82,49 +82,28 @@
     </div>
 
     <div class="product-personalization__composer">
-      <label class="form__label" for="PersonalizationTypebox-{{ section.id }}">
+      <label class="form__label product-personalization__label" for="PersonalizationTypebox-{{ section.id }}">
         Personalization Details
       </label>
-      <p class="caption product-personalization__help">
+      <p class="product-personalization__help">
         Type letters or numbers, or tap a symbol to add one. Each tile is one keycap,
         built in this order. Tap a tile to take it off.
       </p>
 
       <div class="product-personalization__caps" data-cap-row title="Click and type"></div>
-      <p class="caption product-personalization__counter" data-cap-counter aria-live="polite"></p>
+      <p class="product-personalization__counter" data-cap-counter aria-live="polite"></p>
 
-      <div class="field product-personalization__typebox">
-        <input
-          id="PersonalizationTypebox-{{ section.id }}"
-          class="field__input"
-          type="text"
-          data-typebox
-          maxlength="1"
-          autocomplete="off"
-          autocapitalize="characters"
-          spellcheck="false"
-          placeholder="Type a letter or number"
-          aria-describedby="PersonalizationHelp-{{ section.id }}"
-        >
-        <label class="field__label" for="PersonalizationTypebox-{{ section.id }}">
-          Type a letter or number
-        </label>
-      </div>
-
-      <p class="caption product-personalization__palette-label" id="PersonalizationHelp-{{ section.id }}">
-        Or tap a symbol. Each symbol takes one cap.
-      </p>
-      <div class="product-personalization__palette" data-palette></div>
-
-      <p class="product-personalization__error" data-composer-error role="alert" hidden></p>
-
+      {%- comment -%}
+        The custom color trio sits directly under the preview, so the swatch a
+        shopper picks and the cap it repaints stay in one glance.
+      {%- endcomment -%}
       <div class="product-personalization__custom" data-custom-colors hidden>
-        <p class="caption product-personalization__custom-label">
+        <p class="product-personalization__custom-label">
           Custom colors. Pick one for each part and the preview updates.
         </p>
         <div class="product-personalization__custom-grid">
           <div class="product-personalization__custom-field">
-            <label class="form__label" for="PersonalizationCase-{{ section.id }}">
+            <label class="form__label product-personalization__sub-label" for="PersonalizationCase-{{ section.id }}">
               Case
               <span class="product-personalization__swatch" data-swatch-for="PersonalizationCase-{{ section.id }}"></span>
             </label>
@@ -157,7 +136,7 @@
             </div>
           </div>
           <div class="product-personalization__custom-field">
-            <label class="form__label" for="PersonalizationKeycap-{{ section.id }}">
+            <label class="form__label product-personalization__sub-label" for="PersonalizationKeycap-{{ section.id }}">
               Keycap
               <span class="product-personalization__swatch" data-swatch-for="PersonalizationKeycap-{{ section.id }}"></span>
             </label>
@@ -190,7 +169,7 @@
             </div>
           </div>
           <div class="product-personalization__custom-field">
-            <label class="form__label" for="PersonalizationLetter-{{ section.id }}">
+            <label class="form__label product-personalization__sub-label" for="PersonalizationLetter-{{ section.id }}">
               Letter
               <span class="product-personalization__swatch" data-swatch-for="PersonalizationLetter-{{ section.id }}"></span>
             </label>
@@ -225,6 +204,31 @@
         </div>
       </div>
 
+      <div class="field product-personalization__typebox">
+        <input
+          id="PersonalizationTypebox-{{ section.id }}"
+          class="field__input"
+          type="text"
+          data-typebox
+          maxlength="1"
+          autocomplete="off"
+          autocapitalize="characters"
+          spellcheck="false"
+          placeholder="Type a letter or number"
+          aria-describedby="PersonalizationHelp-{{ section.id }}"
+        >
+        <label class="field__label" for="PersonalizationTypebox-{{ section.id }}">
+          Type a letter or number
+        </label>
+      </div>
+
+      <p class="product-personalization__palette-label" id="PersonalizationHelp-{{ section.id }}">
+        Or tap a symbol. Each symbol takes one cap.
+      </p>
+      <div class="product-personalization__palette" data-palette></div>
+
+      <p class="product-personalization__error" data-composer-error role="alert" hidden></p>
+
       <input
         type="hidden"
         id="PersonalizationDetails-{{ section.id }}"
@@ -239,21 +243,45 @@
   {% style %}
     .product-personalization .product-form__input {
       max-width: 44rem;
+      margin: 2.4rem 0 0;
     }
     .product-personalization__composer {
       max-width: 44rem;
       margin-top: 2.4rem;
-      padding-top: 1.8rem;
+      padding-top: 2.4rem;
       border-top: 0.1rem solid rgba(var(--color-foreground), 0.15);
+    }
+    label.product-personalization__label {
+      display: block;
+      margin: 0 0 0.6rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: 0.04rem;
+      color: rgb(var(--color-foreground));
     }
     .product-personalization__help,
     .product-personalization__palette-label,
     .product-personalization__custom-label {
-      margin: 0.4rem 0 1rem;
+      font-size: 1.3rem;
+      line-height: 1.5;
+      letter-spacing: 0.02rem;
       color: rgba(var(--color-foreground), 0.75);
     }
+    .product-personalization__help {
+      margin: 0 0 1.2rem;
+    }
+    .product-personalization__custom-label {
+      margin: 0 0 0.6rem;
+    }
     .product-personalization__palette-label {
-      margin-top: 1.6rem;
+      margin: 1.6rem 0 0.6rem;
+    }
+    label.product-personalization__sub-label {
+      font-size: 1.2rem;
+      line-height: 1.4;
+      letter-spacing: 0.02rem;
+      color: rgba(var(--color-foreground), 0.75);
     }
     div.product-personalization__caps {
       display: flex;
@@ -339,6 +367,9 @@
     }
     .product-personalization__counter {
       margin: 0.6rem 0 0;
+      font-size: 1.2rem;
+      line-height: 1.4;
+      letter-spacing: 0.02rem;
       text-align: right;
       color: rgba(var(--color-foreground), 0.75);
     }
@@ -346,7 +377,7 @@
       color: rgb(var(--color-foreground));
     }
     .product-personalization__typebox {
-      margin-top: 1.2rem;
+      margin-top: 1.6rem;
     }
     div.product-personalization__palette {
       display: flex;
@@ -378,13 +409,13 @@
       cursor: not-allowed;
     }
     .product-personalization__error {
-      margin: 1rem 0 0;
+      margin: 1.6rem 0 0;
       font-size: 1.4rem;
       line-height: 1.4;
       color: #d32f2f;
     }
     .product-personalization__custom {
-      margin-top: 1.8rem;
+      margin-top: 1.6rem;
     }
     .product-personalization__custom-grid {
       display: flex;
@@ -395,10 +426,11 @@
       flex: 1 1 12rem;
       min-width: 0;
     }
-    .product-personalization__custom-field .form__label {
+    .product-personalization__custom-field label.product-personalization__sub-label {
       display: flex;
       align-items: center;
       gap: 0.6rem;
+      margin: 0 0 0.4rem;
     }
     .product-personalization__swatch {
       display: inline-block;
@@ -667,7 +699,7 @@
 
         if (counter) {
           counter.textContent = tokens.length + ' of ' + budget + ' caps used';
-          counter.className = 'caption product-personalization__counter' + (tokens.length >= budget ? ' is-full' : '');
+          counter.className = 'product-personalization__counter' + (tokens.length >= budget ? ' is-full' : '');
         }
         detailsInput.value = tokens.length ? serialize() : '';
         palette.querySelectorAll('.product-personalization__chip').forEach(function (c) {
