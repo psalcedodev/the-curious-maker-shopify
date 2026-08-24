@@ -714,8 +714,21 @@
         b.title = s[0];
         b.setAttribute('aria-label', 'Add ' + s[0]);
         b.innerHTML = icon(s[1]);
+        // A chip is a real button, so the browser activates it on Space and
+        // Enter. The typebox sits immediately before the palette in tab order,
+        // so a shopper who tabs out of it and keeps typing was silently filling
+        // every slot with the first symbol: space is an ordinary keystroke when
+        // you believe you are still typing a name. Two guards, neither of which
+        // costs keyboard operability.
+        b.addEventListener('keydown', function (e) {
+          // A held Space or Enter auto-repeats; one press should mean one cap.
+          if (e.repeat && (e.key === ' ' || e.key === 'Enter' || e.key === 'Spacebar')) e.preventDefault();
+        });
         b.addEventListener('click', function () {
           addToken({ t: 'sym', name: s[0], b64: s[1] });
+          // Put the caret back where the composing happens, so the next
+          // keystroke goes to the typebox instead of re-firing this chip.
+          typebox.focus({ preventScroll: true });
         });
         palette.appendChild(b);
       });
